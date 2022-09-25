@@ -1,0 +1,35 @@
+TUDO QUE MUDAR TEM QUE ATUALIZAR O DIAGRAMA
+
+não usar "using namespace";
+nome de variavel começa com minusculo. se tiver mais de uma palavra, deve ser no modelo "primeiraSegundaTerceria...";
+nome de classe começa com maiusculo;
+ordem: private, protected, public;
+dentro de um mesmo nível de acesso, atributos vêm antes de métodos;
+atributos static vêm antes dos demais;
+implementação de métodos deve ser externa à declaração da classe;
+quando o parametro tiver o mesmo nome que um atributo da classe, usar _nome;
+avaliar se é, mesmo, usar referencia no parametro da função: não existe referencia para o que não é variável;
+sempre que se referir a atributo do objeto, usar this->;
+
+indentador: 1 tab ou 2 espaços;
+
+indentação de método:
+tipo nome(parametros) {
+  corpo do método
+  estrutura(parametros) {
+    corpo da estrutura
+  }
+}
+
+indentação classe:
+class nome : public nome_pai {
+  public:
+    membros publicos
+  protected:
+    membros protected
+  private:
+    mebros private
+}
+
+indentação enumerador:
+  enum nome = { enum1, enum2, ..., enum3 };
