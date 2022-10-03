@@ -3,11 +3,9 @@
 
 #include <string>
 #include <map>
-#include "Declaracoes.h"
 #include "Pessoa.hpp"
 #include "Data.h"
 #include "Cargo.hpp"
-#include "Departamento.hpp"
 #include "Alteracao.hpp"
 
 class Funcionario : public Pessoa {
@@ -15,7 +13,6 @@ class Funcionario : public Pessoa {
     std::string endereco;
     unsigned int matricula;
     Data nascimento;
-    Departamento *departamento;
     Cargo cargo;
     Data dataCriacao;
     float salario;
@@ -26,7 +23,7 @@ class Funcionario : public Pessoa {
 
 public:
   Funcionario(TipoPessoa _tipo, std::string _cadastro, std::string _nome, std::string _email,
-                std::string _endereco, Data _nascimento, Departamento* _departamento,
+                std::string _endereco, Data _nascimento,
                   Cargo _cargo, Data _dataContratacao, float _salario);
   void aplicaDissidio(Data _data, float _novoSalario);
   void promover(Data _data, Cargo _novoCargo, float _novoSalario);
@@ -38,8 +35,6 @@ public:
   int getMatricula() const;
   Data getNascimento() const;
   void setNascimento(const Data _nascimento);
-  Departamento* getDepartamento() const;
-  void setDepartamento(Departamento* _departamento);
   Cargo getCargo() const;
   float getSalario() const;
   Status getStatus() const;

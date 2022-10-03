@@ -2,7 +2,6 @@
 #define  CLIENTE_H
 
 #include <string>
-#include "Declaracoes.h"
 #include "Pessoa.hpp"
 
 class  Cliente : public Pessoa {

@@ -2,7 +2,8 @@
 #define PESSOA_H
 
 #include <string>
-#include "Declaracoes.h"
+
+enum TipoPessoa { pFisica, pJuridica };
 
 class Pessoa {
   protected:

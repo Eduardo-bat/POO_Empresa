@@ -3,19 +3,18 @@
 
 #include <string>
 #include <vector>
-#include "Declaracoes.h"
-#include "Empresa.hpp"
+#include "Funcionario.hpp"
 
 class Departamento {
 private:
   std::string nome;
   std::vector<Funcionario*> pessoal;
-  friend Empresa;
 
 public:
   Departamento(std::string Nome);
   void adicionarFuncionario(Funcionario *f);
   bool retirarFuncionario(const Funcionario *f);
+  std::vector<Funcionario*> getFuncionarios();
   std::string getNome() const;
   void setNome(const std::string _nome);
 };

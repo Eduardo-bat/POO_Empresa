@@ -2,7 +2,6 @@
 #define CARGO_H
 
 #include <string>
-#include "Declaracoes.h"
 
 class Cargo {
   private:

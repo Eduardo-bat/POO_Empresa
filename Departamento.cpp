@@ -18,6 +18,10 @@ bool Departamento::retirarFuncionario(const Funcionario *f) {
   return false;
 }
 
+std::vector<Funcionario*> Departamento::getFuncionarios() {
+  return this -> pessoal;
+}
+
 std::string Departamento:: getNome() const {
   return this->nome;
 }

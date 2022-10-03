@@ -1,29 +1,26 @@
 #include "Empresa.hpp"
 #include <regex>
 
-Funcionario Empresa::adicionaFuncionario(TipoPessoa _tipo, std::string _cadastro, std::string _nome,
+Funcionario* Empresa::adicionaFuncionario(TipoPessoa _tipo, std::string _cadastro, std::string _nome,
                           std::string _email, std::string _endereco, Data _nascimento,
                             Departamento* _departamento, Cargo _cargo, Data _dataContratacao,
                               float _salario) {
   if(validaCadastro(func, _tipo, _cadastro)) {
-    Funcionario funcionario(_tipo, _cadastro, _nome, _email, _endereco, _nascimento,
-                              _departamento, _cargo, _dataContratacao, _salario);
+    Funcionario* funcionario = new Funcionario(_tipo, _cadastro, _nome, _email, _endereco, _nascimento, _cargo, _dataContratacao, _salario); //fazer delete
+    _departamento->adicionarFuncionario(funcionario);
     return funcionario;
   } else {
-    Funcionario funcionario_falha(_tipo, "0", "0", "0", "0", _nascimento,
-                              _departamento, _cargo, _dataContratacao, 0);
-    return funcionario_falha;
+    return nullptr;
   }
 }
 
-Cliente Empresa::adicionarCliente(std::string telefone, std::string nome, std::string cadastro,
+Cliente* Empresa::adicionarCliente(std::string telefone, std::string nome, std::string cadastro,
                                     std::string email, enum TipoPessoa tipo) {
   if(validaCadastro(cliente, tipo, cadastro)) {
-    Cliente cliente(telefone, nome, cadastro, email, tipo);
+    Cliente* cliente = new Cliente(telefone, nome, cadastro, email, tipo);
     return cliente;
   } else {
-    Cliente cliente_falha("0", "0", "0", "0", tipo);
-    return cliente_falha;
+    return nullptr;
   }          
 }
 
@@ -35,7 +32,7 @@ bool Empresa::validaCadastro(TipoCadastro tipoC, TipoPessoa tipoP, std::string c
     std::vector<Departamento*>::iterator itrD;
     std::vector<Funcionario*>::iterator itrF;
     for(itrD = this->departamentos.begin(); itrD != this->departamentos.end(); ++ itrD)
-      for(itrF = (*itrD)->pessoal.begin(); itrF != (*itrD)->pessoal.end(); ++ itrF)
+      for(itrF = (*itrD)->getFuncionarios().begin(); itrF != (*itrD)->getFuncionarios().end(); ++ itrF)
         if((*itrF)->getCadastro() == cadastro)
           return false;
   } else {
@@ -65,13 +62,21 @@ void Empresa::aplicarDissidio(TipoDissidio tipo, float valor, Data data) {
   std::vector<Departamento*>::iterator itrD;
   std::vector<Funcionario*>::iterator itrF;
   for(itrD = this->departamentos.begin(); itrD != this->departamentos.end(); ++ itrD)
-    for(itrF = (*itrD)->pessoal.begin(); itrF != (*itrD)->pessoal.end(); ++ itrF)
+    for(itrF = (*itrD)->getFuncionarios().begin(); itrF != (*itrD)->getFuncionarios().end(); ++ itrF)
       if(tipo == percentual)
         (*itrF)->aplicaDissidio(data, (*itrF)->getSalario() + (*itrF)->getSalario() * valor / 100);
       else
         (*itrF)->aplicaDissidio(data, (*itrF)->getSalario() +  valor);
 }
 
-bool vende(Cliente *cliente, Produto *produto, int qtd, unsigned ano, unsigned mes, unsigned dia) {
-  
+Departamento* Empresa::getDeptFuncionario(Funcionario* funcionario) {
+  std::vector<Departamento*>::iterator itrD;
+  std::vector<Funcionario*>::iterator itrF;
+  for(itrD = this->departamentos.begin(); itrD != this->departamentos.end(); ++ itrD) {
+    std::vector<Funcionario*> funcionarios = (*itrD)->getFuncionarios();
+    for(itrF = (*itrD)->getFuncionarios().begin(); itrF != (*itrD)->getFuncionarios().end(); ++ itrF)
+      if((*itrF) == funcionario)
+        return (*itrD);
+  }
+  return nullptr;
 }

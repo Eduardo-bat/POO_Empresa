@@ -1,10 +1,9 @@
 #include "Funcionario.hpp"
 
-unsigned int Funcionario::qtd = 1;
+unsigned int Funcionario::qtd = 0;
 
 Funcionario::Funcionario(TipoPessoa _tipo, std::string _cadastro, std::string _nome, std::string _email,
-                          std::string _endereco, Data _nascimento, Departamento* _departamento,
-                            Cargo _cargo, Data _dataCriacao, float _salario) {
+                          std::string _endereco, Data _nascimento, Cargo _cargo, Data _dataCriacao, float _salario) {
   this->tipo = _tipo;
   this->cadastro = _cadastro;
   this->nome = _nome;
@@ -12,7 +11,6 @@ Funcionario::Funcionario(TipoPessoa _tipo, std::string _cadastro, std::string _n
   this->endereco = _endereco;
   this->matricula = Funcionario::qtd;
   this->nascimento = _nascimento;
-  this->departamento = _departamento;
   this->cargo = _cargo;
   this->dataCriacao = _dataCriacao;
   this->salario = _salario;
@@ -64,14 +62,6 @@ Data Funcionario::getNascimento() const {
 
 void Funcionario::setNascimento(const Data _nascimento) {
   this->nascimento = _nascimento;
-}
-
-Departamento* Funcionario::getDepartamento() const {
-  return this->departamento;
-}
-
-void Funcionario::setDepartamento(Departamento* _departamento) {
-  this->departamento = _departamento;
 }
 
 Cargo Funcionario::getCargo() const {
