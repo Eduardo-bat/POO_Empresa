@@ -71,3 +71,7 @@ void Empresa::aplicarDissidio(TipoDissidio tipo, float valor, Data data) {
       else
         (*itrF)->aplicaDissidio(data, (*itrF)->getSalario() +  valor);
 }
+
+bool vende(Cliente *cliente, Produto *produto, int qtd, unsigned ano, unsigned mes, unsigned dia) {
+  
+}

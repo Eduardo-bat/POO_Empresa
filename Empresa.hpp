@@ -6,6 +6,7 @@
 #include "Funcionario.hpp"
 #include "Cliente.hpp"
 #include "Departamento.hpp"
+#include "Venda.hpp"
 
 class Empresa {
   private:
@@ -23,6 +24,7 @@ class Empresa {
     void adicionarDepartamento(Departamento* departamento);
     bool retirarDepartamento(Departamento* departamento);
     void aplicarDissidio(TipoDissidio tipo, float valor, Data data);
+    bool vende(Cliente *cliente, Produto *produto, int qtd, unsigned ano, unsigned mes, unsigned dia);
 };
 
 #endif
