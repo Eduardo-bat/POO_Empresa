@@ -1,0 +1,32 @@
+#ifndef PRODUTO_H
+#define PRODUTO_H
+#include <string>
+#include <list>
+
+class Produto {
+  private:
+std::string nome;
+float valorvenda;
+int codigo;
+int lotemin;
+int estoquemin;
+std::list<int*> lotes;
+public:
+Produto(std::string nome,float valorvenda, int codigo, int lotemin, int estoquemin);
+  int ChecaQtd();
+  void alteraQtd(int qtd);
+  bool verificaEstoque(int _qtd);
+  bool verificaEstoquemin();
+  std::string getNome() const;
+  void setNome(const std::string _nome);
+  int getCodigo() const;
+  void setCodigo(const int codigo);
+  int getLotemin() const;
+  void setLotemin(const int lotemin);
+  int getEstoquemin() const;
+  void setEstoquemin(const int estoquemin);
+  float getValorvenda() const;
+  void setValorvenda(const float valorvenda);
+  void insereLotes(int qtd);
+};
+#endif
