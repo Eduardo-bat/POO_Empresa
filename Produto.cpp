@@ -11,19 +11,19 @@ Produto::Produto(std::string nome,float valorvenda, int codigo, int lotemin, int
 int Produto::ChecaQtd(){
     int outp=0;
     for(auto it=lotes.begin();it!=lotes.end();it++){
-        outp+=(**it);
+        outp+=(*it);
     }
     return outp;
 }
 
 void Produto::alteraQtd(int qtd){
      for(auto it=lotes.begin();it!=lotes.end();it++){
-      if(qtd>=0 && (**it) <= qtd){
-       qtd -=(**it);
-        (**it)=0;
+      if(qtd>=0 && (*it) <= qtd){
+       qtd -=(*it);
+        (*it)=0;
         }
        else{
-         (**it)-=qtd;
+         (*it)-=qtd;
        }
 }
   }
@@ -62,9 +62,43 @@ void Produto::setEstoquemin(const int estoquemin){this->estoquemin=estoquemin;}
 
 float Produto::getValorvenda() const{return this->valorvenda;}
 
-void Produto::setValorvenda(const float valorvenda){this->valorvenda=valorvenda;}
+void Produto::setValorvenda(const float valorvenda, Data _data){
+  this->valorvenda=valorvenda;
+  hist_valor.emplace(_data,valorvenda);
+  }
 
 void Produto::insereLotes(int qtd){
-    lotes.push_back(&qtd);
+    lotes.push_back(qtd);
+}
+
+void Produto::print(){
+  int aux=0;
+  std::cout<<"nome: ";
+  std::cout<<this->getNome();
+  std::cout<<"\n";
+  std::cout<<"Valor Venda: ";
+  std::cout<<this->getValorvenda();
+  std::cout<<"\n";
+  std::cout<<"Lote Mínimo: ";
+  std::cout<<this->getLotemin();
+  std::cout<<"\n";
+  std::cout<<"Estoque Mínimo: ";
+  std::cout<<this->getEstoquemin();
+  std::cout<<"\n";
+  std::cout<<"Código: ";
+  std::cout<<this->getCodigo();
+  std::cout<<"\n";
+  std::cout<<"Quantidade: ";
+  std::cout<<this->ChecaQtd();
+  std::cout<<"\n";
+  for(auto it=lotes.begin();it!=lotes.end();it++){
+    std::cout<<"Lote: ";
+    std::cout<<aux;
+    std::cout<<"\n";
+    std::cout<<"Quantidade: ";
+    std::cout<<(*it);
+    aux++;
+  }
+
 }
 

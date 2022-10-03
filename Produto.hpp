@@ -2,6 +2,9 @@
 #define PRODUTO_H
 #include <string>
 #include <list>
+#include <map>
+#include <iostream>
+#include "Data.h"
 
 class Produto {
   private:
@@ -10,7 +13,9 @@ float valorvenda;
 int codigo;
 int lotemin;
 int estoquemin;
-std::list<int*> lotes;
+std::list<int> lotes;
+std::map<Data,float> hist_valor;
+
 public:
 Produto(std::string nome,float valorvenda, int codigo, int lotemin, int estoquemin);
   int ChecaQtd();
@@ -26,7 +31,8 @@ Produto(std::string nome,float valorvenda, int codigo, int lotemin, int estoquem
   int getEstoquemin() const;
   void setEstoquemin(const int estoquemin);
   float getValorvenda() const;
-  void setValorvenda(const float valorvenda);
+  void setValorvenda(const float valorvenda, Data _data);
   void insereLotes(int qtd);
+  void print();
 };
 #endif
