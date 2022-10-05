@@ -14,7 +14,6 @@ class Funcionario : public Pessoa {
     unsigned int matricula;
     Data nascimento;
     Cargo *cargo;
-    Data dataCriacao;
     float salario;
     Status status;
     std::map<Data, Alteracao> histAlt;
@@ -23,12 +22,16 @@ class Funcionario : public Pessoa {
 
 public:
   Funcionario(TipoPessoa _tipo, std::string _cadastro, std::string _nome, std::string _email,
-                std::string _endereco, Data _nascimento,
-                  Cargo *_cargo, Data _dataContratacao, float _salario);
-  void aplicaDissidio(Data _data, float _novoSalario);
-  void promover(Data _data, Cargo *_novoCargo, float _novoSalario);
-  void contratar(Data _data, Cargo *_novoCargo, float _novoSalario);
-  void demitir(Data _data);
+                std::string _endereco, Data _nascimento, Cargo *cargo, Data dataCriacao, float salario);
+  void aplicaDissidio(unsigned ano, unsigned mes, unsigned dia, float _novoSalario);
+  void aplicaDissidio(Data data, float _novoSalario);
+  void promover(unsigned ano, unsigned mes, unsigned dia, Cargo *_novoCargo, float _novoSalario);
+  void promover(Data data, Cargo *_novoCargo, float _novoSalario);
+  void contratar(unsigned ano, unsigned mes, unsigned dia, Cargo *_novoCargo, float _novoSalario);
+  void contratar(Data data, Cargo *_novoCargo, float _novoSalario);
+  void demitir(unsigned ano, unsigned mes, unsigned dia);
+  void demitir(Data data);
+
   std::map<Data, Alteracao> gettHistAlt();
   std::string getEndereco() const;
   void setEndereco(const std::string _endereco);

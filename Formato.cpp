@@ -27,17 +27,17 @@ Formato::Formato(string valNome)
 
 Formato::~Formato(){}
 
-string Formato::getNome()
+string Formato::getNome() const
 {
     return nome;
 }
 
-string Formato::getSeparadorData()
+string Formato::getSeparadorData () const
 {
     return separadorData;
 }
 
-string Formato::getSeparadorHorario()
+string Formato::getSeparadorHorario() const
 {
     return separadorHorario;
 }

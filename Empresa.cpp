@@ -10,11 +10,12 @@ Empresa *Empresa::instEmpresa() {
 }
 
 Funcionario* Empresa::adicionaFuncionario(TipoPessoa tipo, std::string cadastro, std::string nome,
-                          std::string email, std::string endereco, Data nascimento,
-                            Departamento* departamento, Cargo *cargo, Data dataContratacao,
-                              float salario) {
+                          std::string email, std::string endereco, unsigned anoNasc, unsigned mesNasc, unsigned diaNasc,
+                            Departamento* departamento, Cargo *cargo, unsigned anoCria, unsigned mesCria, unsigned diaCria, float salario) {
   if(validaCadastro(func, tipo, cadastro)) {
-    Funcionario* funcionario = new Funcionario(tipo, cadastro, nome, email, endereco, nascimento, cargo, dataContratacao, salario); //fazer delete
+    Data dataNasc(anoNasc, mesNasc, diaNasc);
+    Data dataCria(anoCria, mesCria, diaCria);
+    Funcionario* funcionario = new Funcionario(tipo, cadastro, nome, email, endereco, dataNasc, cargo, dataCria, salario); //fazer delete
     departamento->adicionarFuncionario(funcionario);
     return funcionario;
   } else {
@@ -66,7 +67,8 @@ bool Empresa::retirarDepartamento(Departamento* departamento) {
   return false;
 }
 
-void Empresa::aplicarDissidio(TipoDissidio tipo, float valor, Data data) {
+void Empresa::aplicarDissidio(TipoDissidio tipo, float valor, unsigned ano, unsigned mes, unsigned dia) {
+  Data data(ano, mes, dia);
   std::vector<Departamento*>::iterator itrD;
   std::vector<Funcionario*>::iterator itrF;
   for(itrD = this->departamentos.begin(); itrD != this->departamentos.end(); ++ itrD)

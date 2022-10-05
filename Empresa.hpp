@@ -23,14 +23,13 @@ class Empresa {
   public:
     static Empresa *instEmpresa();
     Funcionario* adicionaFuncionario(TipoPessoa tipo, std::string cadastro, std::string nome,
-                              std::string email, std::string endereco, Data nascimento,
-                                Departamento* departamento, Cargo *cargo, Data dataContratacao,
-                                  float salario);
+                              std::string email, std::string endereco, unsigned anoNasc, unsigned mesNasc, unsigned diaNasc,
+                                Departamento* departamento, Cargo *cargo, unsigned anoCria, unsigned mesCria, unsigned diaCria, float salario);
     Cliente* adicionarCliente(std::string telefone, std::string nome, std::string cadastro,
           std::string email, enum TipoPessoa tipo);
     void adicionarDepartamento(Departamento* departamento);
     bool retirarDepartamento(Departamento* departamento);
-    void aplicarDissidio(TipoDissidio tipo, float valor, Data data);
+    void aplicarDissidio(TipoDissidio tipo, float valor, unsigned ano, unsigned mes, unsigned dia);
     Departamento* getDeptFuncionario(Funcionario* funcionario);
     bool vende(Cliente *cliente, Produto *produto, int qtd, unsigned ano, unsigned mes, unsigned dia);
 };

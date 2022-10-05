@@ -18,9 +18,9 @@ public:
     Formato();      //Construtor default
     Formato(string valNome);     //Construtor com parametro de nome
     virtual ~Formato();     //Destrutor
-    string getNome();
-    string getSeparadorData();
-    string getSeparadorHorario();
+    string getNome() const;
+    string getSeparadorData() const;
+    string getSeparadorHorario() const;
 };
 
 #endif // FORMATO_H_INCLUDED
