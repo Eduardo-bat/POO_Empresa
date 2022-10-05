@@ -1,4 +1,0 @@
-todo objeto deve ser criado antes de ser passado como argumento para a função;
-cpf ou cnpj pode ser no formato 12345678911, 123.456.789-11 ou 1234567891234, 12.345.678/9123-45;
-a criação de funcionario deve ser por meio da funcao adicionaFuncionario, de Empresa. Esta retorna um ponteiro para o funcionario criado e, portanto, deve ser atribuida a um objeto do tipo;
-se a criação de um funcionario falhar, nullptr é retornado

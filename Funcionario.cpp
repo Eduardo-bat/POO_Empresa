@@ -3,7 +3,7 @@
 unsigned int Funcionario::qtd = 0;
 
 Funcionario::Funcionario(TipoPessoa _tipo, std::string _cadastro, std::string _nome, std::string _email,
-                          std::string _endereco, Data _nascimento, Cargo _cargo, Data _dataCriacao, float _salario) {
+                          std::string _endereco, Data _nascimento, Cargo *_cargo, Data _dataCriacao, float _salario) {
   this->tipo = _tipo;
   this->cadastro = _cadastro;
   this->nome = _nome;
@@ -18,21 +18,21 @@ Funcionario::Funcionario(TipoPessoa _tipo, std::string _cadastro, std::string _n
   Funcionario::qtd++;
 }
 
-void Funcionario::aplicaDissidio(Data _data, float _novoSalario) {
-  this->histAlt.insert({_data, Alteracao(_novoSalario)});
-  this->salario = _novoSalario;
+void Funcionario::aplicaDissidio(Data data, float novoSalario) {
+  this->histAlt.insert({data, Alteracao(novoSalario)});
+  this->salario = novoSalario;
 }
 
-void Funcionario::promover(Data _data, Cargo _novoCargo, float _novoSalario) {
-  this->histAlt.insert({_data, Alteracao(_novoCargo, _novoSalario)});
-  this->cargo = _novoCargo;
-  this->salario = _novoSalario;
+void Funcionario::promover(Data data, Cargo *novoCargo, float novoSalario) {
+  this->histAlt.insert({data, Alteracao(novoCargo, novoSalario)});
+  this->cargo = novoCargo;
+  this->salario = novoSalario;
 }
 
-void Funcionario::contratar(Data _data, Cargo _novoCargo, float _novoSalario) {
-  this->histAlt.insert({_data, Alteracao(ativo, _novoCargo, _novoSalario)});
-  this->cargo = _novoCargo;
-  this->salario = _novoSalario;
+void Funcionario::contratar(Data data, Cargo *novoCargo, float novoSalario) {
+  this->histAlt.insert({data, Alteracao(ativo, novoCargo, novoSalario)});
+  this->cargo = novoCargo;
+  this->salario = novoSalario;
 }
 
 void Funcionario::demitir(Data _data) {
@@ -64,7 +64,7 @@ void Funcionario::setNascimento(const Data _nascimento) {
   this->nascimento = _nascimento;
 }
 
-Cargo Funcionario::getCargo() const {
+Cargo *Funcionario::getCargo() const {
   return this->cargo;
 }
 

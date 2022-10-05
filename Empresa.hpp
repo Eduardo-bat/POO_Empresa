@@ -17,18 +17,22 @@ class Empresa {
     std::vector<Cliente*> clientes;
     std::list<Venda> vendas;
     bool validaCadastro(TipoCadastro tipoC, TipoPessoa tipo, std::string cadastro);
+    Empresa() {};
+    static Empresa *instptrEmpresa;
     
   public:
-    Funcionario* adicionaFuncionario(TipoPessoa _tipo, std::string _cadastro, std::string _nome,
-                              std::string _email, std::string _endereco, Data _nascimento,
-                                Departamento* _departamento, Cargo _cargo, Data _dataContratacao,
-                                  float _salario);
+    static Empresa *instEmpresa();
+    Funcionario* adicionaFuncionario(TipoPessoa tipo, std::string cadastro, std::string nome,
+                              std::string email, std::string endereco, Data nascimento,
+                                Departamento* departamento, Cargo *cargo, Data dataContratacao,
+                                  float salario);
     Cliente* adicionarCliente(std::string telefone, std::string nome, std::string cadastro,
           std::string email, enum TipoPessoa tipo);
     void adicionarDepartamento(Departamento* departamento);
     bool retirarDepartamento(Departamento* departamento);
     void aplicarDissidio(TipoDissidio tipo, float valor, Data data);
     Departamento* getDeptFuncionario(Funcionario* funcionario);
+    bool vende(Cliente *cliente, Produto *produto, int qtd, unsigned ano, unsigned mes, unsigned dia);
 };
 
 #endif

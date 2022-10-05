@@ -1,13 +1,21 @@
 #include "Empresa.hpp"
 #include <regex>
 
-Funcionario* Empresa::adicionaFuncionario(TipoPessoa _tipo, std::string _cadastro, std::string _nome,
-                          std::string _email, std::string _endereco, Data _nascimento,
-                            Departamento* _departamento, Cargo _cargo, Data _dataContratacao,
-                              float _salario) {
-  if(validaCadastro(func, _tipo, _cadastro)) {
-    Funcionario* funcionario = new Funcionario(_tipo, _cadastro, _nome, _email, _endereco, _nascimento, _cargo, _dataContratacao, _salario); //fazer delete
-    _departamento->adicionarFuncionario(funcionario);
+Empresa *Empresa::instptrEmpresa = 0;
+
+Empresa *Empresa::instEmpresa() {
+  if(instptrEmpresa == 0)
+    instptrEmpresa = new Empresa;
+  return instptrEmpresa;
+}
+
+Funcionario* Empresa::adicionaFuncionario(TipoPessoa tipo, std::string cadastro, std::string nome,
+                          std::string email, std::string endereco, Data nascimento,
+                            Departamento* departamento, Cargo *cargo, Data dataContratacao,
+                              float salario) {
+  if(validaCadastro(func, tipo, cadastro)) {
+    Funcionario* funcionario = new Funcionario(tipo, cadastro, nome, email, endereco, nascimento, cargo, dataContratacao, salario); //fazer delete
+    departamento->adicionarFuncionario(funcionario);
     return funcionario;
   } else {
     return nullptr;
@@ -25,8 +33,8 @@ Cliente* Empresa::adicionarCliente(std::string telefone, std::string nome, std::
 }
 
 bool Empresa::validaCadastro(TipoCadastro tipoC, TipoPessoa tipoP, std::string cadastro) {
-  std::regex regularExpr(tipoP == pFisica ? "[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}" :
-                                              "[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}");
+  std::regex regularExpr(tipoP == pFisica ? "[0-9]{3}[0-9]{3}[0-9]{3}[0-9]{2}" :
+                                              "[0-9]{2}[0-9]{3}[0-9]{3}[0-9]{4}[0-9]{2}");
   if(!std::regex_match(cadastro, regularExpr)) return false;
   if(tipoC == func) {
     std::vector<Departamento*>::iterator itrD;
@@ -79,4 +87,13 @@ Departamento* Empresa::getDeptFuncionario(Funcionario* funcionario) {
         return (*itrD);
   }
   return nullptr;
+}
+
+bool Empresa::vende(Cliente *cliente, Produto *produto, int qtd, unsigned ano, unsigned mes, unsigned dia) {
+  if(produto->ChecaQtd() >= qtd) {
+    Data data(ano, mes, dia);
+    Venda venda(cliente, produto, qtd, data);
+    this->vendas.push_back(venda);
+    return true;
+  } else return false;
 }
