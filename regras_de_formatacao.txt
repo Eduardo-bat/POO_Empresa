@@ -7,7 +7,6 @@ ordem: private, protected, public;
 dentro de um mesmo nível de acesso, atributos vêm antes de métodos;
 atributos static vêm antes dos demais;
 implementação de métodos deve ser externa à declaração da classe;
-quando o parametro tiver o mesmo nome que um atributo da classe, usar _nome;
 avaliar se é, mesmo, usar referencia no parametro da função: não existe referencia para o que não é variável;
 sempre que se referir a atributo do objeto, usar this->;
 usar chaves quando houver for e ifs em sequencia em um método;

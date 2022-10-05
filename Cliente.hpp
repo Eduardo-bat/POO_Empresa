@@ -14,6 +14,7 @@ public:
           std::string email, enum TipoPessoa tipo);
   void setTelefone(const std::string _telefone);
   std::string getTelefone();
+  virtual ~Cliente() {};
 };
 
 #endif

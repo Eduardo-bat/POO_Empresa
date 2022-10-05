@@ -3,7 +3,7 @@
 unsigned int Funcionario::qtd = 0;
 
 Funcionario::Funcionario(TipoPessoa _tipo, std::string _cadastro, std::string _nome, std::string _email,
-                          std::string _endereco, Data _nascimento, Cargo _cargo, Data _dataCriacao, float _salario) {
+                          std::string _endereco, Data _nascimento, Cargo *cargo, Data dataCriacao, float salario) {
   this->tipo = _tipo;
   this->cadastro = _cadastro;
   this->nome = _nome;
@@ -11,32 +11,50 @@ Funcionario::Funcionario(TipoPessoa _tipo, std::string _cadastro, std::string _n
   this->endereco = _endereco;
   this->matricula = Funcionario::qtd;
   this->nascimento = _nascimento;
-  this->cargo = _cargo;
-  this->dataCriacao = _dataCriacao;
-  this->salario = _salario;
+  this->contratar(dataCriacao, cargo, salario);
   this->status = ativo;
   Funcionario::qtd++;
 }
 
-void Funcionario::aplicaDissidio(Data _data, float _novoSalario) {
-  this->histAlt.insert({_data, Alteracao(_novoSalario)});
-  this->salario = _novoSalario;
+void Funcionario::aplicaDissidio(Data data, float novoSalario) {
+  this->histAlt.insert({data, Alteracao(novoSalario)});
+  this->salario = novoSalario;
 }
 
-void Funcionario::promover(Data _data, Cargo _novoCargo, float _novoSalario) {
-  this->histAlt.insert({_data, Alteracao(_novoCargo, _novoSalario)});
-  this->cargo = _novoCargo;
-  this->salario = _novoSalario;
+void Funcionario::promover(unsigned ano, unsigned mes, unsigned dia, Cargo *novoCargo, float novoSalario) {
+  Data data(ano, mes, dia);
+  this->histAlt.insert({data, Alteracao(novoCargo, novoSalario)});
+  this->cargo = novoCargo;
+  this->salario = novoSalario;
 }
 
-void Funcionario::contratar(Data _data, Cargo _novoCargo, float _novoSalario) {
-  this->histAlt.insert({_data, Alteracao(ativo, _novoCargo, _novoSalario)});
-  this->cargo = _novoCargo;
-  this->salario = _novoSalario;
+void Funcionario::promover(Data data, Cargo *novoCargo, float novoSalario) {
+  this->histAlt.insert({data, Alteracao(novoCargo, novoSalario)});
+  this->cargo = novoCargo;
+  this->salario = novoSalario;
 }
 
-void Funcionario::demitir(Data _data) {
-  this->histAlt.insert({_data, Alteracao(desligado)});
+void Funcionario::contratar(unsigned ano, unsigned mes, unsigned dia, Cargo *novoCargo, float novoSalario) {
+  Data data(ano, mes, dia);
+  this->histAlt.insert({data, Alteracao(ativo, novoCargo, novoSalario)});
+  this->cargo = novoCargo;
+  this->salario = novoSalario;
+}
+
+void Funcionario::contratar(Data data, Cargo *novoCargo, float novoSalario) {
+  this->histAlt.insert({data, Alteracao(ativo, novoCargo, novoSalario)});
+  this->cargo = novoCargo;
+  this->salario = novoSalario;
+}
+
+void Funcionario::demitir(unsigned ano, unsigned mes, unsigned dia) {
+  Data data(ano, mes, dia);
+  this->histAlt.insert({data, Alteracao(desligado)});
+  this->status = desligado;
+}
+
+void Funcionario::demitir(Data data) {
+  this->histAlt.insert({data, Alteracao(desligado)});
   this->status = desligado;
 }
 
@@ -64,7 +82,7 @@ void Funcionario::setNascimento(const Data _nascimento) {
   this->nascimento = _nascimento;
 }
 
-Cargo Funcionario::getCargo() const {
+Cargo *Funcionario::getCargo() const {
   return this->cargo;
 }
 

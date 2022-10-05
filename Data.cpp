@@ -320,7 +320,7 @@ void Data::printData()
     }
 }
 
-string Data::getData() {
+string Data::getData() const {
   string data = "";
    if (strcmp(formatoData.getNome().c_str(),"PT-BR")==0)
     {

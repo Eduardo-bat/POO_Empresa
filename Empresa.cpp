@@ -1,13 +1,22 @@
 #include "Empresa.hpp"
 #include <regex>
 
-Funcionario* Empresa::adicionaFuncionario(TipoPessoa _tipo, std::string _cadastro, std::string _nome,
-                          std::string _email, std::string _endereco, Data _nascimento,
-                            Departamento* _departamento, Cargo _cargo, Data _dataContratacao,
-                              float _salario) {
-  if(validaCadastro(func, _tipo, _cadastro)) {
-    Funcionario* funcionario = new Funcionario(_tipo, _cadastro, _nome, _email, _endereco, _nascimento, _cargo, _dataContratacao, _salario); //fazer delete
-    _departamento->adicionarFuncionario(funcionario);
+Empresa *Empresa::instptrEmpresa = 0;
+
+Empresa *Empresa::instEmpresa() {
+  if(instptrEmpresa == 0)
+    instptrEmpresa = new Empresa;
+  return instptrEmpresa;
+}
+
+Funcionario* Empresa::adicionaFuncionario(TipoPessoa tipo, std::string cadastro, std::string nome,
+                          std::string email, std::string endereco, unsigned anoNasc, unsigned mesNasc, unsigned diaNasc,
+                            Departamento* departamento, Cargo *cargo, unsigned anoCria, unsigned mesCria, unsigned diaCria, float salario) {
+  if(validaCadastro(func, tipo, cadastro)) {
+    Data dataNasc(anoNasc, mesNasc, diaNasc);
+    Data dataCria(anoCria, mesCria, diaCria);
+    Funcionario* funcionario = new Funcionario(tipo, cadastro, nome, email, endereco, dataNasc, cargo, dataCria, salario); //fazer delete
+    departamento->adicionarFuncionario(funcionario);
     return funcionario;
   } else {
     return nullptr;
@@ -17,7 +26,7 @@ Funcionario* Empresa::adicionaFuncionario(TipoPessoa _tipo, std::string _cadastr
 Cliente* Empresa::adicionarCliente(std::string telefone, std::string nome, std::string cadastro,
                                     std::string email, enum TipoPessoa tipo) {
   if(validaCadastro(cliente, tipo, cadastro)) {
-    Cliente* cliente = new Cliente(telefone, nome, cadastro, email, tipo);
+    Cliente* cliente = new Cliente(telefone, nome, cadastro, email, tipo); //fazer delete
     return cliente;
   } else {
     return nullptr;
@@ -25,8 +34,8 @@ Cliente* Empresa::adicionarCliente(std::string telefone, std::string nome, std::
 }
 
 bool Empresa::validaCadastro(TipoCadastro tipoC, TipoPessoa tipoP, std::string cadastro) {
-  std::regex regularExpr(tipoP == pFisica ? "[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}" :
-                                              "[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}");
+  std::regex regularExpr(tipoP == pFisica ? "[0-9]{3}[0-9]{3}[0-9]{3}[0-9]{2}" :
+                                              "[0-9]{2}[0-9]{3}[0-9]{3}[0-9]{4}[0-9]{2}");
   if(!std::regex_match(cadastro, regularExpr)) return false;
   if(tipoC == func) {
     std::vector<Departamento*>::iterator itrD;
@@ -58,7 +67,8 @@ bool Empresa::retirarDepartamento(Departamento* departamento) {
   return false;
 }
 
-void Empresa::aplicarDissidio(TipoDissidio tipo, float valor, Data data) {
+void Empresa::aplicarDissidio(TipoDissidio tipo, float valor, unsigned ano, unsigned mes, unsigned dia) {
+  Data data(ano, mes, dia);
   std::vector<Departamento*>::iterator itrD;
   std::vector<Funcionario*>::iterator itrF;
   for(itrD = this->departamentos.begin(); itrD != this->departamentos.end(); ++ itrD)
@@ -79,4 +89,27 @@ Departamento* Empresa::getDeptFuncionario(Funcionario* funcionario) {
         return (*itrD);
   }
   return nullptr;
+}
+
+bool Empresa::vende(Cliente *cliente, Produto *produto, int qtd, unsigned ano, unsigned mes, unsigned dia) {
+  if(produto->ChecaQtd() >= qtd) {
+    Data data(ano, mes, dia);
+    Venda venda(cliente, produto, qtd, data);
+    this->vendas.push_back(venda);
+    return true;
+  } else return false;
+}
+
+void Empresa::deletaFuncionario(Funcionario* funcionario) {
+  this->getDeptFuncionario(funcionario)->retirarFuncionario(funcionario);
+  delete funcionario;
+}
+
+void Empresa::deletaCliente(Cliente* cliente) {
+  std::vector<Cliente*>::iterator itr;
+  for(itr = this->clientes.begin(); itr != this->clientes.end(); ++ itr)
+    if(*itr == cliente) {
+      this->clientes.erase(itr);
+      delete cliente;
+    }
 }
