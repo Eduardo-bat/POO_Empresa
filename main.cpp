@@ -18,4 +18,7 @@ int main() {
         std::cout << "verifica 2 funciona\n";
     if(empresa->adicionaFuncionario(pFisica, "12345678910", "func", "email", "end", 2000, 10, 10, &dep, &cargo, 2000, 10, 11, 10000) == nullptr)
         std::cout << "verifica 3 funciona\n";
+    empresa->aplicarDissidio(absoluto, 100, 2000, 10, 12);
+    std::cout << funcionario->getCargo()->getNome() << std::endl;
+    std::cout << (-- (funcionario->gettHistAlt()).end())->second.getNovoCargo()->getNome() << std::endl;
 }

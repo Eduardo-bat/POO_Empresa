@@ -16,12 +16,6 @@ Funcionario::Funcionario(TipoPessoa _tipo, std::string _cadastro, std::string _n
   Funcionario::qtd++;
 }
 
-void Funcionario::aplicaDissidio(unsigned ano, unsigned mes, unsigned dia, float novoSalario) {
-  Data data(ano, mes, dia);
-  this->histAlt.insert({data, Alteracao(novoSalario)});
-  this->salario = novoSalario;
-}
-
 void Funcionario::aplicaDissidio(Data data, float novoSalario) {
   this->histAlt.insert({data, Alteracao(novoSalario)});
   this->salario = novoSalario;

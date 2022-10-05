@@ -26,7 +26,7 @@ Funcionario* Empresa::adicionaFuncionario(TipoPessoa tipo, std::string cadastro,
 Cliente* Empresa::adicionarCliente(std::string telefone, std::string nome, std::string cadastro,
                                     std::string email, enum TipoPessoa tipo) {
   if(validaCadastro(cliente, tipo, cadastro)) {
-    Cliente* cliente = new Cliente(telefone, nome, cadastro, email, tipo);
+    Cliente* cliente = new Cliente(telefone, nome, cadastro, email, tipo); //fazer delete
     return cliente;
   } else {
     return nullptr;
@@ -98,4 +98,18 @@ bool Empresa::vende(Cliente *cliente, Produto *produto, int qtd, unsigned ano, u
     this->vendas.push_back(venda);
     return true;
   } else return false;
+}
+
+void Empresa::deletaFuncionario(Funcionario* funcionario) {
+  this->getDeptFuncionario(funcionario)->retirarFuncionario(funcionario);
+  delete funcionario;
+}
+
+void Empresa::deletaCliente(Cliente* cliente) {
+  std::vector<Cliente*>::iterator itr;
+  for(itr = this->clientes.begin(); itr != this->clientes.end(); ++ itr)
+    if(*itr == cliente) {
+      this->clientes.erase(itr);
+      delete cliente;
+    }
 }

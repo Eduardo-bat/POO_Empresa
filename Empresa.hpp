@@ -32,6 +32,8 @@ class Empresa {
     void aplicarDissidio(TipoDissidio tipo, float valor, unsigned ano, unsigned mes, unsigned dia);
     Departamento* getDeptFuncionario(Funcionario* funcionario);
     bool vende(Cliente *cliente, Produto *produto, int qtd, unsigned ano, unsigned mes, unsigned dia);
+    void deletaFuncionario(Funcionario* funcionario);
+    void deletaCliente(Cliente* cliente);
 };
 
 #endif
