@@ -31,8 +31,9 @@ Produto(std::string nome,float valorvenda, int codigo, int lotemin, int estoquem
   int getEstoquemin() const;
   void setEstoquemin(const int estoquemin);
   float getValorvenda() const;
-  void setValorvenda(const float valorvenda, Data _data);
+  void setValorvenda(const float valorvenda, unsigned ano, unsigned mes, unsigned dia);
   void insereLotes(int qtd);
   void print();
+  void print_hist();
 };
 #endif

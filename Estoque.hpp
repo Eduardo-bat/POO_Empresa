@@ -5,6 +5,7 @@
 #include"Data.h"
 #include"Ordemdeprod.hpp"
 #include"Produto.hpp"
+#include <iostream>
 
 
 
@@ -21,6 +22,7 @@ class Estoque {
     bool verificaEstoque(Produto *_produto, int _qtd, Data _data);
     bool verificaEstoquemin(Produto *_produto, Data _data);
     Estoque();
+    void print();
 
 };
 #endif

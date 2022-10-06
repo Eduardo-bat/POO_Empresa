@@ -37,3 +37,14 @@ OrdemDeProd Estoque::emiteOrdem(Data _data) {
   adicionaOrdem(op);
   return *op;
 }
+
+void Estoque::print(){
+ std::vector<Produto *>::iterator it;
+ std::cout<<"Produtos em Estoque:";
+ std::cout<<"\n";
+  for (it = produtos_estoque.begin(); it != produtos_estoque.end(); it++) {
+  (*it)->print();
+  std::cout<<"\n";
+}
+ std::cout<<"\n";
+}

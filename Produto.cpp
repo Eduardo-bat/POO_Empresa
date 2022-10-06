@@ -62,9 +62,10 @@ void Produto::setEstoquemin(const int estoquemin){this->estoquemin=estoquemin;}
 
 float Produto::getValorvenda() const{return this->valorvenda;}
 
-void Produto::setValorvenda(const float valorvenda, Data _data){
+void Produto::setValorvenda(const float valorvenda, unsigned ano, unsigned mes, unsigned dia){
   this->valorvenda=valorvenda;
-  hist_valor.emplace(_data,valorvenda);
+  Data data(ano, mes, dia);
+  hist_valor.emplace(data,valorvenda);
   }
 
 void Produto::insereLotes(int qtd){
@@ -97,8 +98,22 @@ void Produto::print(){
     std::cout<<"\n";
     std::cout<<"Quantidade: ";
     std::cout<<(*it);
+    std::cout<<"\n";
     aux++;
   }
 
+}
+
+void Produto::print_hist(){
+  std::cout<<"\n";
+  std::cout<<"Histórico Valor de Venda: ";
+  std::cout<<"\n";
+  for(auto it=hist_valor.begin();it!=hist_valor.end();it++){
+    std::cout<<it->first.getData();
+    std::cout<<": R$ ";
+    std::cout<<it->second;
+    std::cout<<"\n";
+  }
+   std::cout<<"\n";
 }
 
