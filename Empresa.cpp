@@ -40,8 +40,10 @@ bool Empresa::validaCadastro(TipoCadastro tipoC, TipoPessoa tipoP, std::string c
   if(tipoC == func) {
     std::vector<Departamento*>::iterator itrD;
     std::vector<Funcionario*>::iterator itrF;
+    std::vector<Funcionario*> funcionarios;
     for(itrD = this->departamentos.begin(); itrD != this->departamentos.end(); ++ itrD)
-      for(itrF = (*itrD)->getFuncionarios().begin(); itrF != (*itrD)->getFuncionarios().end(); ++ itrF)
+      for(funcionarios = (*itrD)->getFuncionarios(),
+            itrF = funcionarios.begin(); itrF != funcionarios.end(); ++ itrF)
         if((*itrF)->getCadastro() == cadastro)
           return false;
   } else {
@@ -71,8 +73,10 @@ void Empresa::aplicarDissidio(TipoDissidio tipo, float valor, unsigned ano, unsi
   Data data(ano, mes, dia);
   std::vector<Departamento*>::iterator itrD;
   std::vector<Funcionario*>::iterator itrF;
+  std::vector<Funcionario*> funcionarios;
   for(itrD = this->departamentos.begin(); itrD != this->departamentos.end(); ++ itrD)
-    for(itrF = (*itrD)->getFuncionarios().begin(); itrF != (*itrD)->getFuncionarios().end(); ++ itrF)
+    for(funcionarios = (*itrD)->getFuncionarios(),
+          itrF = funcionarios.begin(); itrF != funcionarios.end(); ++ itrF)
       if(tipo == percentual)
         (*itrF)->aplicaDissidio(data, (*itrF)->getSalario() + (*itrF)->getSalario() * valor / 100);
       else

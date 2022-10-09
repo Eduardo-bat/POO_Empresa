@@ -22,7 +22,7 @@ std::vector<Funcionario*> Departamento::getFuncionarios() {
   return this -> pessoal;
 }
 
-std::string Departamento:: getNome() const {
+std::string Departamento::getNome() const {
   return this->nome;
 }
 
