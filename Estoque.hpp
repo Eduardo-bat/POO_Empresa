@@ -13,6 +13,8 @@ class Estoque {
   private:
     std::list<OrdemDeProd> ordemdeprod;
     std::vector<Produto*> produtos_estoque;
+     Estoque(){};
+    static Estoque *instptrEstoque;
 
   public:
     void adicionaProduto(Produto* p);
@@ -21,7 +23,7 @@ class Estoque {
     OrdemDeProd emiteOrdem(Data data);
     bool verificaEstoque(Produto *_produto, int _qtd, Data _data);
     bool verificaEstoquemin(Produto *_produto, Data _data);
-    Estoque();
+    static Estoque *instEstoque();
     void print();
 
 };

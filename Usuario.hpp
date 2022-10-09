@@ -6,10 +6,12 @@ class Usuario {
  private:
 
  int permissao;
+  Usuario(int _permissao);
+  static Usuario *instptrUsuario;
 
  public:
 
- Usuario(int _permissao);
+static Usuario *instUsuario(int _permissao);
  bool verificaPermissao(int _permissao);
  int getPermissao();
  void setPermissao(int _permissao);

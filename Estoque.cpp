@@ -1,6 +1,14 @@
 #include "Estoque.hpp"
 
-Estoque::Estoque() {}
+
+Estoque *Estoque::instptrEstoque = 0;
+
+Estoque *Estoque::instEstoque() {
+  if(instptrEstoque == 0)
+    instptrEstoque = new Estoque;
+  return instptrEstoque;
+}
+
 void Estoque::adicionaProduto(Produto *p) { produtos_estoque.push_back(p); }
 
 void Estoque::adicionaOrdem(OrdemDeProd *op) { ordemdeprod.push_back(*op); }

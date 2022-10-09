@@ -7,7 +7,7 @@
 
 
 int main() {
-    
+    /*
     Empresa* empresa = Empresa::instEmpresa();
     Departamento dep("departamento");
     empresa->adicionarDepartamento(&dep);
@@ -25,11 +25,12 @@ int main() {
     empresa->aplicarDissidio(absoluto, 100, 2000, 10, 12);
     std::cout << funcionario->getCargo()->getNome() << std::endl;
     std::cout << (-- (funcionario->gettHistAlt()).end())->second.getNovoCargo()->getNome() << std::endl;
+    */
+    Estoque* estoque = Estoque::instEstoque();
     Produto* produto = new  Produto("Carro",17750,10,45,13);
     Produto* produto_1 = new  Produto("Computador",1500,6,35,22);
     produto->insereLotes(50);
     produto->insereLotes(65);
-    Estoque* estoque= new Estoque();
     estoque->adicionaProduto(produto);
     estoque->adicionaProduto(produto_1);
     estoque->print();
