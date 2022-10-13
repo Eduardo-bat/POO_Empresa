@@ -9,9 +9,11 @@ private:
  Data data;
 
 public:
- OrdemDeProd(Data _data);
- Producao produz(Data _data, int qtd, int lote, Produto *prod);
+ OrdemDeProd(unsigned _ano, unsigned _mes, unsigned _dia);
+ Producao produz(int qtd, int lote, Produto *prod);
 
 };
+
+
 
 #endif

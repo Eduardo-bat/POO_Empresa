@@ -14,8 +14,9 @@ class Producao {
   
   public:
     Producao(Data _data, int quantidade, int Lote, Produto *prod);
-    void atualizaEstoque(); 
+    //void atualizaEstoque(); 
 
 };
+
 
 #endif
