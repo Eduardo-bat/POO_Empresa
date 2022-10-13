@@ -15,7 +15,7 @@ Data data;
   public:
 Venda(Cliente *_cliente, Produto *_produto, int _qtd, Data _data);
 
-void efetuaVenda(Produto *_produto, int _qtd);
+void efetuaVenda();
 };
 
 #endif
