@@ -10,3 +10,6 @@ Producao OrdemDeProd::produz( Produto *prod) {
   Producao p=Producao(this->data, this->qtd,prod);
   return p;
 }
+
+
+
