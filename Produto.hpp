@@ -20,7 +20,6 @@ public:
 Produto(std::string nome,float valorvenda, int codigo, int lotemin, int estoquemin);
   int ChecaQtd();
   void alteraQtd(int qtd);
-  bool verificaEstoque(int _qtd);
   bool verificaEstoquemin();
   std::string getNome() const;
   void setNome(const std::string _nome);

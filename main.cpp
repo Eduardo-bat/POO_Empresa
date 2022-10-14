@@ -37,6 +37,8 @@ int main() {
     produto->print_hist();
     estoque->removeProduto(produto);
     estoque->print();
+    estoque->verificaEstoquemin(produto_1,2022,13,10);
+    estoque->print();
 
 
 }

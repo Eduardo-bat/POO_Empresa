@@ -28,13 +28,6 @@ void Produto::alteraQtd(int qtd){
 }
   }
 
-bool Produto::verificaEstoque(int _qtd){
-if (this->ChecaQtd() >= _qtd) {
-    return true;
-  } else {
-    return false;
-  }
-}
 
 bool Produto::verificaEstoquemin(){
   if (this->ChecaQtd() >= this->getEstoquemin() ) {

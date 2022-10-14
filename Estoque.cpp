@@ -22,26 +22,20 @@ void Estoque::removeProduto(Produto *p) {
     }
   }
 }
-bool Estoque::verificaEstoque(Produto *_produto, int _qtd, Data _data) {
-  if (_produto->verificaEstoque(_qtd) == 1) {
-    return true;
-  } else {
-    emiteOrdem(_data);
-    return false;
-  }
-}
 
-bool Estoque::verificaEstoquemin(Produto *_produto, Data _data) {
+
+bool Estoque::verificaEstoquemin(Produto *_produto, unsigned _ano, unsigned _mes, unsigned _dia) {
   if (_produto->verificaEstoquemin() == 1) {
     return true;
   } else {
-    emiteOrdem(_data);
+    int aux=_produto->getEstoquemin()-_produto->ChecaQtd();
+    emiteOrdem( _ano, _mes, _dia,aux,_produto);
     return false;
   }
 }
 
-OrdemDeProd Estoque::emiteOrdem(Data _data) {
-  OrdemDeProd *op = new OrdemDeProd(_data);
+OrdemDeProd Estoque::emiteOrdem(unsigned _ano, unsigned _mes, unsigned _dia, int _qtd,Produto *_produto) {
+  OrdemDeProd *op = new OrdemDeProd(_ano, _mes, _dia,_qtd,_produto);
   adicionaOrdem(op);
   return *op;
 }

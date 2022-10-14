@@ -7,11 +7,14 @@ class OrdemDeProd{
 
 private:
  Data data;
+ int qtd;
 
 public:
- OrdemDeProd(Data _data);
- Producao produz(Data _data, int qtd, int lote, Produto *prod);
+ OrdemDeProd(unsigned _ano, unsigned _mes, unsigned _dia, int _qtd, Produto *_prod);
+ Producao produz(Produto *prod);
 
 };
+
+
 
 #endif
