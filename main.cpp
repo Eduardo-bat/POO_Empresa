@@ -39,14 +39,7 @@ int main() {
     estoque->print();
     estoque->verificaEstoquemin(produto_1,2022,13,10);
     estoque->print();
+    estoque->print_op();
 
-  Produto* cerveja=new Produto("Cerveja",4.50,1, 100, 200);
-  cerveja->print();
-  OrdemDeProd ordem=OrdemDeProd(2020, 10, 13); 
-  ordem.produz(20, 0, cerveja);
-  cerveja->print();
-  estoque->adicionaProduto(cerveja);
-  estoque->print();
-  
 
 }

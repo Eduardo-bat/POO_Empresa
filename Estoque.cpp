@@ -11,7 +11,7 @@ Estoque *Estoque::instEstoque() {
 
 void Estoque::adicionaProduto(Produto *p) { produtos_estoque.push_back(p); }
 
-void Estoque::adicionaOrdem(OrdemDeProd *op) { ordemdeprod.push_back(*op); }
+void Estoque::adicionaOrdem(OrdemDeProd *op, Produto _p) { ordemdeprod.emplace(op,_p); }
 
 void Estoque::removeProduto(Produto *p) {
   std::vector<Produto *>::iterator it;
@@ -36,9 +36,12 @@ bool Estoque::verificaEstoquemin(Produto *_produto, unsigned _ano, unsigned _mes
 
 OrdemDeProd Estoque::emiteOrdem(unsigned _ano, unsigned _mes, unsigned _dia, int _qtd,Produto *_produto) {
   OrdemDeProd *op = new OrdemDeProd(_ano, _mes, _dia,_qtd,_produto);
-  adicionaOrdem(op);
+  adicionaOrdem(op, *_produto);
   return *op;
 }
+
+
+
 
 void Estoque::print(){
  std::vector<Produto *>::iterator it;
@@ -47,6 +50,21 @@ void Estoque::print(){
   for (it = produtos_estoque.begin(); it != produtos_estoque.end(); it++) {
   (*it)->print();
   std::cout<<"\n";
+}
+ std::cout<<"\n";
+}
+
+void Estoque::print_op()const{
+  std::cout<<"Ordens de Produção registradas:";
+ std::cout<<"\n";
+ 
+  for(auto it=ordemdeprod.begin();it!=ordemdeprod.end();it++){
+  std::cout<<"Nome:"<<it->second.getNome();
+  std::cout<<"\n";
+  std::cout<<"Código:"<<it->second.getCodigo();
+  std::cout<<"\n";
+  std::cout<<*it->first;
+  std::cout<<"\n"; 
 }
  std::cout<<"\n";
 }

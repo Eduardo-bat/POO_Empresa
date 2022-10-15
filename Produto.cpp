@@ -1,4 +1,5 @@
 #include "Produto.hpp"
+#include "Usuario.hpp"
 
 Produto::Produto(std::string nome,float valorvenda, int codigo, int lotemin, int estoquemin){
     this->nome=nome;
@@ -66,7 +67,7 @@ void Produto::insereLotes(int qtd){
 }
 
 void Produto::print(){
-  int aux=0;
+  int aux=1;
   std::cout<<"nome: ";
   std::cout<<this->getNome();
   std::cout<<"\n";
