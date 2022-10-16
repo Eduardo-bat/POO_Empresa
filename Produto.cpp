@@ -1,5 +1,4 @@
 #include "Produto.hpp"
-#include "Usuario.hpp"
 
 Produto::Produto(std::string nome,float valorvenda, int codigo, int lotemin, int estoquemin){
     this->nome=nome;
@@ -19,12 +18,13 @@ int Produto::ChecaQtd(){
 
 void Produto::alteraQtd(int qtd){
      for(auto it=lotes.begin();it!=lotes.end();it++){
-      if(qtd>=0 && (*it) <= qtd){
+      if(qtd>0 && (*it) <= qtd){
        qtd -=(*it);
         (*it)=0;
         }
        else{
          (*it)-=qtd;
+         break;
        }
 }
   }
