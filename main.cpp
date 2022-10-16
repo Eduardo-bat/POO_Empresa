@@ -40,6 +40,6 @@ int main() {
     estoque->verificaEstoquemin(produto_1,2022,13,10);
     estoque->print();
     estoque->print_op();
-
+    
 
 }
