@@ -7,6 +7,7 @@ class Usuario {
  int permissao;
   Usuario(int _permissao);
   static Usuario *instptrUsuario;
+  
 
  public:
 Usuario(){};
