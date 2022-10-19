@@ -3,9 +3,9 @@
 
 Usuario *Usuario::instptrUsuario = 0;
 
-Usuario *Usuario::instUsuario(int _permissao) {
+Usuario *Usuario::instUsuario( int _permissao) {
   if(instptrUsuario == 0)
-    instptrUsuario = new Usuario(_permissao);
+    instptrUsuario = new Usuario( _permissao);
   return instptrUsuario;
 }
 
@@ -39,4 +39,4 @@ bool Usuario::verificaPermissao(int _permissao){
     
 int Usuario::getPermissao() { return this->permissao; }
 
-void Usuario::setPermissao( int _permissao){this->permissao=_permissao;}
+

@@ -19,7 +19,7 @@ Estoque *Estoque::instEstoque() {
 }
 
 void Estoque::adicionaProduto(Produto *p) { produtos_estoque.push_back(p);
-this->entity<Estoque>();
+//this->entity<Estoque>();
 }
 
 void Estoque::adicionaOrdem(OrdemDeProd *op, Produto _p) { ordemdeprod.emplace(op,_p); }
