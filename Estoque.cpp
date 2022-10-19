@@ -1,7 +1,16 @@
 #include "Estoque.hpp"
+#include "Usuario.hpp"
+#include "Log.hpp"
 
 
 Estoque *Estoque::instptrEstoque = 0;
+/*
+template<typename t> void Estoque::entity(){
+  Log<t>* log = new  Log<t>();
+  log->setEntity(this);
+
+}
+*/
 
 Estoque *Estoque::instEstoque() {
   if(instptrEstoque == 0)
@@ -9,7 +18,9 @@ Estoque *Estoque::instEstoque() {
   return instptrEstoque;
 }
 
-void Estoque::adicionaProduto(Produto *p) { produtos_estoque.push_back(p); }
+void Estoque::adicionaProduto(Produto *p) { produtos_estoque.push_back(p);
+this->entity<Estoque>();
+}
 
 void Estoque::adicionaOrdem(OrdemDeProd *op, Produto _p) { ordemdeprod.emplace(op,_p); }
 
@@ -44,6 +55,8 @@ OrdemDeProd Estoque::emiteOrdem(unsigned _ano, unsigned _mes, unsigned _dia, int
 
 
 void Estoque::print(){
+  int permissao=4;
+  if(Usuario::instUsuario()->verificaPermissao(permissao)==true){
  std::vector<Produto *>::iterator it;
  std::cout<<"Produtos em Estoque:";
  std::cout<<"\n";
@@ -52,6 +65,7 @@ void Estoque::print(){
   std::cout<<"\n";
 }
  std::cout<<"\n";
+  }
 }
 
 void Estoque::print_op()const{
