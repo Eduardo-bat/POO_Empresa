@@ -1,3 +1,4 @@
+/*
 #pragma once
 #include "Data.h"
 #include "Usuario.hpp"
@@ -33,3 +34,4 @@ void Log<t>:: setEntity(t *_entity){this->entidade=(_entity);}
 template <class t>
 t Log<t>::getEntity(){return this->*entidade;}
 
+*/
