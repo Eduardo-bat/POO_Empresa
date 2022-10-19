@@ -9,6 +9,12 @@ Usuario *Usuario::instUsuario(int _permissao) {
   return instptrUsuario;
 }
 
+Usuario *Usuario::instUsuario() {
+  if(instptrUsuario == 0)
+    instptrUsuario = new Usuario;
+  return instptrUsuario;
+}
+
 Usuario::Usuario(int _permissao){this->permissao=_permissao;}
 
 

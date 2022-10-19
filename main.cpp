@@ -3,9 +3,13 @@
 #include "Funcionario.hpp"
 #include "Produto.hpp"
 #include "Estoque.hpp"
+#include "Usuario.hpp"
 
 int main() {
-    
+    int _p;
+    std::cout<<"Insira permissão do usuário: ";
+    scanf("%d",&_p);
+    Usuario* user = Usuario::instUsuario(_p);
     Empresa* empresa = Empresa::instEmpresa();
     Departamento dep("departamento");
     empresa->adicionarDepartamento(&dep);
@@ -31,7 +35,9 @@ int main() {
     estoque->adicionaProduto(produto);
     estoque->adicionaProduto(produto_1);
     estoque->print();
-    produto->alteraQtd(60);
+    produto->insereLotes(65);
+    produto->alteraQtd(30);
+    estoque->verificaEstoquemin(produto,2022,13,10);
     produto->setValorvenda(1920,2000, 10, 11);
     estoque->print();
     produto->print_hist();

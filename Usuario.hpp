@@ -10,8 +10,9 @@ class Usuario {
   static Usuario *instptrUsuario;
 
  public:
-
+Usuario(){};
 static Usuario *instUsuario(int _permissao);
+static Usuario *instUsuario();
  bool verificaPermissao(int _permissao);
  int getPermissao();
  void setPermissao(int _permissao);
