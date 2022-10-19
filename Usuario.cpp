@@ -15,7 +15,7 @@ Usuario *Usuario::instUsuario() {
   return instptrUsuario;
 }
 
-Usuario::Usuario(int _permissao){this->permissao=_permissao;}
+Usuario::Usuario( int _permissao){this->permissao=_permissao;}
 
 
 bool Usuario::verificaPermissao(int _permissao){
@@ -38,5 +38,3 @@ bool Usuario::verificaPermissao(int _permissao){
     }
     
 int Usuario::getPermissao() { return this->permissao; }
-
-
