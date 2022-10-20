@@ -30,3 +30,8 @@
 *.exe
 *.out
 *.app
+
+# Replit
+*.nix
+*.replit
+.ccls-cache/
