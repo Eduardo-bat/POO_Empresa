@@ -98,7 +98,7 @@ Departamento* Empresa::getDeptFuncionario(Funcionario* funcionario) {
 bool Empresa::vende(Cliente *cliente, Produto *produto, int qtd, unsigned ano, unsigned mes, unsigned dia) {
   if(produto->ChecaQtd() >= qtd) {
     Data data(ano, mes, dia);
-    Venda venda(cliente, produto, qtd, data);
+    Venda venda(cliente, produto, qtd, data, Estoque::instEstoque());
     this->vendas.push_back(venda);
     return true;
   } else return false;

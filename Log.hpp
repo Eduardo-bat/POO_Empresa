@@ -5,11 +5,12 @@
 template <class Entidade>
 class Log {
   protected:
-    Data data;
     Usuario *usuario;
+    Data data;
     Entidade entidade;
     virtual void metodoAbstrato() = 0;
   public:
+    Log(Usuario *_usuario, Data _data, Entidade _entidade) : usuario(_usuario), data(_data), entidade(_entidade) {};
     Usuario* getUsuario();
     Data getData();
     Entidade getEntity();

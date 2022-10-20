@@ -19,8 +19,8 @@ class ExcecaoAcessoNegado : public std::exception {
 
 template <class Entidade, typename Funcionalidade>
 ExcecaoAcessoNegado::ExcecaoAcessoNegado(Usuario *usuario, Data data, Entidade entidade, Funcionalidade funcionalidade) {
-  LogAcessoNegado log(usuario, data, entidade, funcionalidade);
-  listLogAcessoNegado.pushback(log);
+  LogAcessoNegado<Entidade, Funcionalidade> log(usuario, data, entidade, funcionalidade);
+  listLogAcessoNegado<Entidade, Funcionalidade>.pushback(log);
 }
 
 #endif
