@@ -1,7 +1,7 @@
 #pragma once
 #include "Data.h"
-#include "Usuario.hpp"
 
+class Usuario;
 template <class Entidade>
 class Log {
   protected:
@@ -10,7 +10,10 @@ class Log {
     Entidade entidade;
     virtual void metodoAbstrato() = 0;
   public:
-    Log(Usuario *_usuario, Data _data, Entidade _entidade) : usuario(_usuario), data(_data), entidade(_entidade) {};
+    Log(Usuario *_usuario, Entidade _entidade) : usuario(_usuario), entidade(_entidade) {
+      Data _data;
+      this->data = _data;
+    };
     Usuario* getUsuario();
     Data getData();
     Entidade getEntity();

@@ -8,9 +8,10 @@ template <class Entidade, typename Funcionalidade>
 class LogAcessoNegado : public Log<Entidade> {
   private:
     Funcionalidade funcionalidade;
+    virtual void metodoAbstrato() {}
   public:
-    LogAcessoNegado(Usuario *_usuario, Data _data, Entidade _entidade, Funcionalidade _funcionalidade)
-                     : Log<Entidade>(_usuario, _data, _entidade), funcionalidade(_funcionalidade) {};
+    LogAcessoNegado(Usuario *_usuario, Entidade _entidade, Funcionalidade _funcionalidade)
+                     : Log<Entidade>(_usuario, _entidade), funcionalidade(_funcionalidade) {};
     Funcionalidade getFuncionalidade();
 };
 

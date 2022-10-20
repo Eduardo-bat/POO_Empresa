@@ -16,25 +16,5 @@ Usuario *Usuario::instUsuario() {
 }
 
 Usuario::Usuario( int _permissao){this->permissao=_permissao;}
-
-
-bool Usuario::verificaPermissao(int _permissao){
-   try{
-    if ((this->permissao == _permissao)){
-         return true;
-    }
-   
-        else{
-           
-            throw(permissao);//revisar 
-            
-        }
-   }
-   catch(int _p){
-    std::cout<<"Permissão "<<_p<<" não compatível";
-    std::cout<<"\n";
-    return false;
-   }
-    }
     
 int Usuario::getPermissao() { return this->permissao; }

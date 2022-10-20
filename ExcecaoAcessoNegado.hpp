@@ -4,23 +4,24 @@
 #include <exception>
 #include <string>
 #include "Empresa.hpp"
-#include "Usuario.hpp"
 #include "Data.h"
 #include "LogAcessoNegado.hpp"
 
 class ExcecaoAcessoNegado : public std::exception {
   private:
-    std::string mensagem;
+    std::string mensagem = "Acesso negado por permissao incompativel";
   public:
     template <class Entidade, typename Funcionalidade>
-    ExcecaoAcessoNegado(Usuario *usuario, Data data, Entidade entidade, Funcionalidade funcionalidade);
-    virtual const char* what() const noexcept override;
+    ExcecaoAcessoNegado(Usuario *usuario, Entidade entidade, Funcionalidade funcionalidade);
+    virtual const char* what() const noexcept override {
+      return this->mensagem.c_str(); 
+    }
 };
 
 template <class Entidade, typename Funcionalidade>
-ExcecaoAcessoNegado::ExcecaoAcessoNegado(Usuario *usuario, Data data, Entidade entidade, Funcionalidade funcionalidade) {
-  LogAcessoNegado<Entidade, Funcionalidade> log(usuario, data, entidade, funcionalidade);
-  listLogAcessoNegado<Entidade, Funcionalidade>.pushback(log);
+ExcecaoAcessoNegado::ExcecaoAcessoNegado(Usuario *usuario, Entidade entidade, Funcionalidade funcionalidade) {
+  LogAcessoNegado<Entidade, Funcionalidade> log(usuario, entidade, funcionalidade);
+  listLogAcessoNegado<Entidade, Funcionalidade>.push_back(log);
 }
 
 #endif
