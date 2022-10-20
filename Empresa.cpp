@@ -94,7 +94,8 @@ Departamento* Empresa::getDeptFuncionario(Funcionario* funcionario) {
   std::vector<Funcionario*>::iterator itrF;
   for(itrD = this->departamentos.begin(); itrD != this->departamentos.end(); ++ itrD) {
     std::vector<Funcionario*> funcionarios = (*itrD)->getFuncionarios();
-    for(itrF = (*itrD)->getFuncionarios().begin(); itrF != (*itrD)->getFuncionarios().end(); ++ itrF)
+    for(funcionarios = (*itrD)->getFuncionarios(),
+					itrF = funcionarios->getFuncionarios().begin(); itrF != funcionarios->getFuncionarios().end(); ++ itrF)
       if((*itrF) == funcionario)
         return (*itrD);
   }

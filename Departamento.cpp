@@ -24,8 +24,11 @@ std::vector<Funcionario*> Departamento::getFuncionarios() {
   return this -> pessoal;
 }
 
-std::string Departamento:: getNome() const {
-  return this->nome;
+std::string Departamento::getNome() const {
+	if(this != nullptr)
+  	return this->nome;
+	else
+		return "";
 }
 
 void Departamento::setNome(std::string _nome){

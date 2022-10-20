@@ -79,11 +79,6 @@ void Funcionario::demitir(Data data) {
 std::map<Data, Alteracao> Funcionario::gettHistAlt() {
   if(this != nullptr)
     return this->histAlt;
-  else {
-    std::map<Data, Alteracao> mapaerro;
-    mapaerro.insert({nullptr, nullptr});
-    
-  }
 }
 
 std::string Funcionario::getEndereco() const {
