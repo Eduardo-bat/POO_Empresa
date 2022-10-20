@@ -5,7 +5,8 @@ Cargo::Cargo(std::string _nome) {
 }
 
 void Cargo::setNome(const std::string _nome) {
-  this->nome = _nome;
+  if(Usuario::instUsuario()->verificaPermissao(administracao, this, Cargo::setNome))
+    this->nome = _nome;
 }
 
 std::string Cargo::getNome() const {

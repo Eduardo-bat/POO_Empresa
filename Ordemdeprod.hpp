@@ -3,15 +3,21 @@
 #include "Data.h"
 #include "Producao.hpp"
 
+
 class OrdemDeProd{
 
 private:
  Data data;
+ int qtd;
 
 public:
- OrdemDeProd(Data _data);
- Producao produz(Data _data, int qtd, int lote, Produto *prod);
+ OrdemDeProd(unsigned _ano, unsigned _mes, unsigned _dia, int _qtd, Produto *_prod);
+ Producao produz(Produto *prod);
+ friend std::ostream& operator<< (std::ostream& stream, const OrdemDeProd& it);
+
 
 };
+
+
 
 #endif

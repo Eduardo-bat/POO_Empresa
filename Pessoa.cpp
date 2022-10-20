@@ -3,25 +3,39 @@
 #include <string>
 
 TipoPessoa Pessoa::getTipo() const {
-  return this -> tipo;
+  if(this != nullptr)
+    return this -> tipo;
+  else
+    return tpInvalido;
 }
 
 std::string Pessoa::getCadastro() const {
-  return this -> cadastro;
+  if(this != nullptr)
+    return this -> cadastro;
+  else
+    return "";
 }
 
 std::string Pessoa::getNome() const {
-  return this -> nome;
+  if(this != nullptr)
+    return this -> nome;
+  else
+    return "";
 }
 
 std::string Pessoa::getEmail() const {
-  return this -> email;
+  if(this != nullptr)
+    return this -> email;
+  else
+    return "";
 }
 
 void Pessoa::setNome(const std::string _nome) {
-  this -> nome = _nome;
+  if(Usuario::instUsuario()->verificaPermissao(RH, this, Pessoa::setNome))
+    this -> nome = _nome;
 }
 
 void Pessoa::setEmail(const std::string _email) {
-  this -> email = _email;
+  if(Usuario::instUsuario()->verificaPermissao(RH, this, Pessoa::setNome))
+    this -> email = _email;
 }

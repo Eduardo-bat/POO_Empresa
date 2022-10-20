@@ -9,13 +9,12 @@ class Producao {
   
     Data data;
     int qtd;
-    int nLote;
     Produto *produto;
   
   public:
-    Producao(Data _data, int quantidade, int Lote, Produto *prod);
-    void atualizaEstoque(); 
+    Producao(Data _data, int quantidade, Produto *prod);
 
 };
+
 
 #endif

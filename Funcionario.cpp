@@ -22,74 +22,120 @@ void Funcionario::aplicaDissidio(Data data, float novoSalario) {
 }
 
 void Funcionario::promover(unsigned ano, unsigned mes, unsigned dia, Cargo *novoCargo, float novoSalario) {
-  Data data(ano, mes, dia);
-  this->histAlt.insert({data, Alteracao(novoCargo, novoSalario)});
-  this->cargo = novoCargo;
-  this->salario = novoSalario;
+  if(Usuario::instUsuario()->verificaPermissao(RH, this,
+                              static_cast<void (Funcionario::*)(unsigned, unsigned, unsigned, Cargo*, float)> (promover))) {
+    Data data(ano, mes, dia);
+    this->histAlt.insert({data, Alteracao(novoCargo, novoSalario)});
+    this->cargo = novoCargo;
+    this->salario = novoSalario;
+  }
 }
 
 void Funcionario::promover(Data data, Cargo *novoCargo, float novoSalario) {
-  this->histAlt.insert({data, Alteracao(novoCargo, novoSalario)});
-  this->cargo = novoCargo;
-  this->salario = novoSalario;
+  if(Usuario::instUsuario()->verificaPermissao(RH, this,
+                              static_cast<void (Funcionario::*)(Data, Cargo*, float)> (promover))) {
+    this->histAlt.insert({data, Alteracao(novoCargo, novoSalario)});
+    this->cargo = novoCargo;
+    this->salario = novoSalario;
+  }
 }
 
 void Funcionario::contratar(unsigned ano, unsigned mes, unsigned dia, Cargo *novoCargo, float novoSalario) {
-  Data data(ano, mes, dia);
-  this->histAlt.insert({data, Alteracao(ativo, novoCargo, novoSalario)});
-  this->cargo = novoCargo;
-  this->salario = novoSalario;
+  if(Usuario::instUsuario()->verificaPermissao(RH, this,
+                              static_cast<void (Funcionario::*)(unsigned, unsigned, unsigned, Cargo*, float)> (contratar))) {
+    Data data(ano, mes, dia);
+    this->histAlt.insert({data, Alteracao(ativo, novoCargo, novoSalario)});
+    this->cargo = novoCargo;
+    this->salario = novoSalario;
+  }
 }
 
 void Funcionario::contratar(Data data, Cargo *novoCargo, float novoSalario) {
-  this->histAlt.insert({data, Alteracao(ativo, novoCargo, novoSalario)});
-  this->cargo = novoCargo;
-  this->salario = novoSalario;
+  if(Usuario::instUsuario()->verificaPermissao(RH, this,
+                              static_cast<void (Funcionario::*)(Data, Cargo*, float)> (contratar))) {
+    this->histAlt.insert({data, Alteracao(ativo, novoCargo, novoSalario)});
+    this->cargo = novoCargo;
+    this->salario = novoSalario;
+  }
 }
 
 void Funcionario::demitir(unsigned ano, unsigned mes, unsigned dia) {
-  Data data(ano, mes, dia);
-  this->histAlt.insert({data, Alteracao(desligado)});
-  this->status = desligado;
+  if(Usuario::instUsuario()->verificaPermissao(RH, this,
+                              static_cast<void (Funcionario::*)(unsigned, unsigned, unsigned)> (demitir))) {
+    Data data(ano, mes, dia);
+    this->histAlt.insert({data, Alteracao(desligado)});
+    this->status = desligado;
+  }
 }
 
 void Funcionario::demitir(Data data) {
+  if(Usuario::instUsuario()->verificaPermissao(RH, this,
+                              static_cast<void (Funcionario::*)(Data)> (demitir))) {
   this->histAlt.insert({data, Alteracao(desligado)});
   this->status = desligado;
+  }
 }
 
 std::map<Data, Alteracao> Funcionario::gettHistAlt() {
-  return this->histAlt;
+  if(this != nullptr)
+    return this->histAlt;
+  else {
+    std::map<Data, Alteracao> mapaerro;
+    mapaerro.insert({nullptr, nullptr});
+    
+  }
 }
 
 std::string Funcionario::getEndereco() const {
-  return this->endereco;
+  if(this != nullptr)
+    return this -> endereco;
+  else
+    return nullptr;
 }
 
 void Funcionario::setEndereco(const std::string _endereco) {
-  this->endereco = _endereco;
+  if(Usuario::instUsuario()->verificaPermissao(RH, this, Funcionario::setEndereco))
+    this->endereco = _endereco;
 }
 
 int Funcionario::getMatricula() const {
-  return this->matricula;
+  if(this != nullptr)
+    return this -> matricula;
+  else
+    return 0;
 }
 
 Data Funcionario::getNascimento() const {
-  return this->nascimento;
+  if(this != nullptr)
+    return this -> nascimento;
+  else {
+    Data data(0, 0, 0);
+    return data;
+  }
 }
 
 void Funcionario::setNascimento(const Data _nascimento) {
-  this->nascimento = _nascimento;
+  if(Usuario::instUsuario()->verificaPermissao(RH, this, Funcionario::setNascimento))
+    this->nascimento = _nascimento;
 }
 
 Cargo *Funcionario::getCargo() const {
-  return this->cargo;
+  if(this != nullptr)
+    return this -> cargo;
+  else
+    return nullptr;
 }
 
 float Funcionario::getSalario() const {
-  return this->salario;
+  if(this != nullptr)
+    return this -> salario;
+  else
+    return 0;
 }
 
 Status Funcionario::getStatus() const {
-  return this->status;
+  if(this != nullptr)
+    return this -> status;
+  else
+    return statusInvalido;
 }

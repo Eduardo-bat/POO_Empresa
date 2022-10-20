@@ -1,25 +1,20 @@
 #include "Usuario.hpp"
+#include <iostream>
 
 Usuario *Usuario::instptrUsuario = 0;
 
-Usuario *Usuario::instUsuario(int _permissao) {
+Usuario *Usuario::instUsuario( int _permissao) {
   if(instptrUsuario == 0)
-    instptrUsuario = new Usuario(_permissao);
+    instptrUsuario = new Usuario( _permissao);
   return instptrUsuario;
 }
 
-Usuario::Usuario(int _permissao){this->permissao=_permissao;}
+Usuario *Usuario::instUsuario() {
+  if(instptrUsuario == 0)
+    instptrUsuario = new Usuario;
+  return instptrUsuario;
+}
 
-
-bool Usuario::verificaPermissao(int _permissao){
-    if (this->permissao == _permissao){
-        return true;
-    }
-        else{
-            return false;
-        }
-    }
+Usuario::Usuario( int _permissao){this->permissao=_permissao;}
     
 int Usuario::getPermissao() { return this->permissao; }
-
-void Usuario::setPermissao( int _permissao){this->permissao=_permissao;}

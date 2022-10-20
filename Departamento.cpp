@@ -1,20 +1,22 @@
 #include "Departamento.hpp"
 
-Departamento::Departamento(std::string _nome){
+Departamento::Departamento(std::string _nome) {
   this->nome = _nome;
 }
 
 void Departamento::adicionarFuncionario(Funcionario *f) {
-  this->pessoal.push_back(f);
+  if(Usuario::instUsuario()->verificaPermissao(RH, this, Departamento::adicionarFuncionario))
+    this->pessoal.push_back(f);
 }
 
 bool Departamento::retirarFuncionario(const Funcionario *f) {
   std::vector<Funcionario*>::iterator itr;
-  for(itr = this->pessoal.begin(); itr != this->pessoal.end(); ++ itr)
-    if(*itr == f) {
-      this->pessoal.erase(itr);
-      return true;
-    }
+  if(Usuario::instUsuario()->verificaPermissao(RH, this, Departamento::retirarFuncionario))
+    for(itr = this->pessoal.begin(); itr != this->pessoal.end(); ++ itr)
+      if(*itr == f) {
+        this->pessoal.erase(itr);
+        return true;
+      }
   return false;
 }
 
@@ -27,5 +29,6 @@ std::string Departamento:: getNome() const {
 }
 
 void Departamento::setNome(std::string _nome){
-  this->nome = _nome;
+  if(Usuario::instUsuario()->verificaPermissao(administracao, this, Departamento::setNome))
+    this->nome = _nome;
 }

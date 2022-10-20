@@ -1,13 +1,8 @@
 #include "Producao.hpp"
 
-Producao::Producao(Data _data, int quantidade, int Lote, Produto *prod){
+Producao::Producao(Data _data, int quantidade, Produto *prod){
  data= _data;
  qtd= quantidade;
  produto= prod;
-}
-
-void Producao::atualizaEstoque(){
-
-  produto->insereLotes(qtd);
-
+produto->insereLotes(qtd);
 }

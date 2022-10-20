@@ -9,10 +9,14 @@ Cliente::Cliente(std::string _cadastro, std::string _nome, std::string _email,
   this->tipo = _tipo;
 }
 
-std::string Cliente::getTelefone(){
-  return this->telefone;
+std::string Cliente::getTelefone() {
+  if(this != nullptr)
+    return this -> telefone;
+  else
+    return nullptr;
 }
  
 void Cliente::setTelefone(const std::string _telefone){
-  this->telefone = _telefone;
+  if(Usuario::instUsuario()->verificaPermissao(vendedor, this, Cliente::setTelefone))
+    this->telefone = _telefone;
 }

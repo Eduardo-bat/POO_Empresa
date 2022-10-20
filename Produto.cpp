@@ -18,23 +18,17 @@ int Produto::ChecaQtd(){
 
 void Produto::alteraQtd(int qtd){
      for(auto it=lotes.begin();it!=lotes.end();it++){
-      if(qtd>=0 && (*it) <= qtd){
+      if(qtd>0 && (*it) <= qtd){
        qtd -=(*it);
         (*it)=0;
         }
        else{
          (*it)-=qtd;
+         break;
        }
 }
   }
 
-bool Produto::verificaEstoque(int _qtd){
-if (this->ChecaQtd() >= _qtd) {
-    return true;
-  } else {
-    return false;
-  }
-}
 
 bool Produto::verificaEstoquemin(){
   if (this->ChecaQtd() >= this->getEstoquemin() ) {
@@ -73,7 +67,7 @@ void Produto::insereLotes(int qtd){
 }
 
 void Produto::print(){
-  int aux=0;
+  int aux=1;
   std::cout<<"nome: ";
   std::cout<<this->getNome();
   std::cout<<"\n";
