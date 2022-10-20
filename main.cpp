@@ -4,6 +4,7 @@
 #include "Produto.hpp"
 #include "Estoque.hpp"
 #include "Usuario.hpp"
+#include "ExcecaoAcessoNegado.hpp"
 
 int main() {
     int _p;

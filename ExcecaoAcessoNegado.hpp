@@ -3,16 +3,24 @@
 
 #include <exception>
 #include <string>
+#include "Empresa.hpp"
 #include "Usuario.hpp"
 #include "Data.h"
+#include "LogAcessoNegado.hpp"
 
 class ExcecaoAcessoNegado : public std::exception {
   private:
     std::string mensagem;
   public:
-    ExcecaoAcessoNegado(Usuario usuario, Data data, std::string entidade, std::string funcionalidade);
+    template <class Entidade, typename Funcionalidade>
+    ExcecaoAcessoNegado(Usuario *usuario, Data data, Entidade entidade, Funcionalidade funcionalidade);
     virtual const char* what() const noexcept override;
 };
 
+template <class Entidade, typename Funcionalidade>
+ExcecaoAcessoNegado::ExcecaoAcessoNegado(Usuario *usuario, Data data, Entidade entidade, Funcionalidade funcionalidade) {
+  LogAcessoNegado log(usuario, data, entidade, funcionalidade);
+  listLogAcessoNegado.pushback(log);
+}
 
 #endif
