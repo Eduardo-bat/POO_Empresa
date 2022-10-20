@@ -1,11 +1,10 @@
 #include "Venda.hpp"
 
-Venda::Venda(Cliente *_cliente, Produto *_produto, int _qtd, Data _data, Estoque *_estoque) {
+Venda::Venda(Cliente *_cliente, Produto *_produto, int _qtd, Data _data) {
   this->cliente = _cliente;
   this->produto = _produto;
   this->qtd = _qtd;
   this->data = _data;
-  this->estoque = _estoque;
 }
 
 bool Venda::verificaEstoque(int _qtd) {
@@ -19,6 +18,6 @@ bool Venda::verificaEstoque(int _qtd) {
 void Venda::efetuaVenda(Data data) {
   if (verificaEstoque(this->qtd)) {
       this->produto->alteraQtd(this->qtd);
-      estoque->verificaEstoquemin(this->produto, data.getAno(), data.getMes(), data.getDia());
+      Estoque::instEstoque()->verificaEstoquemin(this->produto, data.getAno(), data.getMes(), data.getDia());
   }
 }

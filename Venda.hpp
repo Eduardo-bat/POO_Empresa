@@ -12,10 +12,9 @@ Cliente *cliente;
 Produto *produto;
 int qtd;
 Data data;
-Estoque *estoque;
 
   public:
-Venda(Cliente *_cliente, Produto *_produto, int _qtd, Data data, Estoque *_estoque);
+Venda(Cliente *_cliente, Produto *_produto, int _qtd, Data data);
 
 bool verificaEstoque(int _qtd);
 
