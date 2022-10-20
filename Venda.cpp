@@ -1,15 +1,24 @@
 #include "Venda.hpp"
 
-Venda::Venda(Cliente *_cliente, Produto *_produto, int _qtd, Data _data) {
+Venda::Venda(Cliente *_cliente, Produto *_produto, int _qtd, Data _data, Estoque *_estoque) {
   this->cliente = _cliente;
   this->produto = _produto;
   this->qtd = _qtd;
   this->data = _data;
+  this->estoque = _estoque;
 }
 
+bool Venda::verificaEstoque(int _qtd) {
+  if (this->produto->ChecaQtd() >= _qtd) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
-// void Venda::efetuaVenda(Produto *_produto, int _qtd) {
-//   if (_produto->verificaEstoque(_qtd)) {
-//       _produto->alteraQtd(_qtd);
-//   }
-// }
+void Venda::efetuaVenda(Data data) {
+  if (verificaEstoque(this->qtd)) {
+      this->produto->alteraQtd(this->qtd);
+      estoque->verificaEstoquemin(this->produto, data.getAno(), data.getMes(), data.getDia());
+  }
+}

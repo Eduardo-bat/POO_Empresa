@@ -4,6 +4,7 @@
 #include "Cliente.hpp"
 #include "Data.h"
 #include "Produto.hpp"
+#include "Estoque.hpp"
 
 class Venda {
   private: 
@@ -11,11 +12,14 @@ Cliente *cliente;
 Produto *produto;
 int qtd;
 Data data;
+Estoque *estoque;
 
   public:
-Venda(Cliente *_cliente, Produto *_produto, int _qtd, Data _data);
+Venda(Cliente *_cliente, Produto *_produto, int _qtd, Data data, Estoque *_estoque);
 
-void efetuaVenda(Produto *_produto, int _qtd);
+bool verificaEstoque(int _qtd);
+
+void efetuaVenda(Data data);
 };
 
 #endif
