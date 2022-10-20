@@ -7,6 +7,8 @@
 #include "Cliente.hpp"
 #include "Departamento.hpp"
 #include "Venda.hpp"
+#include "Usuario.hpp"
+#include "Cargo.hpp"
 
 enum TipoDissidio { percentual, absoluto };
 enum TipoCadastro { func, cliente};
@@ -34,6 +36,7 @@ class Empresa {
     bool vende(Cliente *cliente, Produto *produto, int qtd, unsigned ano, unsigned mes, unsigned dia);
     void deletaFuncionario(Funcionario* funcionario);
     void deletaCliente(Cliente* cliente);
+    Cargo* criaCargo(std::string nome);
 };
 
 #endif

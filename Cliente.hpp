@@ -1,8 +1,9 @@
 #ifndef CLIENTE_H
 #define  CLIENTE_H
 
-#include <string>
+#include <iostream>
 #include "Pessoa.hpp"
+#include "Usuario.hpp"
 
 class  Cliente : public Pessoa {
 private:

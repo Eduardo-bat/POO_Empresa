@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "Funcionario.hpp"
+#include "Usuario.hpp"
 
 class Departamento {
 private:

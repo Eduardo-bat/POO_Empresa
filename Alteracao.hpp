@@ -4,7 +4,7 @@
 #include "Cargo.hpp"
 
 enum TipoAlteracao {admissao, demissao, promocao, dissidio, tipoAltNA};
-enum Status { ativo, desligado, tipoStatusNA };
+enum Status { ativo, desligado, tipoStatusNA, statusInvalido };
 class Funcionario;
 
 class  Alteracao {

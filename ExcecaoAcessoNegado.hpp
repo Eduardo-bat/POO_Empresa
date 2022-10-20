@@ -3,9 +3,10 @@
 
 #include <exception>
 #include <string>
-#include "Empresa.hpp"
 #include "Data.h"
 #include "LogAcessoNegado.hpp"
+
+enum Permissao { vendedor, funcionarioSimples, RH, logista, administracao };
 
 class ExcecaoAcessoNegado : public std::exception {
   private:

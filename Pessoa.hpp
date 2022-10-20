@@ -2,8 +2,9 @@
 #define PESSOA_H
 
 #include <string>
+#include "Usuario.hpp"
 
-enum TipoPessoa { pFisica, pJuridica };
+enum TipoPessoa { pFisica, pJuridica, tpInvalido };
 
 class Pessoa {
   protected:

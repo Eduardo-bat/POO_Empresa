@@ -7,6 +7,7 @@
 #include "Data.h"
 #include "Cargo.hpp"
 #include "Alteracao.hpp"
+#include "Usuario.hpp"
 
 class Funcionario : public Pessoa {
   private:

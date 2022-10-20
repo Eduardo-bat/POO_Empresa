@@ -2,6 +2,7 @@
 #define CARGO_H
 
 #include <string>
+#include "Usuario.hpp"
 
 class Cargo {
   private:
