@@ -10,5 +10,8 @@ void Cargo::setNome(const std::string _nome) {
 }
 
 std::string Cargo::getNome() const {
-  return this->nome;
+  if(this != nullptr)
+    return this->nome;
+  else
+    return "Cargo invalido (nome)";
 }

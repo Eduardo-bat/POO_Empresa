@@ -9,11 +9,10 @@ Funcionario::Funcionario(TipoPessoa _tipo, std::string _cadastro, std::string _n
   this->nome = _nome;
   this->email = _email;
   this->endereco = _endereco;
-  this->matricula = Funcionario::qtd;
+  this->matricula = (++ Funcionario::qtd);
   this->nascimento = _nascimento;
   this->contratar(dataCriacao, cargo, salario);
   this->status = ativo;
-  Funcionario::qtd++;
 }
 
 void Funcionario::aplicaDissidio(Data data, float novoSalario) {
@@ -79,6 +78,11 @@ void Funcionario::demitir(Data data) {
 std::map<Data, Alteracao> Funcionario::gettHistAlt() {
   if(this != nullptr)
     return this->histAlt;
+  else {
+    std::map<Data, Alteracao> mapErro;
+    mapErro.insert({Data(0, 0, 0), Alteracao()});
+    return mapErro;
+  }
 }
 
 std::string Funcionario::getEndereco() const {
@@ -103,10 +107,8 @@ int Funcionario::getMatricula() const {
 Data Funcionario::getNascimento() const {
   if(this != nullptr)
     return this -> nascimento;
-  else {
-    Data data(0, 0, 0);
-    return data;
-  }
+  else
+    return Data(0, 0, 0);
 }
 
 void Funcionario::setNascimento(const Data _nascimento) {

@@ -13,21 +13,21 @@ std::string Pessoa::getCadastro() const {
   if(this != nullptr)
     return this -> cadastro;
   else
-    return "";
+    return "Pessoa invalida (cadastro)";
 }
 
 std::string Pessoa::getNome() const {
   if(this != nullptr)
     return this -> nome;
   else
-    return "";
+    return "Pessoa invalida (nome)";
 }
 
 std::string Pessoa::getEmail() const {
   if(this != nullptr)
     return this -> email;
   else
-    return "";
+    return "Pessoa invalida (email)";
 }
 
 void Pessoa::setNome(const std::string _nome) {

@@ -28,7 +28,7 @@ std::string Departamento::getNome() const {
 	if(this != nullptr)
   	return this->nome;
 	else
-		return "";
+		return "Departamento invalido (nome)";
 }
 
 void Departamento::setNome(std::string _nome){

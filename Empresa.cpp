@@ -95,7 +95,7 @@ Departamento* Empresa::getDeptFuncionario(Funcionario* funcionario) {
   for(itrD = this->departamentos.begin(); itrD != this->departamentos.end(); ++ itrD) {
     std::vector<Funcionario*> funcionarios = (*itrD)->getFuncionarios();
     for(funcionarios = (*itrD)->getFuncionarios(),
-					itrF = funcionarios->getFuncionarios().begin(); itrF != funcionarios->getFuncionarios().end(); ++ itrF)
+					itrF = funcionarios.begin(); itrF != funcionarios.end(); ++ itrF)
       if((*itrF) == funcionario)
         return (*itrD);
   }
@@ -106,7 +106,7 @@ bool Empresa::vende(Cliente *cliente, Produto *produto, int qtd, unsigned ano, u
   if(produto->ChecaQtd() >= qtd
       and Usuario::instUsuario()->verificaPermissao(vendedor, this, Empresa::vende)) {
     Data data(ano, mes, dia);
-    Venda venda(cliente, produto, qtd, data, Estoque::instEstoque());
+    Venda venda(cliente, produto, qtd, data);
     this->vendas.push_back(venda);
     return true;
   } else return false;

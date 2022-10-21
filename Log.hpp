@@ -11,7 +11,7 @@ class Log {
     virtual void metodoAbstrato() = 0;
   public:
     Log(Usuario *_usuario, Entidade _entidade) : usuario(_usuario), entidade(_entidade) {
-      Data _data;
+      Data _data = Data::dateNow();
       this->data = _data;
     };
     Usuario* getUsuario();

@@ -13,7 +13,7 @@ std::string Cliente::getTelefone() {
   if(this != nullptr)
     return this -> telefone;
   else
-    return "";
+    return "Cliente invalido (telefone)";
 }
  
 void Cliente::setTelefone(const std::string _telefone){

@@ -18,6 +18,7 @@ class  Alteracao {
     Alteracao(Cargo *_novoCargo, float _novoSalario); //promocao
     Alteracao(Status _novoStatus, Cargo *_novoCargo, float _novoSalario); //contratacao
     Alteracao(Status _novoStatus); //demissao
+    Alteracao();
     friend Funcionario;
   
   public:

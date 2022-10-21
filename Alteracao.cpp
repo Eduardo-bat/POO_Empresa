@@ -27,6 +27,10 @@ Alteracao::Alteracao(Status _novoStatus) {
   this->novoCargo = &cargoNA;
 }
 
+Alteracao::Alteracao() {
+  this->tipo = tipoAltNA;
+}
+
 TipoAlteracao Alteracao::getTipo() const {
   return tipo;
 }
@@ -36,5 +40,6 @@ float Alteracao::getNovoSalario() const {
 }
 
 Cargo *Alteracao::getNovoCargo() const {
-  return novoCargo;
+  if(this->tipo == tipoAltNA) return nullptr;
+  else return novoCargo;
 }

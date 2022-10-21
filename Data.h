@@ -59,7 +59,7 @@ public:
     void setFormato(Formato valFormato);
 
     bool validaData();      //Verifica se todos os valores dos atributos estao dentro dos limites possiveis
-    Data dateNow();     //Retorna a data do presente momento
+    static Data dateNow();     //Retorna a data do presente momento
     void printData();       //Imprime a data na tela de acordo com o formato ja atribuido
     string getData() const;       //Retorna a data no formato de string
     int diffData(Data);    // Retorna a diferença entre duas datas em dias
