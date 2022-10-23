@@ -4,13 +4,7 @@
 
 
 Estoque *Estoque::instptrEstoque = 0;
-/*
-template<typename t> void Estoque::entity(){
-  Log<t>* log = new  Log<t>();
-  log->setEntity(this);
 
-}
-*/
 
 Estoque *Estoque::instEstoque() {
   if(instptrEstoque == 0)
@@ -19,7 +13,6 @@ Estoque *Estoque::instEstoque() {
 }
 
 void Estoque::adicionaProduto(Produto *p) { produtos_estoque.push_back(p);
-//this->entity<Estoque>();
 }
 
 void Estoque::adicionaOrdem(OrdemDeProd *op, Produto _p) { ordemdeprod.emplace(op,_p); }

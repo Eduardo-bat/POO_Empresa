@@ -16,7 +16,6 @@ class Estoque {
     std::vector<Produto*> produtos_estoque;
      Estoque(){};
     static Estoque *instptrEstoque;
-    //template<typename t>  void entity();
 
   public:
      void adicionaProduto(Produto* p);
