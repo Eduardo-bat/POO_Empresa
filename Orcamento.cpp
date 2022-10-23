@@ -25,7 +25,7 @@
  Orcamento::Orcamento(Cliente* _cliente){
     Data d=this->data;
     this->cliente=_cliente;
-    this->valor_total=calculatotal();
+    this->valor_total=0;
 
  }
 
