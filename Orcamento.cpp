@@ -1,6 +1,8 @@
 #include "Orcamento.hpp"
  
- void Orcamento::insereProduto(Produto* _produto, int qtd){carrinho.emplace(_produto,qtd);}
+ void Orcamento::insereProduto(Produto* _produto, int qtd){carrinho.emplace(_produto,qtd);
+ this->valor_total=calculatotal();
+ }
 
  void Orcamento::removeProduto(Produto* _produto){
   for (auto it = carrinho.begin(); it != carrinho.end(); it++) {
@@ -9,6 +11,7 @@
       break;
     }
   }
+  this->valor_total=calculatotal();
  }
 
  float Orcamento::calculatotal(){
