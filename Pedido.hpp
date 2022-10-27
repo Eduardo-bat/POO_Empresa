@@ -18,8 +18,6 @@ class Pedido {
         float valor_total;
         std::list<Venda*> listaVendas;
 
-
-
 };
 
 #endif

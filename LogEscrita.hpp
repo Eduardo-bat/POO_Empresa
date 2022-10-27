@@ -8,8 +8,8 @@ template <class Entidade, typename AtrtibutoAntes, typename AtributoDepois>
 class LogEscrita : public Log<Entidade> {
 
     private:
-        AtributoAntes atributo;
-        AtributoDepois atributo;
+        AtributoAntes atributoAntes;
+        AtributoDepois atributoDepois;
         virtual void metodoAbstrato() {}
     
     public:
@@ -17,13 +17,18 @@ class LogEscrita : public Log<Entidade> {
                      : Log<Entidade>(_usuario, _entidade, _data), AtributoAntes(_atributo), AtributoDepois(_atributo) {};
 
 
-        AtrtibutoAntes getAtributo();
-        AtributoDepois getAtributo();
+        AtrtibutoAntes getAtributoAntes();
+        AtributoDepois getAtributoDepois();
     };
 
 template <class Entidade, typename AtrtibutoAntes, typename AtributoDepois>
-AtrtibutoAntes LogEscrita<Entidade, AtrtibutoAntes, AtributoDepois>::getAtributo() {
-    return this->atributo;
+AtrtibutoAntes LogEscrita<Entidade, AtrtibutoAntes, AtributoDepois>::getAtributoAntes() {
+    return this->atributoAntes;
+}
+
+template <class Entidade, typename AtrtibutoAntes, typename AtributoDepois>
+AtributoDepois LogEscrita<Entidade, AtrtibutoAntes, AtributoDepois>::getAtributoDepois() {
+    return this->atributoDepois;
 }
 
 template <class Entidade, typename AtrtibutoAntes, typename AtributoDepois>

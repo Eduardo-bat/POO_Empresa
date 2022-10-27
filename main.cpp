@@ -32,10 +32,13 @@ int main() {
   Produto* produto = new  Produto("Carro",17750,10,45,13);
   Produto* produto_1 = new  Produto("Computador",1500,6,35,22);
   produto->insereLotes(50);
-  produto->insereLotes(65);
+  produto_1->insereLotes(65);
   estoque->adicionaProduto(produto);
   estoque->adicionaProduto(produto_1);
+  std::cout << "\n";
   estoque->print();
+  std::cout << "\n";
+  /*
   produto->insereLotes(65);
   produto->alteraQtd(30);
   estoque->verificaEstoquemin(produto,2022,13,10);
@@ -46,7 +49,7 @@ int main() {
   estoque->print();
   estoque->verificaEstoquemin(produto_1,2022,13,10);
   estoque->print();
-  estoque->print_op();
+  estoque->print_op();*/
 
   Data data(2022, 10, 27);
 
@@ -56,4 +59,9 @@ int main() {
   orcamento->print();
 
   Pedido* pedido = new Pedido(orcamento, data);
+
+  //Venda* venda = new Venda(cliente, produto, 25, data);
+
+  estoque->print();
+  
 }
