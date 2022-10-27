@@ -5,6 +5,8 @@
 #include "Estoque.hpp"
 #include "Usuario.hpp"
 #include "ExcecaoAcessoNegado.hpp"
+#include "Orcamento.hpp"
+#include "Pedido.hpp"
 
 int main() {
   Usuario* user = Usuario::instUsuario(administracao);
@@ -13,8 +15,7 @@ int main() {
   empresa->adicionarDepartamento(&dep);
   Cargo cargo("cargo");
   Funcionario* funcionario = empresa->adicionaFuncionario(pFisica, "12345678910", "func", "email", "end", 2000, 10, 10, &dep, &cargo, 2000, 10, 11, 10000);
-  Cliente* cliente = empresa->adicionarCliente(std::string telefone, std::string nome, std::string cadastro,z
-          std::string email, enum TipoPessoa tipo);
+  Cliente* cliente = empresa->adicionarCliente("34372373", "Cliente", "123456789", "email", pFisica);
   std::cout << funcionario->getCadastro() << std::endl;
   std::cout << ((funcionario->getHistAlt()).begin())->second.getNovoCargo()->getNome() << std::endl;
   std::cout << ((funcionario->getHistAlt()).begin())->first.getData() << std::endl;
@@ -46,5 +47,13 @@ int main() {
   estoque->verificaEstoquemin(produto_1,2022,13,10);
   estoque->print();
   estoque->print_op();
-  
+
+  Data data(2022, 10, 27);
+
+  Orcamento* orcamento = new Orcamento(cliente);
+  orcamento->insereProduto(produto, 25);
+  orcamento->insereProduto(produto_1, 25);
+  orcamento->print();
+
+  Pedido* pedido = new Pedido(orcamento, data);
 }
