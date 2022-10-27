@@ -5,11 +5,12 @@
 #include <map>
 
 class Pedido;
+class Empresa;
 
 class Orcamento{
     
     public:
-Orcamento(Cliente* _cliente);
+Orcamento(Cliente* _cliente, Data _data);
 void insereProduto(Produto* _produto, int qtd);
 void removeProduto(Produto* _produto);
 float calculatotal();
@@ -21,4 +22,5 @@ Data data;
 Cliente* cliente;
 float valor_total;
 friend Pedido;
+friend Empresa;
 };
