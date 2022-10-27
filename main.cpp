@@ -13,6 +13,8 @@ int main() {
   empresa->adicionarDepartamento(&dep);
   Cargo cargo("cargo");
   Funcionario* funcionario = empresa->adicionaFuncionario(pFisica, "12345678910", "func", "email", "end", 2000, 10, 10, &dep, &cargo, 2000, 10, 11, 10000);
+  Cliente* cliente = empresa->adicionarCliente(std::string telefone, std::string nome, std::string cadastro,z
+          std::string email, enum TipoPessoa tipo);
   std::cout << funcionario->getCadastro() << std::endl;
   std::cout << ((funcionario->getHistAlt()).begin())->second.getNovoCargo()->getNome() << std::endl;
   std::cout << ((funcionario->getHistAlt()).begin())->first.getData() << std::endl;
