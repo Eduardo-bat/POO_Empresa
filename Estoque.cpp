@@ -49,7 +49,7 @@ OrdemDeProd Estoque::emiteOrdem(unsigned _ano, unsigned _mes, unsigned _dia, int
 
 void Estoque::print(){
   int permissao=4;
-  if(Usuario::instUsuario()->verificaPermissao(permissao, this, Estoque::print)==true){
+  if(Usuario::instUsuario()->verificaPermissao(permissao, this, &Estoque::print)==true){
  std::vector<Produto *>::iterator it;
  std::cout<<"Produtos em Estoque:";
  std::cout<<"\n";

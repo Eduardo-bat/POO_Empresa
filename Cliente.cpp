@@ -17,6 +17,6 @@ std::string Cliente::getTelefone() {
 }
  
 void Cliente::setTelefone(const std::string _telefone){
-  if(Usuario::instUsuario()->verificaPermissao(vendedor, this, Cliente::setTelefone))
+  if(Usuario::instUsuario()->verificaPermissao(vendedor, this, &Cliente::setTelefone))
     this->telefone = _telefone;
 }

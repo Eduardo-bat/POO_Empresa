@@ -13,7 +13,7 @@ Funcionario* Empresa::adicionaFuncionario(TipoPessoa tipo, std::string cadastro,
                           std::string email, std::string endereco, unsigned anoNasc, unsigned mesNasc, unsigned diaNasc,
                             Departamento* departamento, Cargo *cargo, unsigned anoCria, unsigned mesCria, unsigned diaCria, float salario) {
   if(validaCadastro(func, tipo, cadastro)
-      and Usuario::instUsuario()->verificaPermissao(RH, this, Empresa::adicionaFuncionario)) {
+      and Usuario::instUsuario()->verificaPermissao(RH, this, &Empresa::adicionaFuncionario)) {
     Data dataNasc(anoNasc, mesNasc, diaNasc);
     Data dataCria(anoCria, mesCria, diaCria);
     Funcionario* funcionario = new Funcionario(tipo, cadastro, nome, email, endereco, dataNasc, cargo, dataCria, salario); //fazer delete
@@ -27,7 +27,7 @@ Funcionario* Empresa::adicionaFuncionario(TipoPessoa tipo, std::string cadastro,
 Cliente* Empresa::adicionarCliente(std::string telefone, std::string nome, std::string cadastro,
                                     std::string email, enum TipoPessoa tipo) {
   if(validaCadastro(cliente, tipo, cadastro)
-      and Usuario::instUsuario()->verificaPermissao(vendedor, this, Empresa::adicionarCliente)) {
+      and Usuario::instUsuario()->verificaPermissao(vendedor, this, &Empresa::adicionarCliente)) {
     Cliente* cliente = new Cliente(telefone, nome, cadastro, email, tipo); //fazer delete
     return cliente;
   } else {
@@ -58,13 +58,13 @@ bool Empresa::validaCadastro(TipoCadastro tipoC, TipoPessoa tipoP, std::string c
 }
 
 void Empresa::adicionarDepartamento(Departamento* departamento) {
-  if(Usuario::instUsuario()->verificaPermissao(administracao, this, Empresa::adicionarDepartamento))
+  if(Usuario::instUsuario()->verificaPermissao(administracao, this, &Empresa::adicionarDepartamento))
     this->departamentos.push_back(departamento);
 }
 
 bool Empresa::retirarDepartamento(Departamento* departamento) {
   std::vector<Departamento*>::iterator itr;
-  if(Usuario::instUsuario()->verificaPermissao(administracao, this, Empresa::retirarDepartamento))
+  if(Usuario::instUsuario()->verificaPermissao(administracao, this, &Empresa::retirarDepartamento))
     for(itr = this->departamentos.begin(); itr != this->departamentos.end(); ++ itr)
       if(*itr == departamento) {
         this->departamentos.erase(itr);
@@ -78,7 +78,7 @@ void Empresa::aplicarDissidio(TipoDissidio tipo, float valor, unsigned ano, unsi
   std::vector<Departamento*>::iterator itrD;
   std::vector<Funcionario*>::iterator itrF;
   std::vector<Funcionario*> funcionarios;
-  if(Usuario::instUsuario()->verificaPermissao(administracao, this, Empresa::aplicarDissidio)) {
+  if(Usuario::instUsuario()->verificaPermissao(administracao, this, &Empresa::aplicarDissidio)) {
     for(itrD = this->departamentos.begin(); itrD != this->departamentos.end(); ++ itrD)
       for(funcionarios = (*itrD)->getFuncionarios(),
             itrF = funcionarios.begin(); itrF != funcionarios.end(); ++ itrF)
@@ -104,7 +104,7 @@ Departamento* Empresa::getDeptFuncionario(Funcionario* funcionario) {
 
 bool Empresa::vende(Cliente *cliente, Produto *produto, int qtd, unsigned ano, unsigned mes, unsigned dia) {
   if(produto->ChecaQtd() >= qtd
-      and Usuario::instUsuario()->verificaPermissao(vendedor, this, Empresa::vende)) {
+      and Usuario::instUsuario()->verificaPermissao(vendedor, this, &Empresa::vende)) {
     Data data(ano, mes, dia);
     Venda venda(cliente, produto, qtd, data);
     this->vendas.push_back(venda);
@@ -113,7 +113,7 @@ bool Empresa::vende(Cliente *cliente, Produto *produto, int qtd, unsigned ano, u
 }
 
 void Empresa::deletaFuncionario(Funcionario* funcionario) {
-  if(Usuario::instUsuario()->verificaPermissao(administracao, this, Empresa::deletaFuncionario)) {
+  if(Usuario::instUsuario()->verificaPermissao(administracao, this, &Empresa::deletaFuncionario)) {
     this->getDeptFuncionario(funcionario)->retirarFuncionario(funcionario);
     delete funcionario;
   }
@@ -121,7 +121,7 @@ void Empresa::deletaFuncionario(Funcionario* funcionario) {
 
 void Empresa::deletaCliente(Cliente* cliente) {
   std::vector<Cliente*>::iterator itr;
-  if(Usuario::instUsuario()->verificaPermissao(administracao, this, Empresa::deletaFuncionario))
+  if(Usuario::instUsuario()->verificaPermissao(administracao, this, &Empresa::deletaFuncionario))
     for(itr = this->clientes.begin(); itr != this->clientes.end(); ++ itr)
       if(*itr == cliente) {
         this->clientes.erase(itr);
@@ -130,7 +130,7 @@ void Empresa::deletaCliente(Cliente* cliente) {
 }
 
 Cargo* Empresa::criaCargo(std::string nome) {
-  if(Usuario::instUsuario()->verificaPermissao(administracao, this, Empresa::criaCargo)) {
+  if(Usuario::instUsuario()->verificaPermissao(administracao, this, &Empresa::criaCargo)) {
     Cargo *cargo = new Cargo(nome);
     return cargo;
   } else return nullptr;

@@ -31,7 +31,7 @@ public:
   void contratar(Data data, Cargo *_novoCargo, float _novoSalario);
   void demitir(unsigned ano, unsigned mes, unsigned dia);
   void demitir(Data data);
-  std::map<Data, Alteracao> gettHistAlt();
+  std::map<Data, Alteracao> getHistAlt();
   std::string getEndereco() const;
   void setEndereco(const std::string _endereco);
   int getMatricula() const;

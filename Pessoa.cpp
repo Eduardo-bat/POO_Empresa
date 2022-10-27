@@ -31,11 +31,11 @@ std::string Pessoa::getEmail() const {
 }
 
 void Pessoa::setNome(const std::string _nome) {
-  if(Usuario::instUsuario()->verificaPermissao(RH, this, Pessoa::setNome))
+  if(Usuario::instUsuario()->verificaPermissao(RH, this, &Pessoa::setNome))
     this -> nome = _nome;
 }
 
 void Pessoa::setEmail(const std::string _email) {
-  if(Usuario::instUsuario()->verificaPermissao(RH, this, Pessoa::setNome))
+  if(Usuario::instUsuario()->verificaPermissao(RH, this, &Pessoa::setNome))
     this -> email = _email;
 }

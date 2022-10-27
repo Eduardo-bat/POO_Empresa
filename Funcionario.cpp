@@ -22,7 +22,7 @@ void Funcionario::aplicaDissidio(Data data, float novoSalario) {
 
 void Funcionario::promover(unsigned ano, unsigned mes, unsigned dia, Cargo *novoCargo, float novoSalario) {
   if(Usuario::instUsuario()->verificaPermissao(RH, this,
-                              static_cast<void (Funcionario::*)(unsigned, unsigned, unsigned, Cargo*, float)> (promover))) {
+                              static_cast<void (Funcionario::*)(unsigned, unsigned, unsigned, Cargo*, float)> (&Funcionario::promover))) {
     Data data(ano, mes, dia);
     this->histAlt.insert({data, Alteracao(novoCargo, novoSalario)});
     this->cargo = novoCargo;
@@ -32,7 +32,7 @@ void Funcionario::promover(unsigned ano, unsigned mes, unsigned dia, Cargo *novo
 
 void Funcionario::promover(Data data, Cargo *novoCargo, float novoSalario) {
   if(Usuario::instUsuario()->verificaPermissao(RH, this,
-                              static_cast<void (Funcionario::*)(Data, Cargo*, float)> (promover))) {
+                              static_cast<void (Funcionario::*)(Data, Cargo*, float)> (&Funcionario::promover))) {
     this->histAlt.insert({data, Alteracao(novoCargo, novoSalario)});
     this->cargo = novoCargo;
     this->salario = novoSalario;
@@ -41,7 +41,7 @@ void Funcionario::promover(Data data, Cargo *novoCargo, float novoSalario) {
 
 void Funcionario::contratar(unsigned ano, unsigned mes, unsigned dia, Cargo *novoCargo, float novoSalario) {
   if(Usuario::instUsuario()->verificaPermissao(RH, this,
-                              static_cast<void (Funcionario::*)(unsigned, unsigned, unsigned, Cargo*, float)> (contratar))) {
+                              static_cast<void (Funcionario::*)(unsigned, unsigned, unsigned, Cargo*, float)> (&Funcionario::contratar))) {
     Data data(ano, mes, dia);
     this->histAlt.insert({data, Alteracao(ativo, novoCargo, novoSalario)});
     this->cargo = novoCargo;
@@ -51,7 +51,7 @@ void Funcionario::contratar(unsigned ano, unsigned mes, unsigned dia, Cargo *nov
 
 void Funcionario::contratar(Data data, Cargo *novoCargo, float novoSalario) {
   if(Usuario::instUsuario()->verificaPermissao(RH, this,
-                              static_cast<void (Funcionario::*)(Data, Cargo*, float)> (contratar))) {
+                              static_cast<void (Funcionario::*)(Data, Cargo*, float)> (&Funcionario::contratar))) {
     this->histAlt.insert({data, Alteracao(ativo, novoCargo, novoSalario)});
     this->cargo = novoCargo;
     this->salario = novoSalario;
@@ -60,7 +60,7 @@ void Funcionario::contratar(Data data, Cargo *novoCargo, float novoSalario) {
 
 void Funcionario::demitir(unsigned ano, unsigned mes, unsigned dia) {
   if(Usuario::instUsuario()->verificaPermissao(RH, this,
-                              static_cast<void (Funcionario::*)(unsigned, unsigned, unsigned)> (demitir))) {
+                              static_cast<void (Funcionario::*)(unsigned, unsigned, unsigned)> (&Funcionario::demitir))) {
     Data data(ano, mes, dia);
     this->histAlt.insert({data, Alteracao(desligado)});
     this->status = desligado;
@@ -69,13 +69,13 @@ void Funcionario::demitir(unsigned ano, unsigned mes, unsigned dia) {
 
 void Funcionario::demitir(Data data) {
   if(Usuario::instUsuario()->verificaPermissao(RH, this,
-                              static_cast<void (Funcionario::*)(Data)> (demitir))) {
+                              static_cast<void (Funcionario::*)(Data)> (&Funcionario::demitir))) {
   this->histAlt.insert({data, Alteracao(desligado)});
   this->status = desligado;
   }
 }
 
-std::map<Data, Alteracao> Funcionario::gettHistAlt() {
+std::map<Data, Alteracao> Funcionario::getHistAlt() {
   if(this != nullptr)
     return this->histAlt;
   else {
@@ -93,7 +93,7 @@ std::string Funcionario::getEndereco() const {
 }
 
 void Funcionario::setEndereco(const std::string _endereco) {
-  if(Usuario::instUsuario()->verificaPermissao(RH, this, Funcionario::setEndereco))
+  if(Usuario::instUsuario()->verificaPermissao(RH, this, &Funcionario::setEndereco))
     this->endereco = _endereco;
 }
 
@@ -112,7 +112,7 @@ Data Funcionario::getNascimento() const {
 }
 
 void Funcionario::setNascimento(const Data _nascimento) {
-  if(Usuario::instUsuario()->verificaPermissao(RH, this, Funcionario::setNascimento))
+  if(Usuario::instUsuario()->verificaPermissao(RH, this, &Funcionario::setNascimento))
     this->nascimento = _nascimento;
 }
 

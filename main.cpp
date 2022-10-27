@@ -14,8 +14,8 @@ int main() {
   Cargo cargo("cargo");
   Funcionario* funcionario = empresa->adicionaFuncionario(pFisica, "12345678910", "func", "email", "end", 2000, 10, 10, &dep, &cargo, 2000, 10, 11, 10000);
   std::cout << funcionario->getCadastro() << std::endl;
-  std::cout << ((funcionario->gettHistAlt()).begin())->second.getNovoCargo()->getNome() << std::endl;
-  std::cout << ((funcionario->gettHistAlt()).begin())->first.getData() << std::endl;
+  std::cout << ((funcionario->getHistAlt()).begin())->second.getNovoCargo()->getNome() << std::endl;
+  std::cout << ((funcionario->getHistAlt()).begin())->first.getData() << std::endl;
   if(empresa->adicionaFuncionario(pFisica, "123", "func", "email", "end", 2000, 10, 10, &dep, &cargo, 2000, 10, 11, 10000) == nullptr)
       std::cout << "verifica 1 funciona\n";
   if(empresa->adicionaFuncionario(pFisica, "1234567891011", "func", "email", "end", 2000, 10, 10, &dep, &cargo, 2000, 10, 11, 10000) == nullptr)
@@ -24,7 +24,7 @@ int main() {
       std::cout << "verifica 3 funciona\n";
   empresa->aplicarDissidio(absoluto, 100, 2000, 10, 12);
   std::cout << funcionario->getCargo()->getNome() << std::endl;
-  std::cout << (-- (funcionario->gettHistAlt()).end())->second.getNovoCargo()->getNome() << std::endl;
+  std::cout << (-- (funcionario->getHistAlt()).end())->second.getNovoCargo()->getNome() << std::endl;
   Estoque* estoque = Estoque::instEstoque();
   Produto* produto = new  Produto("Carro",17750,10,45,13);
   Produto* produto_1 = new  Produto("Computador",1500,6,35,22);
