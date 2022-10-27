@@ -3,6 +3,7 @@
 
 #include "Data.h"
 #include "Log.hpp"
+#include <list>
 
 template <class Entidade ,typename Informacao>
 class LogLeitura: public Log<Entidade>{
@@ -13,7 +14,7 @@ private:
 virtual void metodoAbstrato() {}
 
 public:
-  Log(Usuario *_usuario, Entidade _entidade, Informacao _informacao)
+  LogLeitura(Usuario *_usuario, Entidade _entidade, Informacao _informacao)
                  : Log<Entidade>(_usuario, _entidade), Informacao(_informacao) {};
 
 
@@ -29,3 +30,4 @@ template <class Entidade, typename Informacao>
 std::list<LogLeitura<Entidade, Informacao>> listLogLeitura;
 
 #endif
+
