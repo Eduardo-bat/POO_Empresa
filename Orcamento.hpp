@@ -4,6 +4,8 @@
 #include "Produto.hpp"
 #include <map>
 
+class Pedido;
+
 class Orcamento{
     
     public:
@@ -18,4 +20,5 @@ std::map<Produto*,int>carrinho;
 Data data;
 Cliente* cliente;
 float valor_total;
+friend Pedido;
 };

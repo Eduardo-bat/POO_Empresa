@@ -5,6 +5,7 @@ Venda::Venda(Cliente *_cliente, Produto *_produto, int _qtd, Data _data) {
   this->produto = _produto;
   this->qtd = _qtd;
   this->data = _data;
+  efetuaVenda(_data);
 }
 
 bool Venda::verificaEstoque(int _qtd) {
