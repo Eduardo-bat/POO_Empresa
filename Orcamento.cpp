@@ -22,8 +22,8 @@
     return outp;
  }
 
- Orcamento::Orcamento(Cliente* _cliente){
-    Data d=this->data;
+ Orcamento::Orcamento(Cliente* _cliente, Data _data){
+    this->data = _data;
     this->cliente=_cliente;
     this->valor_total=0;
 

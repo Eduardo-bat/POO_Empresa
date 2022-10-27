@@ -102,7 +102,7 @@ Departamento* Empresa::getDeptFuncionario(Funcionario* funcionario) {
   return nullptr;
 }
 
-bool Empresa::vende(Cliente *cliente, Produto *produto, int qtd, unsigned ano, unsigned mes, unsigned dia) {
+/*bool Empresa::vende(Cliente *cliente, Produto *produto, int qtd, unsigned ano, unsigned mes, unsigned dia) {
   if(produto->ChecaQtd() >= qtd
       and Usuario::instUsuario()->verificaPermissao(vendedor, this, &Empresa::vende)) {
     Data data(ano, mes, dia);
@@ -110,6 +110,22 @@ bool Empresa::vende(Cliente *cliente, Produto *produto, int qtd, unsigned ano, u
     this->vendas.push_back(venda);
     return true;
   } else return false;
+}*/
+
+bool Empresa::criaOrcamento(Cliente* cliente, unsigned ano, unsigned mes, unsigned dia) {
+  if(Usuario::instUsuario()->verificaPermissao(vendedor, this, &Empresa::criaOrcamento)) {
+		this->orcamentos.push_back(new Orcamento(cliente, Data(ano, mes, dia)));
+		return true;
+	} else return false;
+}
+
+bool Empresa::efetuaPedido(Orcamento* orcamento, unsigned ano, unsigned mes, unsigned dia) {
+  if(Usuario::instUsuario()->verificaPermissao(vendedor, this, &Empresa::efetuaPedido)) {
+		for(std::map<Produto*, int>::iterator itr = orcamento->carrinho.begin(); itr != orcamento->carrinho.end(); ++ itr)
+			if((itr->first)->ChecaQtd() < (itr->second)) return false;
+		this->pedidos.push_back(new Pedido(orcamento, Data(ano, mes, dia)));
+		return true;
+	} else return false;
 }
 
 void Empresa::deletaFuncionario(Funcionario* funcionario) {
