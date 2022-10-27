@@ -50,7 +50,7 @@ int main() {
 
   Data data(2022, 10, 27);
 
-  Orcamento* orcamento = new Orcamento(cliente);
+  Orcamento* orcamento = new Orcamento(cliente, data);
   orcamento->insereProduto(produto, 25);
   orcamento->insereProduto(produto_1, 25);
   orcamento->print();
