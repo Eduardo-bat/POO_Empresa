@@ -5,7 +5,7 @@
 class Pagamento{
 
 protected:
- Data data // to em duvida dessa data ainda...
+ Data data; // to em duvida dessa data ainda...
  bool efetuado;
  virtual void metodoAbstrato() = 0;
 

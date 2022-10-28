@@ -5,6 +5,6 @@ Boleto::Boleto(int _vencimento, float _valor){
   valor= _valor;
 }
 
-Boleto::bool boletoVencido(){
-  this->data.diffData(dateNow()); //conferir
+bool Boleto::boletoVencido(){
+  if( this->data.diffData(this->data.dateNow() > vencimento ) //conferir
 }

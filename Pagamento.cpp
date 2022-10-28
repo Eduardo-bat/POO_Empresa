@@ -1,5 +1,5 @@
 #include "Pagamento.hpp"
 
-Pagamento::bool pagamentoEfetuado(){
+bool Pagamento::pagamentoEfetuado(){
   return efetuado;
 }
