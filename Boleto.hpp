@@ -2,19 +2,22 @@
 #define BOLETO_H
 #include "Pagamento.hpp"
 #include "Data.h"
+#include <iostream>
+
+enum vencimentoBoleto {trintaDias, sessentaDias, noventaDias};
 
 class Boleto : public Pagamento{
 
  private:
   virtual void metodoAbstrato() {}
-  int vencimento; //30, 60 ou 90 dias
+  vencimentoBoleto vencimento; //30, 60 ou 90 dias
+  Data dataAbertura, dataPagamento;
   float valor;
 
  public:
-  Boleto(int _vencimento, float _valor);
+  Boleto(vencimentoBoleto _vencimento, float _valor);
   bool boletoVencido();
-
- 
+  void pagarBoleto();
 };
 
 #endif
