@@ -18,7 +18,6 @@ class Boleto : public Pagamento{
   Boleto(vencimentoBoleto _vencimento, float _valor);
   bool boletoVencido();
   void pagarBoleto();
-  bool getEfetuado();
   Data getDataAbertura();
   Data getDataPagamento();
   vencimentoBoleto getVencimento();

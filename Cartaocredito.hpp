@@ -12,8 +12,7 @@ class Cartaocredito: public Pagamento{
 
   public:
    Cartaocredito(int _numParcelas, float _valorTotal);
-   void efetuarPagamento();
-   bool getEfetuado();
+   void efetuarPagamento(); 
    Data getDataPagamento();
    float getValorTotal();
    float getValorParcela();

@@ -11,10 +11,6 @@ void Cartaocredito::efetuarPagamento(){
   efetuado=true;
   dataPagamento=dataPagamento.dateNow();
 }
-
-bool Cartaocredito::getEfetuado(){
-  return efetuado;
-}
    
 Data Cartaocredito::getDataPagamento(){
  return dataPagamento;    

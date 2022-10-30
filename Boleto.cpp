@@ -42,12 +42,6 @@ void Boleto::pagarBoleto(){
   }
 }
 
-
-
-bool Boleto::getEfetuado(){
-  return efetuado;
-}
-
 Data Boleto::getDataAbertura(){
  return dataAbertura;   
 }
