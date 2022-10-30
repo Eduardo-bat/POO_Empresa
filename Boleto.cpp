@@ -41,3 +41,25 @@ void Boleto::pagarBoleto(){
     std::cout<<endl<<"Este boleto esta vencido!";  
   }
 }
+
+
+
+bool Boleto::getEfetuado(){
+  return efetuado;
+}
+
+Data Boleto::getDataAbertura(){
+ return dataAbertura;   
+}
+
+Data Boleto::getDataPagamento(){
+ return dataPagamento;
+}
+
+vencimentoBoleto Boleto::getVencimento(){
+  return vencimento; 
+}  
+
+float Boleto::getValor(){
+  return valor;
+}
