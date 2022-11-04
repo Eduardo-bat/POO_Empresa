@@ -1,10 +1,10 @@
 #include "Boleto.hpp"
 
-Boleto::Boleto(vencimentoBoleto _vencimento, float _valor){
-  efetuado= false;
-  vencimento= _vencimento;
-  valor= _valor;
-  dataAbertura= dataAbertura.dateNow();
+Boleto::Boleto(vencimentoBoleto _vencimento, float _valor ,unsigned int ano, unsigned int mes, unsigned int dia){
+  this->efetuado= false;
+  this->vencimento= _vencimento;
+  this->valor= _valor;
+  this->dataAbertura= Data(ano, mes, dia);
 }
 
 bool Boleto::boletoVencido(){
@@ -34,11 +34,11 @@ bool Boleto::boletoVencido(){
 
 void Boleto::pagarBoleto(){
   if(this->boletoVencido()==false){
-    efetuado=true;
-    dataPagamento=dataAbertura.dateNow();
-    std::cout<<endl<<"Pagamento efetuado com sucesso!";
+    this->efetuado=true;
+    this->dataPagamento=dataAbertura.dateNow();
+    std::cout<<endl<<"Pagamento efetuado com sucesso!"<<endl;
   }else{
-    std::cout<<endl<<"Este boleto esta vencido!";  
+    std::cout<<endl<<"Este boleto esta vencido, nao eh possivel efetuar o pagamento!";  
   }
 }
 
@@ -56,4 +56,33 @@ vencimentoBoleto Boleto::getVencimento(){
 
 float Boleto::getValor(){
   return valor;
+}
+
+void Boleto::print(){
+  std::cout<<endl<<"Valor do boleto: R$"<<this->getValor();
+  std::cout<<endl<<"Data de abertura do boleto: ";
+  this->dataAbertura.printData();
+  
+  if(this->getVencimento()==noventaDias){
+    std::cout<<"Vencimento: 90 dias";
+  }else if(this->getVencimento()==sessentaDias){
+    std::cout<<"Vencimento: 60 dias";
+  }else if(this->getVencimento()==trintaDias){
+    std::cout<<"Vencimento: 30 dias";
+  }
+
+  if(this->pagamentoEfetuado()==true){
+    std::cout<<endl<<"Boleto pago.";
+    std::cout<<endl<<"Data de pagamento: ";
+    this->dataPagamento.printData();
+    std::cout<<endl;
+  }else{
+    std::cout<<endl<<"Boleto nao pago.";
+    if(this->boletoVencido()==false){
+     std::cout<<endl<<"Boleto nao vencido."<<endl;
+    }else{
+    std::cout<<endl<<"Boleto vencido."<<endl;
+    }
+  }
+  
 }

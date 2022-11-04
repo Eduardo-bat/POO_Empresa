@@ -38,7 +38,7 @@ int main() {
   std::cout << "\n";
   estoque->print();
   std::cout << "\n";
-  /*
+  
   produto->insereLotes(65);
   produto->alteraQtd(30);
   estoque->verificaEstoquemin(produto,2022,13,10);
@@ -49,7 +49,7 @@ int main() {
   estoque->print();
   estoque->verificaEstoquemin(produto_1,2022,13,10);
   estoque->print();
-  estoque->print_op();*/
+  estoque->print_op();
 
   Data data(2022, 10, 27);
 
@@ -62,6 +62,6 @@ int main() {
 
   //Venda* venda = new Venda(cliente, produto, 25, data);
 
-  estoque->print();
+ estoque->print();
   
 }

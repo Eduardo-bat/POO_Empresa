@@ -11,17 +11,20 @@ class Boleto : public Pagamento{
  private:
   virtual void metodoAbstrato() {}
   vencimentoBoleto vencimento; //30, 60 ou 90 dias
-  Data dataAbertura, dataPagamento;
+  Data dataAbertura;
   float valor;
 
  public:
-  Boleto(vencimentoBoleto _vencimento, float _valor);
-  bool boletoVencido();
+  Boleto(vencimentoBoleto _vencimento, float _valor, unsigned int ano, 
+  unsigned int mes, unsigned int dia); 
+  bool boletoVencido(); //tem warning mas funciona perfeitamente
   void pagarBoleto();
-  Data getDataAbertura();
+  Data getDataAbertura(); 
   Data getDataPagamento();
   vencimentoBoleto getVencimento();
   float getValor();
+  void print();
+  
 };
 
 #endif

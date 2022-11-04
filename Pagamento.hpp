@@ -6,12 +6,11 @@ class Pagamento{
 
 protected:
  bool efetuado;
+ Data dataPagamento;
  virtual void metodoAbstrato() = 0;
 
 public:
-  bool pagamentoEfetuado(); //porque o pedido so eh efetivado quando o pagamento eh efetuado
- 
+ bool pagamentoEfetuado(); //porque o pedido so eh efetivado quando o pagamento eh efetuado
 };
-
 
 #endif

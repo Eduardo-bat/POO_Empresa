@@ -1,15 +1,15 @@
 #include "Cartaocredito.hpp"
 
-Cartaocredito::Cartaocredito(int _numParcelas, float _valorTotal){
- numParcelas= _numParcelas;
- valorTotal= _valorTotal;
- valorParcela= _valorTotal / _numParcelas;
-  efetuado= false;
+Cartaocredito::Cartaocredito(unsigned _numParcelas, float _valorTotal){
+ this->numParcelas= _numParcelas;
+ this->valorTotal= _valorTotal;
+ this->valorParcela= _valorTotal / _numParcelas;
+ this->efetuado= false;
 } 
 
 void Cartaocredito::efetuarPagamento(){
-  efetuado=true;
-  dataPagamento=dataPagamento.dateNow();
+  this->efetuado=true;
+  this->dataPagamento=dataPagamento.dateNow();
 }
    
 Data Cartaocredito::getDataPagamento(){
@@ -24,6 +24,20 @@ float Cartaocredito::getValorParcela(){
  return valorParcela;
 }
 
-int Cartaocredito::getNumParcelas(){
+unsigned Cartaocredito::getNumParcelas(){
   return numParcelas;
+}
+
+void Cartaocredito::print(){
+ std::cout<<endl<<"Valor total: R$"<<this->getValorTotal();
+ std:: cout<<endl<<"Parcelas: "<<this->getNumParcelas(); 
+ std::cout<<endl<<"Valor da parcela: "<<this->getValorParcela();
+ if(this->efetuado==true){
+   std::cout<<endl<<"Pagamento ja efetuado!"<<endl;
+   std::cout<<"Data do pagamento: ";
+   this->dataPagamento.printData();
+ }else{
+   std::cout<<endl<<"Pagamento ainda nao efetuado."<<endl;
+ }
+ 
 }
