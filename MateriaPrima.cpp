@@ -30,8 +30,10 @@ Fornecedor* MateriaPrima::finalizaCompra(OrcamentoCompra* orcamento) {
   Fornecedor* fornecedor;
   float min = std::numeric_limits<float>::max();
   for(itr = respostasOrcamento.begin(); itr != respostasOrcamento.end(); ++ itr)
-    if(float resposta = (itr->first)->respostaOrcamento(orcamento); resposta > 0 and resposta < min)
+    if(float resposta = (itr->first)->respostaOrcamento(orcamento); resposta > 0 and resposta < min) {
       fornecedor = itr->first;
+      min = resposta;
+    }
   respostasOrcamento.at(fornecedor) = true;
   this->alteraQtd(orcamento->getQtdMaterial());
   return fornecedor;
