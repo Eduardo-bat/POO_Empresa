@@ -10,6 +10,7 @@ class Pedido {
         Pedido(Orcamento *orcamento, Data data);
         void vende();
         float calculaNovoTotal();
+        std::list<Venda*> getVendas();
     
 
     private:

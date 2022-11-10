@@ -18,3 +18,7 @@ void Pedido::vende() {
     }
 }
 
+std::list<Venda*> Pedido::getVendas() {
+    return listaVendas;
+}
+
