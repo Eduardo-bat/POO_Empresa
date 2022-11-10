@@ -7,6 +7,7 @@
 #include "ExcecaoAcessoNegado.hpp"
 #include "Orcamento.hpp"
 #include "Pedido.hpp"
+#include "MateriaPrima.hpp"
 
 int main() {
   Usuario* user = Usuario::instUsuario(administracao);
@@ -58,9 +59,13 @@ int main() {
   orcamento->insereProduto(produto_1, 25);
   orcamento->print();
 
-  Pedido* pedido = new Pedido(orcamento, data);
-
-  //Venda* venda = new Venda(cliente, produto, 25, data);
+  //Pedido* pedido = new Pedido(orcamento, data);
+	MateriaPrima mp("kg", 5);
+	Fornecedor fornecedor;
+	mp.inserirFornecedor(*fornecedor);
+	mp.emiteOrcamentoCompra(10);
+	fornecedor.calculaOrcamento((mp.))
+  
 
  estoque->print();
   

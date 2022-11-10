@@ -4,7 +4,7 @@ void Fornecedor::adicionaOrcamento(OrcamentoCompra *orcamento) {
     respFornecedor.emplace(orcamento, -1);
 }
 
-float Fornecedor::calculaOrcamento(OrcamentoCompra *orcamento, float valor) {
+void Fornecedor::calculaOrcamento(OrcamentoCompra *orcamento, float valor) {
     respFornecedor.at(orcamento) = valor;
 }
 

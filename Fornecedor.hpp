@@ -11,7 +11,7 @@ class Fornecedor{
 
     public:
         void adicionaOrcamento(OrcamentoCompra *orcamento);
-        float calculaOrcamento(OrcamentoCompra *orcamento, float valor);
+        void calculaOrcamento(OrcamentoCompra *orcamento, float valor);
         float respostaOrcamento(OrcamentoCompra *orcamento);
 
 };
