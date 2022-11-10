@@ -64,9 +64,8 @@ int main() {
 	Fornecedor fornecedor;
 	mp.inserirFornecedor(*fornecedor);
 	mp.emiteOrcamentoCompra(10);
-	fornecedor.calculaOrcamento((mp.))
-  
-
- estoque->print();
-  
+	OrcamentoCompra* oc = mp.getOrcamentos().begin().first;
+	fornecedor.calculaOrcamento(oc, 1000.0);
+	std::cout << (mp.finalizaCompra(oc))->respostaOrcamento(oc);
+	estoque->print();
 }
