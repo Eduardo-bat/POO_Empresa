@@ -1,6 +1,6 @@
 #include "OrcamentoCompra.hpp"
 
-OrcamentoComprra::OrcamentoCompra(unsigned qtd){
+OrcamentoCompra::OrcamentoCompra(unsigned qtd){
   this->qtdMaterial= qtd;
   this->qtdRespostas= 0;
   this->finalizado= false;
