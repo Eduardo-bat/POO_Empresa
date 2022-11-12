@@ -46,3 +46,7 @@ void MateriaPrima::alteraQtd(int qtd) {
 unsigned MateriaPrima::getQtd() {
   return this->estoqueAtual;
 }
+
+std::string MateriaPrima::getUnidadeDeMedida() {
+return this->unidadeDeMedida;
+}

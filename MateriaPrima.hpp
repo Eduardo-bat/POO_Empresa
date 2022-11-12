@@ -24,6 +24,7 @@ class MateriaPrima {
     Fornecedor* finalizaCompra(OrcamentoCompra*);
     void alteraQtd(int);
     unsigned getQtd();
+    std::string getUnidadeDeMedida();
 };
 
 #endif
