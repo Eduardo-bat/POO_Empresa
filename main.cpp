@@ -7,6 +7,7 @@
 #include "ExcecaoAcessoNegado.hpp"
 #include "Orcamento.hpp"
 #include "Pedido.hpp"
+#include "Turno.hpp"
 
 int main() {
   Usuario* user = Usuario::instUsuario(administracao);
@@ -29,12 +30,18 @@ int main() {
   std::cout << funcionario->getCargo()->getNome() << std::endl;
   std::cout << (-- (funcionario->getHistAlt()).end())->second.getNovoCargo()->getNome() << std::endl;
   Estoque* estoque = Estoque::instEstoque();
-  Produto* produto = new  Produto("Carro",17750,10,45,13);
-  Produto* produto_1 = new  Produto("Computador",1500,6,35,22);
+  MateriaPrima* ferro= new MateriaPrima("kg",45);
+  MateriaPrima* silicio= new MateriaPrima("kg",15);
+  MateriaPrima* plastico= new MateriaPrima("kg",100);
+  MateriaPrima* C_I= new MateriaPrima("Unidades",1000);
+  std::map<MateriaPrima*,unsigned> materiaprima;
+  materiaprima.emplace(ferro,35);
+  materiaprima.emplace(silicio,8);
+  materiaprima.emplace(plastico,50);
+  materiaprima.emplace(C_I,500);
+  Produto* produto = new  Produto("Carro",17750,10,45,13,&materiaprima);
   produto->insereLotes(50);
-  produto_1->insereLotes(65);
   estoque->adicionaProduto(produto);
-  estoque->adicionaProduto(produto_1);
   std::cout << "\n";
   estoque->print();
   std::cout << "\n";
@@ -47,7 +54,6 @@ int main() {
   produto->print_hist();
   estoque->removeProduto(produto);
   estoque->print();
-  estoque->verificaEstoquemin(produto_1,2022,13,10);
   estoque->print();
   estoque->print_op();
 
@@ -55,7 +61,6 @@ int main() {
 
   Orcamento* orcamento = new Orcamento(cliente, data);
   orcamento->insereProduto(produto, 25);
-  orcamento->insereProduto(produto_1, 25);
   orcamento->print();
 
   Pedido* pedido = new Pedido(orcamento, data);
@@ -63,5 +68,14 @@ int main() {
   //Venda* venda = new Venda(cliente, produto, 25, data);
 
  estoque->print();
+ Turno turno=Turno("M");
+ Turno turno_1=Turno("T");
+ Turno turno_2=Turno("N");
+ std::cout<<turno.gethorario_entrada()<<"\n";
+ std::cout<<turno.gethorario_saida()<<"\n";
+ std::cout<<turno_1.gethorario_entrada()<<"\n";
+ std::cout<<turno_1.gethorario_saida()<<"\n";
+ std::cout<<turno_2.gethorario_entrada()<<"\n";
+ std::cout<<turno_2.gethorario_saida()<<"\n";
   
 }
