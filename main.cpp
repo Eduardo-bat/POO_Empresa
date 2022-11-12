@@ -7,7 +7,11 @@
 #include "ExcecaoAcessoNegado.hpp"
 #include "Orcamento.hpp"
 #include "Pedido.hpp"
+<<<<<<< HEAD
 #include "Turno.hpp"
+=======
+#include "MateriaPrima.hpp"
+>>>>>>> 76ebbcc29d7d92d299af90a7ff21f3d3eb17e654
 
 int main() {
   Usuario* user = Usuario::instUsuario(administracao);
@@ -63,6 +67,7 @@ int main() {
   orcamento->insereProduto(produto, 25);
   orcamento->print();
 
+<<<<<<< HEAD
   Pedido* pedido = new Pedido(orcamento, data);
 
   //Venda* venda = new Venda(cliente, produto, 25, data);
@@ -78,4 +83,15 @@ int main() {
  std::cout<<turno_2.gethorario_entrada()<<"\n";
  std::cout<<turno_2.gethorario_saida()<<"\n";
   
+=======
+  //Pedido* pedido = new Pedido(orcamento, data);
+	MateriaPrima mp("kg", 5);
+	Fornecedor fornecedor;
+	mp.inserirFornecedor(*fornecedor);
+	mp.emiteOrcamentoCompra(10);
+	OrcamentoCompra* oc = mp.getOrcamentos().begin().first;
+	fornecedor.calculaOrcamento(oc, 1000.0);
+	std::cout << (mp.finalizaCompra(oc))->respostaOrcamento(oc);
+	estoque->print();
+>>>>>>> 76ebbcc29d7d92d299af90a7ff21f3d3eb17e654
 }
