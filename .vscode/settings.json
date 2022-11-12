@@ -54,5 +54,6 @@
         "regex": "cpp",
         "shared_mutex": "cpp",
         "list": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "Enabled"
 }

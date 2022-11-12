@@ -3,6 +3,7 @@
 
 #include <string>
 #include <map>
+#include <list>
 #include <vector>
 #include <algorithm>
 #include <limits>
@@ -19,7 +20,8 @@ class MateriaPrima {
     MateriaPrima(std::string _unidadeDeMedida, unsigned _estoqueMin)
                   : unidadeDeMedida(_unidadeDeMedida), estoqueMin(_estoqueMin) {};
     bool inserirFornecedor(Fornecedor*);
-    void emiteOrcamentoCompra(unsigned);
+    OrcamentoCompra* emiteOrcamentoCompra(unsigned);
+    bool deletaOrcamento(OrcamentoCompra*);
     std::map<OrcamentoCompra*, std::map<Fornecedor*, bool>> getOrcamentos();
     Fornecedor* finalizaCompra(OrcamentoCompra*);
     void alteraQtd(int);

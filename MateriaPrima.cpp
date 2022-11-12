@@ -8,7 +8,7 @@ bool MateriaPrima::inserirFornecedor(Fornecedor* fornecedor) {
   return true;
 }
 
-void MateriaPrima::emiteOrcamentoCompra(unsigned qtd) {
+OrcamentoCompra* MateriaPrima::emiteOrcamentoCompra(unsigned qtd) {
   std::vector<Fornecedor*>::iterator itrF;
   OrcamentoCompra* orcamento = new OrcamentoCompra(qtd);
   std::map<Fornecedor*, bool> fornecedoresOrcamento;
@@ -17,6 +17,13 @@ void MateriaPrima::emiteOrcamentoCompra(unsigned qtd) {
     fornecedoresOrcamento.insert({*itrF, false});
   }
   this->orcamentos.insert({orcamento, fornecedoresOrcamento});
+  return orcamento;
+}
+
+bool MateriaPrima::deletaOrcamento(OrcamentoCompra* orcamento) {
+  if(static_cast<bool>(this->orcamentos.erase(orcamento))) delete orcamento;
+  else return false;
+  return true;
 }
 
 std::map<OrcamentoCompra*, std::map<Fornecedor*, bool>> MateriaPrima::getOrcamentos() {
@@ -48,5 +55,5 @@ unsigned MateriaPrima::getQtd() {
 }
 
 std::string MateriaPrima::getUnidadeDeMedida() {
-return this->unidadeDeMedida;
+  return this->unidadeDeMedida;
 }
