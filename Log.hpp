@@ -1,29 +1,24 @@
 #pragma once
 #include "Data.h"
+#include <typeinfo>
+#include <iostream>
+#include <list>
+#include "Usuario.hpp"
 
-class Usuario;
-template <class Entidade>
 class Log {
   protected:
     Usuario *usuario;
     Data data;
-    Entidade entidade;
+    std::string entidade;
     virtual void metodoAbstrato() = 0;
+    static list<Log> listLog;
   public:
-    Log(Usuario *_usuario, Entidade _entidade) : usuario(_usuario), entidade(_entidade) {
-      Data _data = Data::dateNow();
-      this->data = _data;
-    };
+    Log(Usuario *_usuario, std::string _entidade)
+        : usuario(_usuario), entidade(_entidade), data(Data::dateNow()) {};
     Usuario* getUsuario();
     Data getData();
-    Entidade getEntity();
+    std::string getEntity();
+    virtual void print();
+    static list<Log> getListLog();
+    static void printTodosLogs();
 };
-
-template <class Entidade>
-Usuario* Log<Entidade>::getUsuario(){return this->usuario;}
-
-template <class t>
-Data Log<t>::getData(){return this->data;}
-
-template <class t>
-t Log<t>::getEntity(){return this->*entidade;}

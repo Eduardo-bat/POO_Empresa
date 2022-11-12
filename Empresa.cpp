@@ -12,27 +12,45 @@ Empresa *Empresa::instEmpresa() {
 Funcionario* Empresa::adicionaFuncionario(TipoPessoa tipo, std::string cadastro, std::string nome,
                           std::string email, std::string endereco, unsigned anoNasc, unsigned mesNasc, unsigned diaNasc,
                             Departamento* departamento, Cargo *cargo, unsigned anoCria, unsigned mesCria, unsigned diaCria, float salario) {
-  if(validaCadastro(func, tipo, cadastro)
-      and Usuario::instUsuario()->verificaPermissao(RH, this, &Empresa::adicionaFuncionario)) {
-    Data dataNasc(anoNasc, mesNasc, diaNasc);
-    Data dataCria(anoCria, mesCria, diaCria);
-    Funcionario* funcionario = new Funcionario(tipo, cadastro, nome, email, endereco, dataNasc, cargo, dataCria, salario); //fazer delete
-    departamento->adicionarFuncionario(funcionario);
-    return funcionario;
-  } else {
-    return nullptr;
+  try {
+    if(Usuario::instUsuario()->getPermissao() == RH)
+      if(validaCadastro(func, tipo, cadastro)) {
+      Data dataNasc(anoNasc, mesNasc, diaNasc);
+      Data dataCria(anoCria, mesCria, diaCria);
+      Funcionario* funcionario = new Funcionario(tipo, cadastro, nome, email, endereco, dataNasc, cargo, dataCria, salario); //fazer delete
+      departamento->adicionarFuncionario(funcionario);
+      return funcionario;
+    } else {
+      std::cout << "CPF invalido" << std::endl;
+      return nullptr;
+    }
+    else
+      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
   }
+  catch(ExcecaoAcessoNegado& e) {
+    std::cerr << e.what() << '\n';
+  }
+  return nullptr;
 }
 
 Cliente* Empresa::adicionarCliente(std::string telefone, std::string nome, std::string cadastro,
                                     std::string email, enum TipoPessoa tipo) {
-  if(validaCadastro(cliente, tipo, cadastro)
-      and Usuario::instUsuario()->verificaPermissao(vendedor, this, &Empresa::adicionarCliente)) {
-    Cliente* cliente = new Cliente(telefone, nome, cadastro, email, tipo); //fazer delete
-    return cliente;
-  } else {
-    return nullptr;
-  }          
+  try {
+    if(Usuario::instUsuario()->getPermissao() == vendedor)
+      if(validaCadastro(func, tipo, cadastro)) {
+        Cliente* cliente = new Cliente(telefone, nome, cadastro, email, tipo); //fazer delete
+        return cliente;
+      } else {
+      std::cout << "CPF invalido" << std::endl;
+      return nullptr;
+      }
+    else
+      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
+  }
+  catch(ExcecaoAcessoNegado& e) {
+    std::cerr << e.what() << '\n';
+  }
+  return nullptr;
 }
 
 bool Empresa::validaCadastro(TipoCadastro tipoC, TipoPessoa tipoP, std::string cadastro) {
@@ -58,34 +76,56 @@ bool Empresa::validaCadastro(TipoCadastro tipoC, TipoPessoa tipoP, std::string c
 }
 
 void Empresa::adicionarDepartamento(Departamento* departamento) {
-  if(Usuario::instUsuario()->verificaPermissao(administracao, this, &Empresa::adicionarDepartamento))
-    this->departamentos.push_back(departamento);
+  try {
+    if(Usuario::instUsuario()->getPermissao() == administracao) 
+      this->departamentos.push_back(departamento);
+    else
+      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
+  }
+  catch(ExcecaoAcessoNegado& e) {
+    std::cerr << e.what() << '\n';
+  }
 }
 
 bool Empresa::retirarDepartamento(Departamento* departamento) {
-  std::vector<Departamento*>::iterator itr;
-  if(Usuario::instUsuario()->verificaPermissao(administracao, this, &Empresa::retirarDepartamento))
-    for(itr = this->departamentos.begin(); itr != this->departamentos.end(); ++ itr)
-      if(*itr == departamento) {
-        this->departamentos.erase(itr);
-        return true;
-      }
+  try {
+    if(Usuario::instUsuario()->getPermissao() == administracao) {
+      std::vector<Departamento*>::iterator itr;
+      for(itr = this->departamentos.begin(); itr != this->departamentos.end(); ++ itr)
+        if(*itr == departamento) {
+          this->departamentos.erase(itr);
+          return true;
+        }
+    }
+    else
+      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
+  }
+  catch(ExcecaoAcessoNegado& e) {
+    std::cerr << e.what() << '\n';
+  }
   return false;
 }
 
 void Empresa::aplicarDissidio(TipoDissidio tipo, float valor, unsigned ano, unsigned mes, unsigned dia) {
-  Data data(ano, mes, dia);
-  std::vector<Departamento*>::iterator itrD;
-  std::vector<Funcionario*>::iterator itrF;
-  std::vector<Funcionario*> funcionarios;
-  if(Usuario::instUsuario()->verificaPermissao(administracao, this, &Empresa::aplicarDissidio)) {
-    for(itrD = this->departamentos.begin(); itrD != this->departamentos.end(); ++ itrD)
-      for(funcionarios = (*itrD)->getFuncionarios(),
-            itrF = funcionarios.begin(); itrF != funcionarios.end(); ++ itrF)
-        if(tipo == percentual)
-          (*itrF)->aplicaDissidio(data, (*itrF)->getSalario() + (*itrF)->getSalario() * valor / 100);
-        else
-          (*itrF)->aplicaDissidio(data, (*itrF)->getSalario() +  valor);
+  try {
+    if(Usuario::instUsuario()->getPermissao() == administracao) {
+      Data data(ano, mes, dia);
+      std::vector<Departamento*>::iterator itrD;
+      std::vector<Funcionario*>::iterator itrF;
+      std::vector<Funcionario*> funcionarios;
+      for(itrD = this->departamentos.begin(); itrD != this->departamentos.end(); ++ itrD)
+        for(funcionarios = (*itrD)->getFuncionarios(),
+              itrF = funcionarios.begin(); itrF != funcionarios.end(); ++ itrF)
+          if(tipo == percentual)
+            (*itrF)->aplicaDissidio(data, (*itrF)->getSalario() + (*itrF)->getSalario() * valor / 100);
+          else
+            (*itrF)->aplicaDissidio(data, (*itrF)->getSalario() +  valor);
+    }
+    else
+      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
+  }
+  catch(ExcecaoAcessoNegado& e) {
+    std::cerr << e.what() << '\n';
   }
 }
 
@@ -102,52 +142,79 @@ Departamento* Empresa::getDeptFuncionario(Funcionario* funcionario) {
   return nullptr;
 }
 
-/*bool Empresa::vende(Cliente *cliente, Produto *produto, int qtd, unsigned ano, unsigned mes, unsigned dia) {
-  if(produto->ChecaQtd() >= qtd
-      and Usuario::instUsuario()->verificaPermissao(vendedor, this, &Empresa::vende)) {
-    Data data(ano, mes, dia);
-    Venda venda(cliente, produto, qtd, data);
-    this->vendas.push_back(venda);
-    return true;
-  } else return false;
-}*/
-
 bool Empresa::criaOrcamento(Cliente* cliente, unsigned ano, unsigned mes, unsigned dia) {
-  if(Usuario::instUsuario()->verificaPermissao(vendedor, this, &Empresa::criaOrcamento)) {
-		this->orcamentos.push_back(new Orcamento(cliente, Data(ano, mes, dia)));
-		return true;
-	} else return false;
+  try {
+    if(Usuario::instUsuario()->getPermissao() == vendedor) {
+      this->orcamentos.push_back(new Orcamento(cliente, Data(ano, mes, dia)));
+      return true;
+    }
+    else
+      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
+  }
+  catch(ExcecaoAcessoNegado& e) {
+    std::cerr << e.what() << '\n';
+  }
+  return false;
 }
 
 bool Empresa::efetuaPedido(Orcamento* orcamento, unsigned ano, unsigned mes, unsigned dia) {
-  if(Usuario::instUsuario()->verificaPermissao(vendedor, this, &Empresa::efetuaPedido)) {
-		for(std::map<Produto*, int>::iterator itr = orcamento->carrinho.begin(); itr != orcamento->carrinho.end(); ++ itr)
-			if((itr->first)->ChecaQtd() < (itr->second)) return false;
-		this->pedidos.push_back(new Pedido(orcamento, Data(ano, mes, dia)));
-		return true;
-	} else return false;
+  try {
+    if(Usuario::instUsuario()->getPermissao() == vendedor) {
+      for(std::map<Produto*, int>::iterator itr = orcamento->carrinho.begin(); itr != orcamento->carrinho.end(); ++ itr)
+        if((itr->first)->ChecaQtd() < (itr->second)) return false;
+      this->pedidos.push_back(new Pedido(orcamento, Data(ano, mes, dia)));
+      return true;
+    }
+    else
+      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
+  }
+  catch(ExcecaoAcessoNegado& e) {
+    std::cerr << e.what() << '\n';
+  }
+  return false;
 }
 
 void Empresa::deletaFuncionario(Funcionario* funcionario) {
-  if(Usuario::instUsuario()->verificaPermissao(administracao, this, &Empresa::deletaFuncionario)) {
-    this->getDeptFuncionario(funcionario)->retirarFuncionario(funcionario);
-    delete funcionario;
+  try {
+    if(Usuario::instUsuario()->getPermissao() == RH) {
+      this->getDeptFuncionario(funcionario)->retirarFuncionario(funcionario);
+      delete funcionario;
+    }
+    else
+      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
+  }
+  catch(ExcecaoAcessoNegado& e) {
+    std::cerr << e.what() << '\n';
   }
 }
 
 void Empresa::deletaCliente(Cliente* cliente) {
-  std::vector<Cliente*>::iterator itr;
-  if(Usuario::instUsuario()->verificaPermissao(administracao, this, &Empresa::deletaFuncionario))
-    for(itr = this->clientes.begin(); itr != this->clientes.end(); ++ itr)
-      if(*itr == cliente) {
-        this->clientes.erase(itr);
-        delete cliente;
-      }
+  try {
+    if(Usuario::instUsuario()->getPermissao() == vendedor) {
+      std::vector<Cliente*>::iterator itr;
+      for(itr = this->clientes.begin(); itr != this->clientes.end(); ++ itr)
+        if(*itr == cliente) {
+          this->clientes.erase(itr);
+          delete cliente;
+        }
+    }
+    else
+      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
+  }
+  catch(ExcecaoAcessoNegado& e) {
+    std::cerr << e.what() << '\n';
+  }
 }
 
 Cargo* Empresa::criaCargo(std::string nome) {
-  if(Usuario::instUsuario()->verificaPermissao(administracao, this, &Empresa::criaCargo)) {
-    Cargo *cargo = new Cargo(nome);
-    return cargo;
-  } else return nullptr;
+  try {
+    if(Usuario::instUsuario()->getPermissao() == administracao)
+      return new Cargo(nome);
+    else
+      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
+  }
+  catch(ExcecaoAcessoNegado& e) {
+    std::cerr << e.what() << '\n';
+  }
+  return nullptr;
 }

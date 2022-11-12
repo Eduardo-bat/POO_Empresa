@@ -8,6 +8,7 @@
 #include "Cargo.hpp"
 #include "Alteracao.hpp"
 #include "Usuario.hpp"
+#include "ExcecaoAcessoNegado.hpp"
 
 class Funcionario : public Pessoa {
   private:

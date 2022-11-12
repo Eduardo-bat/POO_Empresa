@@ -4,34 +4,20 @@
 #include "Log.hpp"
 #include <list>
 
-template <class Entidade, typename AtrtibutoAntes, typename AtributoDepois>
-class LogEscrita : public Log<Entidade> {
+class LogEscrita : public Log {
 
-    private:
-        AtributoAntes atributoAntes;
-        AtributoDepois atributoDepois;
-        virtual void metodoAbstrato() {}
-    
-    public:
-        LogEscrita(Usuario *_usuario, Entidade _entidade, Data _data, AtributoAntes _atributo, AtributoDepois _atributo)
-                     : Log<Entidade>(_usuario, _entidade, _data), AtributoAntes(_atributo), AtributoDepois(_atributo) {};
-
-
-        AtrtibutoAntes getAtributoAntes();
-        AtributoDepois getAtributoDepois();
-    };
-
-template <class Entidade, typename AtrtibutoAntes, typename AtributoDepois>
-AtrtibutoAntes LogEscrita<Entidade, AtrtibutoAntes, AtributoDepois>::getAtributoAntes() {
-    return this->atributoAntes;
-}
-
-template <class Entidade, typename AtrtibutoAntes, typename AtributoDepois>
-AtributoDepois LogEscrita<Entidade, AtrtibutoAntes, AtributoDepois>::getAtributoDepois() {
-    return this->atributoDepois;
-}
-
-template <class Entidade, typename AtrtibutoAntes, typename AtributoDepois>
-std::list<LogEscrita<Entidade, AtrtibutoAntes, AtributoDepois>> listLogEscrita;
+  private:
+    std::string atributoAntes;
+    std::string atributoDepois;
+    virtual void metodoAbstrato() {};
+  
+  public:
+    LogEscrita(Usuario *_usuario, std::string _entidade, Data _data, 
+                  std::string _atributoAntes, std::string _atributoDepois)
+                    : Log(_usuario, _entidade), atributoAntes(_atributoAntes), atributoDepois(_atributoDepois) {};
+    std::string getAtributoAntes();
+    std::string getAtributoDepois();
+    void print() override;
+  };
 
 #endif

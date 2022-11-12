@@ -5,29 +5,18 @@
 #include "Log.hpp"
 #include <list>
 
-template <class Entidade ,typename Informacao>
-class LogLeitura: public Log<Entidade>{
+class LogLeitura: public Log {
 
 private:
-
-  Informacao informacao;
-virtual void metodoAbstrato() {}
+  std::string informacao;
+  virtual void metodoAbstrato() {};
 
 public:
-  LogLeitura(Usuario *_usuario, Entidade _entidade, Informacao _informacao)
-                 : Log<Entidade>(_usuario, _entidade), Informacao(_informacao) {};
-
-
-  Informacao getInformacao();
+  LogLeitura(Usuario *_usuario, std::string _entidade, std::string _informacao)
+              : Log(_usuario, _entidade), informacao(_informacao) {};
+  std::string getInformacao();
+  void print() override;
 };
-
-template <class Entidade, typename Informacao>
-Informacao LogLeitura<Entidade, Informacao>::getInformacao() {
-  return this->informacao;
-}
-
-template <class Entidade, typename Informacao>
-std::list<LogLeitura<Entidade, Informacao>> listLogLeitura;
 
 #endif
 

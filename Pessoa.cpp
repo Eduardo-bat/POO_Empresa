@@ -31,11 +31,26 @@ std::string Pessoa::getEmail() const {
 }
 
 void Pessoa::setNome(const std::string _nome) {
-  if(Usuario::instUsuario()->verificaPermissao(RH, this, &Pessoa::setNome))
-    this -> nome = _nome;
+  try {
+    if(Usuario::instUsuario()->getPermissao() == RH)
+      this -> nome = _nome;
+    else
+      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
+  }
+  catch(ExcecaoAcessoNegado& e) {
+    std::cerr << e.what() << '\n';
+  }
 }
 
 void Pessoa::setEmail(const std::string _email) {
-  if(Usuario::instUsuario()->verificaPermissao(RH, this, &Pessoa::setNome))
-    this -> email = _email;
+  try {
+    if(Usuario::instUsuario()->getPermissao() == RH)
+      this -> email = _email;
+
+    else
+      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
+  }
+  catch(ExcecaoAcessoNegado& e) {
+    std::cerr << e.what() << '\n';
+  }
 }

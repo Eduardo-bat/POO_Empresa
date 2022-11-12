@@ -21,57 +21,90 @@ void Funcionario::aplicaDissidio(Data data, float novoSalario) {
 }
 
 void Funcionario::promover(unsigned ano, unsigned mes, unsigned dia, Cargo *novoCargo, float novoSalario) {
-  if(Usuario::instUsuario()->verificaPermissao(RH, this,
-                              static_cast<void (Funcionario::*)(unsigned, unsigned, unsigned, Cargo*, float)> (&Funcionario::promover))) {
-    Data data(ano, mes, dia);
-    this->histAlt.insert({data, Alteracao(novoCargo, novoSalario)});
-    this->cargo = novoCargo;
-    this->salario = novoSalario;
+  try {
+    if(Usuario::instUsuario()->getPermissao() == RH) {
+      this->histAlt.insert({Data(ano, mes, dia), Alteracao(novoCargo, novoSalario)});
+      this->cargo = novoCargo;
+      this->salario = novoSalario;
+    }
+    else
+      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
+  }
+  catch(ExcecaoAcessoNegado& e) {
+    std::cerr << e.what() << '\n';
   }
 }
 
 void Funcionario::promover(Data data, Cargo *novoCargo, float novoSalario) {
-  if(Usuario::instUsuario()->verificaPermissao(RH, this,
-                              static_cast<void (Funcionario::*)(Data, Cargo*, float)> (&Funcionario::promover))) {
-    this->histAlt.insert({data, Alteracao(novoCargo, novoSalario)});
-    this->cargo = novoCargo;
-    this->salario = novoSalario;
+  try {
+    if(Usuario::instUsuario()->getPermissao() == RH) {
+      this->histAlt.insert({data, Alteracao(novoCargo, novoSalario)});
+      this->cargo = novoCargo;
+      this->salario = novoSalario;
+    }
+    else
+      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
+  }
+  catch(ExcecaoAcessoNegado& e) {
+    std::cerr << e.what() << '\n';
   }
 }
 
 void Funcionario::contratar(unsigned ano, unsigned mes, unsigned dia, Cargo *novoCargo, float novoSalario) {
-  if(Usuario::instUsuario()->verificaPermissao(RH, this,
-                              static_cast<void (Funcionario::*)(unsigned, unsigned, unsigned, Cargo*, float)> (&Funcionario::contratar))) {
-    Data data(ano, mes, dia);
-    this->histAlt.insert({data, Alteracao(ativo, novoCargo, novoSalario)});
+  try {
+    if(Usuario::instUsuario()->getPermissao() == RH) {
+    this->histAlt.insert({Data(ano, mes, dia), Alteracao(ativo, novoCargo, novoSalario)});
     this->cargo = novoCargo;
     this->salario = novoSalario;
+    }
+    else
+      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
+  }
+  catch(ExcecaoAcessoNegado& e) {
+    std::cerr << e.what() << '\n';
   }
 }
 
 void Funcionario::contratar(Data data, Cargo *novoCargo, float novoSalario) {
-  if(Usuario::instUsuario()->verificaPermissao(RH, this,
-                              static_cast<void (Funcionario::*)(Data, Cargo*, float)> (&Funcionario::contratar))) {
+  try {
+    if(Usuario::instUsuario()->getPermissao() == RH) {
     this->histAlt.insert({data, Alteracao(ativo, novoCargo, novoSalario)});
     this->cargo = novoCargo;
     this->salario = novoSalario;
+    }
+    else
+      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
+  }
+  catch(ExcecaoAcessoNegado& e) {
+    std::cerr << e.what() << '\n';
   }
 }
 
 void Funcionario::demitir(unsigned ano, unsigned mes, unsigned dia) {
-  if(Usuario::instUsuario()->verificaPermissao(RH, this,
-                              static_cast<void (Funcionario::*)(unsigned, unsigned, unsigned)> (&Funcionario::demitir))) {
-    Data data(ano, mes, dia);
-    this->histAlt.insert({data, Alteracao(desligado)});
+  try {
+    if(Usuario::instUsuario()->getPermissao() == RH) {
+    this->histAlt.insert({Data(ano, mes, dia), Alteracao(desligado)});
     this->status = desligado;
+    }
+    else
+      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
+  }
+  catch(ExcecaoAcessoNegado& e) {
+    std::cerr << e.what() << '\n';
   }
 }
 
 void Funcionario::demitir(Data data) {
-  if(Usuario::instUsuario()->verificaPermissao(RH, this,
-                              static_cast<void (Funcionario::*)(Data)> (&Funcionario::demitir))) {
-  this->histAlt.insert({data, Alteracao(desligado)});
-  this->status = desligado;
+  try {
+    if(Usuario::instUsuario()->getPermissao() == RH) {
+      this->histAlt.insert({data, Alteracao(desligado)});
+      this->status = desligado;
+    }
+    else
+      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
+  }
+  catch(ExcecaoAcessoNegado& e) {
+    std::cerr << e.what() << '\n';
   }
 }
 
@@ -93,8 +126,15 @@ std::string Funcionario::getEndereco() const {
 }
 
 void Funcionario::setEndereco(const std::string _endereco) {
-  if(Usuario::instUsuario()->verificaPermissao(RH, this, &Funcionario::setEndereco))
-    this->endereco = _endereco;
+  try {
+    if(Usuario::instUsuario()->getPermissao() == RH)
+      this->endereco = _endereco;
+    else
+      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
+  }
+  catch(ExcecaoAcessoNegado& e) {
+    std::cerr << e.what() << '\n';
+  }
 }
 
 int Funcionario::getMatricula() const {
@@ -112,8 +152,15 @@ Data Funcionario::getNascimento() const {
 }
 
 void Funcionario::setNascimento(const Data _nascimento) {
-  if(Usuario::instUsuario()->verificaPermissao(RH, this, &Funcionario::setNascimento))
-    this->nascimento = _nascimento;
+  try {
+    if(Usuario::instUsuario()->getPermissao() == RH)
+      this->nascimento = _nascimento;
+    else
+      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
+  }
+  catch(ExcecaoAcessoNegado& e) {
+    std::cerr << e.what() << '\n';
+  }
 }
 
 Cargo *Funcionario::getCargo() const {

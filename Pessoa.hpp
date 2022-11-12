@@ -3,6 +3,7 @@
 
 #include <string>
 #include "Usuario.hpp"
+#include "ExcecaoAcessoNegado.hpp"
 
 enum TipoPessoa { pFisica, pJuridica, tpInvalido };
 
