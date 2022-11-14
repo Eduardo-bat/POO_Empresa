@@ -1,5 +1,6 @@
 #include "ExcecaoAcessoNegado.hpp"
+#include "RegistroLog.hpp"
 
 ExcecaoAcessoNegado::ExcecaoAcessoNegado(Usuario *usuario, std::string entidade, std::string funcionalidade) {
-  Log::getListLog().push_back(LogAcessoNegado(usuario, entidade, funcionalidade));
+  RegistroLog::instRegLog()->vecLogAcNeg.push_back(LogAcessoNegado(usuario, entidade, funcionalidade));
 }

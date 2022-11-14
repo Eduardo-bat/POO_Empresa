@@ -218,3 +218,7 @@ Cargo* Empresa::criaCargo(std::string nome) {
   }
   return nullptr;
 }
+
+void Empresa::adicionaVeiculo(Veiculo *veiculo) {
+  this->frota.push_back(veiculo);
+}

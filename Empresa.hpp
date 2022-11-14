@@ -10,6 +10,7 @@
 #include "Usuario.hpp"
 #include "Cargo.hpp"
 #include "Pedido.hpp"
+#include "Veiculo.hpp"
 
 enum TipoDissidio { percentual, absoluto };
 enum TipoCadastro { func, cliente};
@@ -18,10 +19,10 @@ class Empresa {
   private:
     std::vector<Departamento*> departamentos;
     std::vector<Cliente*> clientes;
-    //std::list<Venda> vendas;
 		std::vector<Orcamento*> orcamentos;
 		std::vector<Pedido*> pedidos;
     bool validaCadastro(TipoCadastro tipoC, TipoPessoa tipo, std::string cadastro);
+    std::vector<Veiculo*> frota;
     Empresa() {};
     static Empresa *instptrEmpresa;
     
@@ -36,12 +37,12 @@ class Empresa {
     bool retirarDepartamento(Departamento* departamento);
     void aplicarDissidio(TipoDissidio tipo, float valor, unsigned ano, unsigned mes, unsigned dia);
     Departamento* getDeptFuncionario(Funcionario* funcionario);
-    //bool vende(Cliente *cliente, Produto *produto, int qtd, unsigned ano, unsigned mes, unsigned dia);
 		bool criaOrcamento(Cliente* cliente, unsigned ano, unsigned mes, unsigned dia);
 		bool efetuaPedido(Orcamento* orcamento, unsigned ano, unsigned mes, unsigned dia);
     void deletaFuncionario(Funcionario* funcionario);
     void deletaCliente(Cliente* cliente);
     Cargo* criaCargo(std::string nome);
+    void adicionaVeiculo(Veiculo* veiculo);
 };
 
 #endif

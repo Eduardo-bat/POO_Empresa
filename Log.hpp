@@ -11,7 +11,6 @@ class Log {
     Data data;
     std::string entidade;
     virtual void metodoAbstrato() = 0;
-    static list<Log> listLog;
   public:
     Log(Usuario *_usuario, std::string _entidade)
         : usuario(_usuario), entidade(_entidade), data(Data::dateNow()) {};
@@ -19,6 +18,4 @@ class Log {
     Data getData();
     std::string getEntity();
     virtual void print();
-    static list<Log> getListLog();
-    static void printTodosLogs();
 };

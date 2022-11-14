@@ -4,8 +4,6 @@
 #include "Log.hpp"
 #include <list>
 
-enum Permissao { vendedor, funcionarioSimples, RH, logista, administracao };
-
 class LogAcessoNegado : public Log {
   private:
     std::string funcionalidade;
