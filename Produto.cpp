@@ -64,7 +64,10 @@ void Produto::setValorvenda(const float valorvenda, unsigned ano, unsigned mes, 
   }
 
 void Produto::insereLotes(int qtd){
-    lotes.push_back(qtd);
+  for(auto it=materiasprimas.begin();it!=materiasprimas.end();it++){
+   it->first->alteraQtd( -(it->second) );
+  }
+  lotes.push_back(qtd);  
 }
 
 void Produto::print(){
