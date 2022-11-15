@@ -9,7 +9,7 @@ std::string LogEscrita::getAtributoDepois() {
 }
 
 void LogEscrita::print() {
-  std::cout << typeid(*this).name() << "; permissao: " << usuario->getPermissao() << "; data: "
+  std::cout << "LogEscrita" << "; permissao: " << usuario->getPermissao() << "; data: "
                 << data.getData() << "; entidade: " << entidade << "; atributo antes: " << atributoAntes
-                    << "; atributo depois: " << atributoDepois;
+                    << "; atributo depois: " << atributoDepois << std::endl;
 }

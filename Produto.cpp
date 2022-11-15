@@ -1,12 +1,12 @@
 #include "Produto.hpp"
 
-Produto::Produto(std::string nome,float valorvenda, int codigo, int lotemin, int estoquemin,std::map<MateriaPrima*,unsigned> *materias_prima){
+Produto::Produto(std::string nome,float valorvenda, int codigo, int lotemin, int estoquemin,std::map<MateriaPrima*,unsigned> materias_prima){
     this->nome=nome;
     this->valorvenda=valorvenda;
     this->lotemin=lotemin;
     this->estoquemin=estoquemin;
     this->codigo=codigo;
-    this->materiasprimas=*materias_prima;
+    this->materiasprimas=materias_prima;
 }
 
 int Produto::ChecaQtd(){

@@ -6,7 +6,7 @@
 #include "Data.h"
 #include "LogAcessoNegado.hpp"
 
-enum Permissao { vendedor, funcionarioSimples, RH, logista, administracao };
+enum Permissao { vendedor, funcionarioSimples, RH, logista, administracao, permissaoTeste };
 
 class ExcecaoAcessoNegado : public std::exception {
   private:

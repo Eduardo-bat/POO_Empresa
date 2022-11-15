@@ -6,7 +6,7 @@ Departamento::Departamento(std::string _nome) {
 
 void Departamento::adicionarFuncionario(Funcionario *f) {
   try {
-    if(Usuario::instUsuario()->getPermissao() == RH)
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste)
       this->pessoal.push_back(f);
     else
       throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
@@ -18,7 +18,7 @@ void Departamento::adicionarFuncionario(Funcionario *f) {
 
 bool Departamento::retirarFuncionario(const Funcionario *f) {
   try {
-    if(Usuario::instUsuario()->getPermissao() == RH) {
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste) {
       std::vector<Funcionario*>::iterator itr;
       for(itr = this->pessoal.begin(); itr != this->pessoal.end(); ++ itr)
         if(*itr == f) {
@@ -48,7 +48,7 @@ std::string Departamento::getNome() const {
 
 void Departamento::setNome(std::string _nome) {
   try {
-    if(Usuario::instUsuario()->getPermissao() == administracao)
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste)
       this->nome = _nome;
     else
       throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);

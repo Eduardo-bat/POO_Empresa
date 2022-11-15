@@ -32,7 +32,7 @@ std::string Pessoa::getEmail() const {
 
 void Pessoa::setNome(const std::string _nome) {
   try {
-    if(Usuario::instUsuario()->getPermissao() == RH)
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste)
       this -> nome = _nome;
     else
       throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
@@ -44,7 +44,7 @@ void Pessoa::setNome(const std::string _nome) {
 
 void Pessoa::setEmail(const std::string _email) {
   try {
-    if(Usuario::instUsuario()->getPermissao() == RH)
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste)
       this -> email = _email;
 
     else

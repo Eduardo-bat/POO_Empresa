@@ -23,13 +23,14 @@ class Empresa {
 		std::vector<Pedido*> pedidos;
     bool validaCadastro(TipoCadastro tipoC, TipoPessoa tipo, std::string cadastro);
     std::vector<Veiculo*> frota;
+    std::pair<int, int> endereco = {0, 0};
     Empresa() {};
     static Empresa *instptrEmpresa;
     
   public:
     static Empresa *instEmpresa();
     Funcionario* adicionaFuncionario(TipoPessoa tipo, std::string cadastro, std::string nome,
-                              std::string email, std::string endereco, unsigned anoNasc, unsigned mesNasc, unsigned diaNasc,
+                              std::string email, std::pair<int, int> endereco, unsigned anoNasc, unsigned mesNasc, unsigned diaNasc,
                                 Departamento* departamento, Cargo *cargo, unsigned anoCria, unsigned mesCria, unsigned diaCria, float salario);
     Cliente* adicionarCliente(std::string telefone, std::string nome, std::string cadastro,
           std::string email, enum TipoPessoa tipo);
@@ -43,6 +44,8 @@ class Empresa {
     void deletaCliente(Cliente* cliente);
     Cargo* criaCargo(std::string nome);
     void adicionaVeiculo(Veiculo* veiculo);
+    void setEndereco(std::pair<int, int>);
+    std::pair<int, int> getEndereco();
 };
 
 #endif

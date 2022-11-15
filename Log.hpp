@@ -8,8 +8,8 @@
 class Log {
   protected:
     Usuario *usuario;
-    Data data;
     std::string entidade;
+    Data data;
     virtual void metodoAbstrato() = 0;
   public:
     Log(Usuario *_usuario, std::string _entidade)

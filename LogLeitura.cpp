@@ -5,6 +5,6 @@ std::string LogLeitura::getInformacao() {
 }
 
 void LogLeitura::print() {
-  std::cout << typeid(*this).name() << "; permissao: " << usuario->getPermissao() << "; data: "
-              << data.getData() << "; entidade: " << entidade << "; informacao: " << informacao;
+  std::cout << "LogLeitura" << "; permissao: " << usuario->getPermissao() << "; data: "
+              << data.getData() << "; entidade: " << entidade << "; informacao: " << informacao << std::endl;
 }

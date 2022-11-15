@@ -3,7 +3,7 @@
 unsigned int Funcionario::qtd = 0;
 
 Funcionario::Funcionario(TipoPessoa _tipo, std::string _cadastro, std::string _nome, std::string _email,
-                          std::string _endereco, Data _nascimento, Cargo *cargo, Data dataCriacao, float salario) {
+                          std::pair<int, int> _endereco, Data _nascimento, Cargo *cargo, Data dataCriacao, float salario) {
   this->tipo = _tipo;
   this->cadastro = _cadastro;
   this->nome = _nome;
@@ -22,7 +22,7 @@ void Funcionario::aplicaDissidio(Data data, float novoSalario) {
 
 void Funcionario::promover(unsigned ano, unsigned mes, unsigned dia, Cargo *novoCargo, float novoSalario) {
   try {
-    if(Usuario::instUsuario()->getPermissao() == RH) {
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste) {
       this->histAlt.insert({Data(ano, mes, dia), Alteracao(novoCargo, novoSalario)});
       this->cargo = novoCargo;
       this->salario = novoSalario;
@@ -37,7 +37,7 @@ void Funcionario::promover(unsigned ano, unsigned mes, unsigned dia, Cargo *novo
 
 void Funcionario::promover(Data data, Cargo *novoCargo, float novoSalario) {
   try {
-    if(Usuario::instUsuario()->getPermissao() == RH) {
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste) {
       this->histAlt.insert({data, Alteracao(novoCargo, novoSalario)});
       this->cargo = novoCargo;
       this->salario = novoSalario;
@@ -52,7 +52,7 @@ void Funcionario::promover(Data data, Cargo *novoCargo, float novoSalario) {
 
 void Funcionario::contratar(unsigned ano, unsigned mes, unsigned dia, Cargo *novoCargo, float novoSalario) {
   try {
-    if(Usuario::instUsuario()->getPermissao() == RH) {
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste) {
     this->histAlt.insert({Data(ano, mes, dia), Alteracao(ativo, novoCargo, novoSalario)});
     this->cargo = novoCargo;
     this->salario = novoSalario;
@@ -67,7 +67,7 @@ void Funcionario::contratar(unsigned ano, unsigned mes, unsigned dia, Cargo *nov
 
 void Funcionario::contratar(Data data, Cargo *novoCargo, float novoSalario) {
   try {
-    if(Usuario::instUsuario()->getPermissao() == RH) {
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste) {
     this->histAlt.insert({data, Alteracao(ativo, novoCargo, novoSalario)});
     this->cargo = novoCargo;
     this->salario = novoSalario;
@@ -82,7 +82,7 @@ void Funcionario::contratar(Data data, Cargo *novoCargo, float novoSalario) {
 
 void Funcionario::demitir(unsigned ano, unsigned mes, unsigned dia) {
   try {
-    if(Usuario::instUsuario()->getPermissao() == RH) {
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste) {
     this->histAlt.insert({Data(ano, mes, dia), Alteracao(desligado)});
     this->status = desligado;
     }
@@ -96,7 +96,7 @@ void Funcionario::demitir(unsigned ano, unsigned mes, unsigned dia) {
 
 void Funcionario::demitir(Data data) {
   try {
-    if(Usuario::instUsuario()->getPermissao() == RH) {
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste) {
       this->histAlt.insert({data, Alteracao(desligado)});
       this->status = desligado;
     }
@@ -118,16 +118,16 @@ std::map<Data, Alteracao> Funcionario::getHistAlt() {
   }
 }
 
-std::string Funcionario::getEndereco() const {
+std::pair<int, int> Funcionario::getEndereco() const {
   if(this != nullptr)
     return this -> endereco;
   else
-    return nullptr;
+    return {0, 0};
 }
 
-void Funcionario::setEndereco(const std::string _endereco) {
+void Funcionario::setEndereco(const std::pair<int, int> _endereco) {
   try {
-    if(Usuario::instUsuario()->getPermissao() == RH)
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste)
       this->endereco = _endereco;
     else
       throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
@@ -153,7 +153,7 @@ Data Funcionario::getNascimento() const {
 
 void Funcionario::setNascimento(const Data _nascimento) {
   try {
-    if(Usuario::instUsuario()->getPermissao() == RH)
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste)
       this->nascimento = _nascimento;
     else
       throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);

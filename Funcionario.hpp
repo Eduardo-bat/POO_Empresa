@@ -12,7 +12,7 @@
 
 class Funcionario : public Pessoa {
   private:
-    std::string endereco;
+    std::pair<int, int> endereco;
     unsigned int matricula;
     Data nascimento;
     Cargo *cargo;
@@ -24,7 +24,7 @@ class Funcionario : public Pessoa {
 
 public:
   Funcionario(TipoPessoa _tipo, std::string _cadastro, std::string _nome, std::string _email,
-                std::string _endereco, Data _nascimento, Cargo *cargo, Data dataCriacao, float salario);
+                std::pair<int, int> _endereco, Data _nascimento, Cargo *cargo, Data dataCriacao, float salario);
   void aplicaDissidio(Data data, float _novoSalario);
   void promover(unsigned ano, unsigned mes, unsigned dia, Cargo *_novoCargo, float _novoSalario);
   void promover(Data data, Cargo *_novoCargo, float _novoSalario);
@@ -33,8 +33,8 @@ public:
   void demitir(unsigned ano, unsigned mes, unsigned dia);
   void demitir(Data data);
   std::map<Data, Alteracao> getHistAlt();
-  std::string getEndereco() const;
-  void setEndereco(const std::string _endereco);
+  std::pair<int, int> getEndereco() const;
+  void setEndereco(const std::pair<int, int> _endereco);
   int getMatricula() const;
   Data getNascimento() const;
   void setNascimento(const Data _nascimento);

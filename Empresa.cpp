@@ -10,10 +10,10 @@ Empresa *Empresa::instEmpresa() {
 }
 
 Funcionario* Empresa::adicionaFuncionario(TipoPessoa tipo, std::string cadastro, std::string nome,
-                          std::string email, std::string endereco, unsigned anoNasc, unsigned mesNasc, unsigned diaNasc,
+                          std::string email, std::pair<int, int> endereco, unsigned anoNasc, unsigned mesNasc, unsigned diaNasc,
                             Departamento* departamento, Cargo *cargo, unsigned anoCria, unsigned mesCria, unsigned diaCria, float salario) {
   try {
-    if(Usuario::instUsuario()->getPermissao() == RH)
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste)
       if(validaCadastro(func, tipo, cadastro)) {
       Data dataNasc(anoNasc, mesNasc, diaNasc);
       Data dataCria(anoCria, mesCria, diaCria);
@@ -36,7 +36,7 @@ Funcionario* Empresa::adicionaFuncionario(TipoPessoa tipo, std::string cadastro,
 Cliente* Empresa::adicionarCliente(std::string telefone, std::string nome, std::string cadastro,
                                     std::string email, enum TipoPessoa tipo) {
   try {
-    if(Usuario::instUsuario()->getPermissao() == vendedor)
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste)
       if(validaCadastro(func, tipo, cadastro)) {
         Cliente* cliente = new Cliente(telefone, nome, cadastro, email, tipo); //fazer delete
         return cliente;
@@ -54,8 +54,7 @@ Cliente* Empresa::adicionarCliente(std::string telefone, std::string nome, std::
 }
 
 bool Empresa::validaCadastro(TipoCadastro tipoC, TipoPessoa tipoP, std::string cadastro) {
-  std::regex regularExpr(tipoP == pFisica ? "[0-9]{3}[0-9]{3}[0-9]{3}[0-9]{2}" :
-                                              "[0-9]{2}[0-9]{3}[0-9]{3}[0-9]{4}[0-9]{2}");
+  std::regex regularExpr(tipoP == pFisica ? "[0-9]{11}" : "[0-9]{14}");
   if(!std::regex_match(cadastro, regularExpr)) return false;
   if(tipoC == func) {
     std::vector<Departamento*>::iterator itrD;
@@ -77,7 +76,7 @@ bool Empresa::validaCadastro(TipoCadastro tipoC, TipoPessoa tipoP, std::string c
 
 void Empresa::adicionarDepartamento(Departamento* departamento) {
   try {
-    if(Usuario::instUsuario()->getPermissao() == administracao) 
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste) 
       this->departamentos.push_back(departamento);
     else
       throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
@@ -89,7 +88,7 @@ void Empresa::adicionarDepartamento(Departamento* departamento) {
 
 bool Empresa::retirarDepartamento(Departamento* departamento) {
   try {
-    if(Usuario::instUsuario()->getPermissao() == administracao) {
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste) {
       std::vector<Departamento*>::iterator itr;
       for(itr = this->departamentos.begin(); itr != this->departamentos.end(); ++ itr)
         if(*itr == departamento) {
@@ -108,7 +107,7 @@ bool Empresa::retirarDepartamento(Departamento* departamento) {
 
 void Empresa::aplicarDissidio(TipoDissidio tipo, float valor, unsigned ano, unsigned mes, unsigned dia) {
   try {
-    if(Usuario::instUsuario()->getPermissao() == administracao) {
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste) {
       Data data(ano, mes, dia);
       std::vector<Departamento*>::iterator itrD;
       std::vector<Funcionario*>::iterator itrF;
@@ -144,7 +143,7 @@ Departamento* Empresa::getDeptFuncionario(Funcionario* funcionario) {
 
 bool Empresa::criaOrcamento(Cliente* cliente, unsigned ano, unsigned mes, unsigned dia) {
   try {
-    if(Usuario::instUsuario()->getPermissao() == vendedor) {
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste) {
       this->orcamentos.push_back(new Orcamento(cliente, Data(ano, mes, dia)));
       return true;
     }
@@ -159,7 +158,7 @@ bool Empresa::criaOrcamento(Cliente* cliente, unsigned ano, unsigned mes, unsign
 
 bool Empresa::efetuaPedido(Orcamento* orcamento, unsigned ano, unsigned mes, unsigned dia) {
   try {
-    if(Usuario::instUsuario()->getPermissao() == vendedor) {
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste) {
       for(std::map<Produto*, int>::iterator itr = orcamento->carrinho.begin(); itr != orcamento->carrinho.end(); ++ itr)
         if((itr->first)->ChecaQtd() < (itr->second)) return false;
       this->pedidos.push_back(new Pedido(orcamento, Data(ano, mes, dia)));
@@ -176,7 +175,7 @@ bool Empresa::efetuaPedido(Orcamento* orcamento, unsigned ano, unsigned mes, uns
 
 void Empresa::deletaFuncionario(Funcionario* funcionario) {
   try {
-    if(Usuario::instUsuario()->getPermissao() == RH) {
+    if(Usuario::instUsuario()->getPermissao() == administracao) {
       this->getDeptFuncionario(funcionario)->retirarFuncionario(funcionario);
       delete funcionario;
     }
@@ -190,7 +189,7 @@ void Empresa::deletaFuncionario(Funcionario* funcionario) {
 
 void Empresa::deletaCliente(Cliente* cliente) {
   try {
-    if(Usuario::instUsuario()->getPermissao() == vendedor) {
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste) {
       std::vector<Cliente*>::iterator itr;
       for(itr = this->clientes.begin(); itr != this->clientes.end(); ++ itr)
         if(*itr == cliente) {
@@ -208,7 +207,7 @@ void Empresa::deletaCliente(Cliente* cliente) {
 
 Cargo* Empresa::criaCargo(std::string nome) {
   try {
-    if(Usuario::instUsuario()->getPermissao() == administracao)
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste)
       return new Cargo(nome);
     else
       throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
@@ -221,4 +220,12 @@ Cargo* Empresa::criaCargo(std::string nome) {
 
 void Empresa::adicionaVeiculo(Veiculo *veiculo) {
   this->frota.push_back(veiculo);
+}
+
+std::pair<int, int> Empresa::getEndereco() {
+  return this->endereco;
+}
+
+void Empresa::setEndereco(std::pair<int, int> _endereco) {
+  this->endereco = _endereco;
 }

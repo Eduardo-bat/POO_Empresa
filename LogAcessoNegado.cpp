@@ -5,6 +5,6 @@ std::string LogAcessoNegado::getFuncionalidade() {
 }
 
 void LogAcessoNegado::print() {
-  std::cout << typeid(*this).name() << "; permissao: " << usuario->getPermissao() << "; data: "
-                << data.getData() << "; entidade: " << entidade << "; funcionalidade: " << funcionalidade;
+  std::cout << "LogAcessoNegado" << "; permissao: " << usuario->getPermissao() << "; data: "
+                << data.getData() << "; entidade: " << entidade << "; funcionalidade: " << funcionalidade << std::endl;
 }

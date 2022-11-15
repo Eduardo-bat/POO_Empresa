@@ -18,7 +18,7 @@ std::string Cliente::getTelefone() {
  
 void Cliente::setTelefone(const std::string _telefone){
   try {
-    if(Usuario::instUsuario()->getPermissao() == vendedor)
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste)
       this->telefone = _telefone;
     else
       throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);

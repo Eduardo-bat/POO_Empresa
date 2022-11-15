@@ -19,7 +19,7 @@ std::map<Data,float> hist_valor;
 std::map<MateriaPrima*,unsigned>materiasprimas;
 
 public:
-Produto(std::string nome,float valorvenda, int codigo, int lotemin, int estoquemin,std::map<MateriaPrima*,unsigned> *materiasprima);
+Produto(std::string nome,float valorvenda, int codigo, int lotemin, int estoquemin,std::map<MateriaPrima*,unsigned> materiasprima);
   int ChecaQtd();
   void alteraQtd(int qtd);
   bool verificaEstoquemin();

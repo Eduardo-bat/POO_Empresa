@@ -7,7 +7,7 @@ Cargo::Cargo(std::string _nome) {
 
 void Cargo::setNome(const std::string _nome) {
   try {
-    if(Usuario::instUsuario()->getPermissao() == administracao)
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste)
       this->nome = _nome;
     else
       throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
