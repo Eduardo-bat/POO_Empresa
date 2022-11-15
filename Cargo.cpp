@@ -2,6 +2,8 @@
 #include "ExcecaoAcessoNegado.hpp"
 
 Cargo::Cargo(std::string _nome) {
+  if(_nome != "cargoNA")
+    RegistroLog::instRegLog()->vecLogEscrita.push_back(LogEscrita(Usuario::instUsuario(), "Cargo", Data::dateNow(), "cria cargo " + _nome));        
   this->nome = _nome;
 }
 

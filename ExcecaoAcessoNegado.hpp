@@ -5,8 +5,7 @@
 #include <string>
 #include "Data.h"
 #include "LogAcessoNegado.hpp"
-
-enum Permissao { vendedor, funcionarioSimples, RH, logista, administracao, permissaoTeste };
+#include "RegistroLog.hpp"
 
 class ExcecaoAcessoNegado : public std::exception {
   private:

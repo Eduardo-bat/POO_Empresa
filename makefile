@@ -1,5 +1,5 @@
 CC := g++
-CFLAGS := -Wall #-g #só tem pq usar -g quando for depurar
+CFLAGS := -Wall -Wno-nonnull-compare #-g #só tem pq usar -g quando for depurar
 TARGET := main.exe
 
 # $(wildcard *.cpp /xxx/xxx/*.cpp): get all .cpp files from the current directory and dir "/xxx/xxx/"

@@ -1,6 +1,7 @@
 #include "Departamento.hpp"
 
 Departamento::Departamento(std::string _nome) {
+  RegistroLog::instRegLog()->vecLogEscrita.push_back(LogEscrita(Usuario::instUsuario(), "Departamento", Data::dateNow(), "cria departamento " + _nome));        
   this->nome = _nome;
 }
 

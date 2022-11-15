@@ -15,10 +15,11 @@ Funcionario* Empresa::adicionaFuncionario(TipoPessoa tipo, std::string cadastro,
   try {
     if(Usuario::instUsuario()->getPermissao() == permissaoTeste)
       if(validaCadastro(func, tipo, cadastro)) {
-      Data dataNasc(anoNasc, mesNasc, diaNasc);
-      Data dataCria(anoCria, mesCria, diaCria);
-      Funcionario* funcionario = new Funcionario(tipo, cadastro, nome, email, endereco, dataNasc, cargo, dataCria, salario); //fazer delete
+      Funcionario* funcionario = new Funcionario(tipo, cadastro, nome, email, endereco, Data(anoNasc, mesNasc, diaNasc),
+                                                  cargo, Data(anoCria, mesCria, diaCria), salario);
       departamento->adicionarFuncionario(funcionario);
+      RegistroLog::instRegLog()->vecLogEscrita.push_back(LogEscrita(Usuario::instUsuario(), "Empresa",
+                                                                      Data::dateNow(), "adiciona funcionario " + funcionario->getNome()));
       return funcionario;
     } else {
       std::cout << "CPF invalido" << std::endl;
@@ -38,7 +39,10 @@ Cliente* Empresa::adicionarCliente(std::string telefone, std::string nome, std::
   try {
     if(Usuario::instUsuario()->getPermissao() == permissaoTeste)
       if(validaCadastro(func, tipo, cadastro)) {
-        Cliente* cliente = new Cliente(telefone, nome, cadastro, email, tipo); //fazer delete
+        Cliente* cliente = new Cliente(telefone, nome, cadastro, email, tipo);
+        this->clientes.push_back(cliente);
+        RegistroLog::instRegLog()->vecLogEscrita.push_back(LogEscrita(Usuario::instUsuario(), "Empresa",
+                                                                        Data::dateNow(), "adiciona cliente " + cliente->getNome()));        
         return cliente;
       } else {
       std::cout << "CPF invalido" << std::endl;
@@ -76,8 +80,11 @@ bool Empresa::validaCadastro(TipoCadastro tipoC, TipoPessoa tipoP, std::string c
 
 void Empresa::adicionarDepartamento(Departamento* departamento) {
   try {
-    if(Usuario::instUsuario()->getPermissao() == permissaoTeste) 
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste) {
       this->departamentos.push_back(departamento);
+      RegistroLog::instRegLog()->vecLogEscrita.push_back(LogEscrita(Usuario::instUsuario(), "Empresa",
+                                                          Data::dateNow(), "adiciona departamento " + departamento->getNome()));
+    }
     else
       throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
   }
@@ -180,7 +187,7 @@ void Empresa::deletaFuncionario(Funcionario* funcionario) {
       delete funcionario;
     }
     else
-      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
+      throw ExcecaoAcessoNegado(Usuario::instUsuario(), "Empresa", __FUNCTION__);
   }
   catch(ExcecaoAcessoNegado& e) {
     std::cerr << e.what() << '\n';

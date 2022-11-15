@@ -3,17 +3,21 @@
 
 #include <iostream>
 
+enum Permissao { vendedor, funcionarioSimples, RH, logista, administracao, permissaoTeste };
+
 class Usuario {
 private:
-  int permissao;
-  Usuario(int _permissao);
+  Permissao permissao;
+  std::string nome;
+  Usuario(std::string nome, Permissao permissao);
   static Usuario *instptrUsuario;
-
 public:
   Usuario() {};
-  static Usuario *instUsuario(int _permissao);
+  static Usuario *instUsuario(std::string nome, Permissao permissao);
   static Usuario *instUsuario();
-  int getPermissao();
+  static void reset();
+  Permissao getPermissao();
+  std::string getNome();
 };
 
 #endif
