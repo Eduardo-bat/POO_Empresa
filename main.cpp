@@ -10,14 +10,15 @@
 #include "Pedido.hpp"
 #include "Turno.hpp"
 #include "MateriaPrima.hpp"
-#include "TesteAlemDoDoc.hpp"
+//#include "TesteAlemDoDoc.hpp"
 
 int main() {
   // o que tiver que testar além do que os testes do documento cobra, testar dentro da funcao
   // cada um implementa a propria "TesteAlemDoDoc.hpp" com esta funcao e os testes que quiser dentro
   // assim nao vai misturar com os testes do doc
-  testeAlemDoDocumento();
+  //testeAlemDoDocumento();
   Usuario::instUsuario()->reset();
+  Estoque *estoque = Estoque::instEstoque();
   Empresa *empresa = Empresa::instEmpresa();
   Usuario *user = Usuario::instUsuario("usuario1", permissaoTeste);
   Usuario *user1 = Usuario::instUsuario();
@@ -34,6 +35,18 @@ int main() {
   Produto mesa("mesa", 10, 0, 10, 20, std::map<MateriaPrima*, unsigned>{{&plastico, 150}, {&aluminio, 100}, {&parafuso, 8}});
   //produzir estoque min
   empresa->deletaFuncionario(func0);
+  estoque->adicionaProduto(&mesa);
+  estoque->emiteOrdem(2022, 11, 17, mesa.getEstoquemin(), &mesa);
+  mesa.print();
+  empresa->criaOrcamento(cliente0, 2022, 11, 17);
+  (*empresa->getOrcamentos().begin())->insereProduto(&mesa, 10);
+  mesa.setValorvenda(10.5, 2022, 11, 22);
+  empresa->efetuaPedido(*empresa->getOrcamentos().begin(), 2022, 11, 17);
+  std::cout << "\n";
+  mesa.print();
+  std::cout << "\n";
+  (*empresa->getOrcamentos().begin())->print();
+  
   //cliente deve solicitar etc...
   //cadastrar veiculo etc...
   RegistroLog::instRegLog()->printLogs(); // cada um coloca os logs nas classes que implementou
