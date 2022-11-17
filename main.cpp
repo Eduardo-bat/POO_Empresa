@@ -26,13 +26,15 @@ int main() {
   Departamento dep("dep");
   empresa->adicionarDepartamento(&dep);
   Cargo cargo("cargo");
-  Funcionario *func0 = empresa->adicionaFuncionario(pFisica, "12345678910", "nome0", "email0", {1, 1}, 2000, 10, 10, &dep, &cargo, 2000, 10, 11, 10000);
-  Funcionario *func1 = empresa->adicionaFuncionario(pFisica, "98765432101", "nome1", "email1", {-1, -1}, 2000, 10, 10, &dep, &cargo, 2000, 10, 11, 10000);
-  Funcionario *func2 = empresa->adicionaFuncionario(pFisica, "32165498799", "nome2", "email2", {1, -1}, 2000, 10, 10, &dep, &cargo, 2000, 10, 11, 10000);
+  Funcionario *func0 = empresa->adicionaFuncionario(pFisica, "12345678910", "nome0", "email0", {1., 1.}, 2000, 10, 10, &dep, &cargo, 2000, 10, 11, 10000);
+  Funcionario *func1 = empresa->adicionaFuncionario(pFisica, "98765432101", "nome1", "email1", {-1., -1.}, 2000, 10, 10, &dep, &cargo, 2000, 10, 11, 10000);
+  Funcionario *func2 = empresa->adicionaFuncionario(pFisica, "32165498799", "nome2", "email2", {1., -1.}, 2000, 10, 10, &dep, &cargo, 2000, 10, 11, 10000);
   Cliente *cliente1 = empresa->adicionarCliente("123456789", "cliente0", "12345678901", "emailcliente0", pFisica);
   Cliente *cliente0 = empresa->adicionarCliente("123456789", "cliente1", "01987654321123", "emailcliente1", pJuridica);
   MateriaPrima madeira("madeira", "g", 1000), plastico("plastico", "g", 1000), aluminio("aluminio", "g", 1000), parafuso("parafuso", "unidade", 20);
   Produto mesa("mesa", 10, 0, 10, 20, std::map<MateriaPrima*, unsigned>{{&plastico, 150}, {&aluminio, 100}, {&parafuso, 8}});
+	Estoque *estoque = Estoque::instEstoque();
+	estoque->adicionaProduto(&mesa);
   //produzir estoque min
   empresa->deletaFuncionario(func0);
   estoque->adicionaProduto(&mesa);
@@ -49,5 +51,5 @@ int main() {
   
   //cliente deve solicitar etc...
   //cadastrar veiculo etc...
-  RegistroLog::instRegLog()->printLogs(); // cada um coloca os logs nas classes que implementou
+  RegistroLog::instRegLog()->printLogs(); // cada um coloca os logs nos métodos das classes que implementou
 }

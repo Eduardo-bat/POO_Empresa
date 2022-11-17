@@ -12,8 +12,8 @@
 #include "RegistroLog.hpp"
 
 class MateriaPrima {
-    std::string unidadeDeMedida;
     std::string nome;
+		std::string unidadeDeMedida;
     std::map<OrcamentoCompra*, std::map<Fornecedor*, bool>> orcamentos;
     std::vector<Fornecedor*> fornecedores;
     unsigned estoqueMin;
