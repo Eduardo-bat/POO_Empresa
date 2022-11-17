@@ -1,22 +1,38 @@
 #include "Departamento.hpp"
 
 Departamento::Departamento(std::string _nome) {
+  RegistroLog::instRegLog()->vecLogEscrita.push_back(LogEscrita(Usuario::instUsuario(), "Departamento", Data::dateNow(), "cria departamento " + _nome));        
   this->nome = _nome;
 }
 
 void Departamento::adicionarFuncionario(Funcionario *f) {
-  if(Usuario::instUsuario()->verificaPermissao(RH, this, &Departamento::adicionarFuncionario))
-    this->pessoal.push_back(f);
+  try {
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste)
+      this->pessoal.push_back(f);
+    else
+      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
+  }
+  catch(ExcecaoAcessoNegado& e) {
+    std::cerr << e.what() << '\n';
+  }
 }
 
 bool Departamento::retirarFuncionario(const Funcionario *f) {
-  std::vector<Funcionario*>::iterator itr;
-  if(Usuario::instUsuario()->verificaPermissao(RH, this, &Departamento::retirarFuncionario))
-    for(itr = this->pessoal.begin(); itr != this->pessoal.end(); ++ itr)
-      if(*itr == f) {
-        this->pessoal.erase(itr);
-        return true;
-      }
+  try {
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste) {
+      std::vector<Funcionario*>::iterator itr;
+      for(itr = this->pessoal.begin(); itr != this->pessoal.end(); ++ itr)
+        if(*itr == f) {
+          this->pessoal.erase(itr);
+          return true;
+        }
+    }
+    else
+      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
+  }
+  catch(ExcecaoAcessoNegado& e) {
+    std::cerr << e.what() << '\n';
+  }
   return false;
 }
 
@@ -31,7 +47,14 @@ std::string Departamento::getNome() const {
 		return "Departamento invalido (nome)";
 }
 
-void Departamento::setNome(std::string _nome){
-  if(Usuario::instUsuario()->verificaPermissao(administracao, this, &Departamento::setNome))
-    this->nome = _nome;
+void Departamento::setNome(std::string _nome) {
+  try {
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste)
+      this->nome = _nome;
+    else
+      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
+  }
+  catch(ExcecaoAcessoNegado& e) {
+    std::cerr << e.what() << '\n';
+  }
 }

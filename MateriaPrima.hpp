@@ -9,16 +9,17 @@
 #include <limits>
 #include "OrcamentoCompra.hpp"
 #include "Fornecedor.hpp"
+#include "RegistroLog.hpp"
 
 class MateriaPrima {
     std::string unidadeDeMedida;
+    std::string nome;
     std::map<OrcamentoCompra*, std::map<Fornecedor*, bool>> orcamentos;
     std::vector<Fornecedor*> fornecedores;
     unsigned estoqueMin;
     unsigned estoqueAtual;
   public:
-    MateriaPrima(std::string _unidadeDeMedida, unsigned _estoqueMin)
-                  : unidadeDeMedida(_unidadeDeMedida), estoqueMin(_estoqueMin) {};
+    MateriaPrima(std::string nome, std::string _unidadeDeMedida, unsigned _estoqueMin);
     bool inserirFornecedor(Fornecedor*);
     OrcamentoCompra* emiteOrcamentoCompra(unsigned);
     bool deletaOrcamento(OrcamentoCompra*);

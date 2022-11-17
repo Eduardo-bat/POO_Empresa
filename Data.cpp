@@ -139,8 +139,8 @@ Data::~Data(){}
 
 bool Data::operator==(const Data &d2) const
 {
-	return ((ano == d2.ano)&&(mes == d2.mes)&&(dia == d2.dia)&&(hora == d2.hora)&&
-           (minuto == d2.minuto)&&(segundo == d2.segundo)||(ticks == d2.ticks));
+	return (((ano == d2.ano)&&(mes == d2.mes)&&(dia == d2.dia)&&(hora == d2.hora)&&
+           (minuto == d2.minuto)&&(segundo == d2.segundo))||(ticks == d2.ticks));
 }
 
 bool Data::operator<(const Data &d2) const
@@ -297,7 +297,6 @@ bool Data::validaData()
 Data Data::dateNow()
 {
     time_t tempo= time(NULL);
-    double a= double(tempo);
     Data aux(tempo);
     return aux;
 }

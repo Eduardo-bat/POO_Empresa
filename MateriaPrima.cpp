@@ -1,5 +1,10 @@
 #include "MateriaPrima.hpp"
 
+MateriaPrima::MateriaPrima(std::string _nome, std::string _unidadeDeMedida, unsigned _estoqueMin)
+                            : nome(_nome), unidadeDeMedida(_unidadeDeMedida), estoqueMin(_estoqueMin) {
+  RegistroLog::instRegLog()->vecLogEscrita.push_back(LogEscrita(Usuario::instUsuario(), "Materia Prima", Data::dateNow(), "cria Materia Prima " + _nome));
+}
+
 bool MateriaPrima::inserirFornecedor(Fornecedor* fornecedor) {
   if(std::find(this->fornecedores.begin(), this->fornecedores.end(), fornecedor) == this->fornecedores.end())
     return false;

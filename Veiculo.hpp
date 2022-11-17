@@ -1,7 +1,6 @@
 #pragma once
 #include "Data.h"
 #include "Funcionario.hpp"
-#include "Empresa.hpp"
 #include "Turno.hpp"
 #include <string>
 #include <map>

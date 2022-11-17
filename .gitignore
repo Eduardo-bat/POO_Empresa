@@ -35,3 +35,6 @@
 *.nix
 *.replit
 .ccls-cache/
+
+# Teste individual
+TesteAlemDoDoc.hpp

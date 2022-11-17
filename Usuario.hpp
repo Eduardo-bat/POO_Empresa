@@ -2,36 +2,22 @@
 #define USUARIO_H
 
 #include <iostream>
-#include "ExcecaoAcessoNegado.hpp"
+
+enum Permissao { vendedor, funcionarioSimples, RH, logista, administracao, permissaoTeste };
 
 class Usuario {
- private:
-
- int permissao;
-  Usuario(int _permissao);
+private:
+  Permissao permissao;
+  std::string nome;
+  Usuario(std::string nome, Permissao permissao);
   static Usuario *instptrUsuario;
-  
-
- public:
-Usuario(){};
-static Usuario *instUsuario(int _permissao);
-static Usuario *instUsuario();
-template <class Entidade, typename Funcionalidade>
- bool verificaPermissao(int _permissao, Entidade entidade, Funcionalidade funcionalidade);
- int getPermissao();
-    };
-
-template <class Entidade, typename Funcionalidade>
-bool Usuario::verificaPermissao(int permissao, Entidade entidade, Funcionalidade funcionalidade) {
-  bool resultado = false;
-  try {
-    if(this->permissao == permissao) resultado = true;
-    else throw ExcecaoAcessoNegado(this, entidade, funcionalidade);
-  }
-  catch(ExcecaoAcessoNegado& e) {
-    std::cerr << e.what() << '\n';
-  }
-  return resultado;
-}
+public:
+  Usuario() {};
+  static Usuario *instUsuario(std::string nome, Permissao permissao);
+  static Usuario *instUsuario();
+  static void reset();
+  Permissao getPermissao();
+  std::string getNome();
+};
 
 #endif

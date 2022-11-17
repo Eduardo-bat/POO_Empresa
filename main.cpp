@@ -5,71 +5,36 @@
 #include "Estoque.hpp"
 #include "Usuario.hpp"
 #include "ExcecaoAcessoNegado.hpp"
+#include "RegistroLog.hpp"
 #include "Orcamento.hpp"
 #include "Pedido.hpp"
 #include "Turno.hpp"
 #include "MateriaPrima.hpp"
+#include "TesteAlemDoDoc.hpp"
 
 int main() {
-  Usuario* user = Usuario::instUsuario(administracao);
-  Empresa* empresa = Empresa::instEmpresa();
-  Departamento dep("departamento");
+  // o que tiver que testar além do que os testes do documento cobra, testar dentro da funcao
+  // cada um implementa a propria "TesteAlemDoDoc.hpp" com esta funcao e os testes que quiser dentro
+  // assim nao vai misturar com os testes do doc
+  testeAlemDoDocumento();
+  Usuario::instUsuario()->reset();
+  Empresa *empresa = Empresa::instEmpresa();
+  Usuario *user = Usuario::instUsuario("usuario1", permissaoTeste);
+  Usuario *user1 = Usuario::instUsuario();
+  std::cout << "se " << user << " == " << user1 << " o singleton funciona." << std::endl;
+  Departamento dep("dep");
   empresa->adicionarDepartamento(&dep);
   Cargo cargo("cargo");
-  Funcionario* funcionario = empresa->adicionaFuncionario(pFisica, "12345678910", "func", "email", "end", 2000, 10, 10, &dep, &cargo, 2000, 10, 11, 10000);
-  Cliente* cliente = empresa->adicionarCliente("34372373", "Cliente", "123456789", "email", pFisica);
-  std::cout << funcionario->getCadastro() << std::endl;
-  std::cout << ((funcionario->getHistAlt()).begin())->second.getNovoCargo()->getNome() << std::endl;
-  std::cout << ((funcionario->getHistAlt()).begin())->first.getData() << std::endl;
-  if(empresa->adicionaFuncionario(pFisica, "123", "func", "email", "end", 2000, 10, 10, &dep, &cargo, 2000, 10, 11, 10000) == nullptr)
-      std::cout << "verifica 1 funciona\n";
-  if(empresa->adicionaFuncionario(pFisica, "1234567891011", "func", "email", "end", 2000, 10, 10, &dep, &cargo, 2000, 10, 11, 10000) == nullptr)
-      std::cout << "verifica 2 funciona\n";
-  if(empresa->adicionaFuncionario(pFisica, "12345678910", "func", "email", "end", 2000, 10, 10, &dep, &cargo, 2000, 10, 11, 10000) == nullptr)
-      std::cout << "verifica 3 funciona\n";
-  empresa->aplicarDissidio(absoluto, 100, 2000, 10, 12);
-  std::cout << funcionario->getCargo()->getNome() << std::endl;
-  std::cout << (-- (funcionario->getHistAlt()).end())->second.getNovoCargo()->getNome() << std::endl;
-  Estoque* estoque = Estoque::instEstoque();
-  MateriaPrima* ferro= new MateriaPrima("kg",45);
-  MateriaPrima* silicio= new MateriaPrima("kg",15);
-  MateriaPrima* plastico= new MateriaPrima("kg",100);
-  MateriaPrima* C_I= new MateriaPrima("Unidades",1000);
-  std::map<MateriaPrima*,unsigned> materiaprima;
-  materiaprima.emplace(ferro,35);
-  materiaprima.emplace(silicio,8);
-  materiaprima.emplace(plastico,50);
-  materiaprima.emplace(C_I,500);
-  Produto* produto = new  Produto("Carro",17750,10,45,13,&materiaprima);
-  produto->insereLotes(50);
-  estoque->adicionaProduto(produto);
-  std::cout << "\n";
-  estoque->print();
-  std::cout << "\n";
-  
-  produto->insereLotes(65);
-  produto->alteraQtd(30);
-  estoque->verificaEstoquemin(produto,2022,13,10);
-  produto->setValorvenda(1920,2000, 10, 11);
-  estoque->print();
-  produto->print_hist();
-  estoque->removeProduto(produto);
-  estoque->print();
-  estoque->print();
-  estoque->print_op();
-
-  Data data(2022, 10, 27);
-
-  Orcamento* orcamento = new Orcamento(cliente, data);
-  orcamento->insereProduto(produto, 25);
-  orcamento->print();
-
-  Pedido* pedido = new Pedido(orcamento, data);
-	MateriaPrima mp("kg", 5);
-	Fornecedor fornecedor;
-	mp.inserirFornecedor(&fornecedor);
-	mp.emiteOrcamentoCompra(10);
-	//OrcamentoCompra* oc = mp.getOrcamentos().begin().first;
-	//fornecedor.calculaOrcamento(oc, 1000.0);
-	//std::cout << (mp.finalizaCompra(oc))->respostaOrcamento(oc);
-	estoque->print();}
+  Funcionario *func0 = empresa->adicionaFuncionario(pFisica, "12345678910", "nome0", "email0", {1, 1}, 2000, 10, 10, &dep, &cargo, 2000, 10, 11, 10000);
+  Funcionario *func1 = empresa->adicionaFuncionario(pFisica, "98765432101", "nome1", "email1", {-1, -1}, 2000, 10, 10, &dep, &cargo, 2000, 10, 11, 10000);
+  Funcionario *func2 = empresa->adicionaFuncionario(pFisica, "32165498799", "nome2", "email2", {1, -1}, 2000, 10, 10, &dep, &cargo, 2000, 10, 11, 10000);
+  Cliente *cliente1 = empresa->adicionarCliente("123456789", "cliente0", "12345678901", "emailcliente0", pFisica);
+  Cliente *cliente0 = empresa->adicionarCliente("123456789", "cliente1", "01987654321123", "emailcliente1", pJuridica);
+  MateriaPrima madeira("madeira", "g", 1000), plastico("plastico", "g", 1000), aluminio("aluminio", "g", 1000), parafuso("parafuso", "unidade", 20);
+  Produto mesa("mesa", 10, 0, 10, 20, std::map<MateriaPrima*, unsigned>{{&plastico, 150}, {&aluminio, 100}, {&parafuso, 8}});
+  //produzir estoque min
+  empresa->deletaFuncionario(func0);
+  //cliente deve solicitar etc...
+  //cadastrar veiculo etc...
+  RegistroLog::instRegLog()->printLogs(); // cada um coloca os logs nas classes que implementou
+}
