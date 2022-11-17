@@ -10,7 +10,7 @@ Empresa *Empresa::instEmpresa() {
 }
 
 Funcionario* Empresa::adicionaFuncionario(TipoPessoa tipo, std::string cadastro, std::string nome,
-                          std::string email, std::pair<int, int> endereco, unsigned anoNasc, unsigned mesNasc, unsigned diaNasc,
+                          std::string email, std::pair<float, float> endereco, unsigned anoNasc, unsigned mesNasc, unsigned diaNasc,
                             Departamento* departamento, Cargo *cargo, unsigned anoCria, unsigned mesCria, unsigned diaCria, float salario) {
   try {
     if(Usuario::instUsuario()->getPermissao() == permissaoTeste)
