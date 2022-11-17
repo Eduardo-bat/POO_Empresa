@@ -163,6 +163,10 @@ bool Empresa::criaOrcamento(Cliente* cliente, unsigned ano, unsigned mes, unsign
   return false;
 }
 
+std::vector<Orcamento*> Empresa::getOrcamentos() {
+	return this->orcamentos;
+}
+
 bool Empresa::efetuaPedido(Orcamento* orcamento, unsigned ano, unsigned mes, unsigned dia) {
   try {
     if(Usuario::instUsuario()->getPermissao() == permissaoTeste) {

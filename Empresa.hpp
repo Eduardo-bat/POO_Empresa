@@ -39,6 +39,7 @@ class Empresa {
     void aplicarDissidio(TipoDissidio tipo, float valor, unsigned ano, unsigned mes, unsigned dia);
     Departamento* getDeptFuncionario(Funcionario* funcionario);
 		bool criaOrcamento(Cliente* cliente, unsigned ano, unsigned mes, unsigned dia);
+		std::vector<Orcamento*> getOrcamentos();
 		bool efetuaPedido(Orcamento* orcamento, unsigned ano, unsigned mes, unsigned dia);
     void deletaFuncionario(Funcionario* funcionario);
     void deletaCliente(Cliente* cliente);
