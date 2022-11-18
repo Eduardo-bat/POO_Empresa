@@ -11,6 +11,8 @@
 #include "Cargo.hpp"
 #include "Pedido.hpp"
 #include "Veiculo.hpp"
+#include "LogEscrita.hpp"
+#include "LogLeitura.hpp"
 
 enum TipoDissidio { percentual, absoluto };
 enum TipoCadastro { func, cliente};
