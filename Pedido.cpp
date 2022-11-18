@@ -3,8 +3,12 @@
 Pedido::Pedido(Orcamento *orcamento, Data data) {
     this->orcamento = orcamento;
     this->data = data;
-    this->valor_total = orcamento->calculatotal();
+    calculaNovoTotal();
     vende();
+}
+
+void Pedido::calculaNovoTotal() {
+    orcamento->valor_total = orcamento->calculatotal();
 }
 
 void Pedido::vende() {

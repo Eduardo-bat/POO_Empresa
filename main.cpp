@@ -33,23 +33,15 @@ int main() {
   Cliente *cliente0 = empresa->adicionarCliente("123456789", "cliente1", "01987654321123", "emailcliente1", pJuridica);
   MateriaPrima madeira("madeira", "g", 1000), plastico("plastico", "g", 1000), aluminio("aluminio", "g", 1000), parafuso("parafuso", "unidade", 20);
   Produto mesa("mesa", 10, 0, 10, 20, std::map<MateriaPrima*, unsigned>{{&plastico, 150}, {&aluminio, 100}, {&parafuso, 8}});
-	Estoque *estoque = Estoque::instEstoque();
 	estoque->adicionaProduto(&mesa);
-  //produzir estoque min
   empresa->deletaFuncionario(func0);
   estoque->adicionaProduto(&mesa);
   estoque->emiteOrdem(2022, 11, 17, mesa.getEstoquemin(), &mesa);
-  mesa.print();
   empresa->criaOrcamento(cliente0, 2022, 11, 17);
   (*empresa->getOrcamentos().begin())->insereProduto(&mesa, 10);
   mesa.setValorvenda(10.5, 2022, 11, 22);
   empresa->efetuaPedido(*empresa->getOrcamentos().begin(), 2022, 11, 17);
-  std::cout << "\n";
-  mesa.print();
-  std::cout << "\n";
-  (*empresa->getOrcamentos().begin())->print();
   
-  //cliente deve solicitar etc...
   //cadastrar veiculo etc...
   RegistroLog::instRegLog()->printLogs(); // cada um coloca os logs nos métodos das classes que implementou
 }
