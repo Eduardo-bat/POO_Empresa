@@ -12,7 +12,7 @@
 
 class Funcionario : public Pessoa {
   private:
-   std::pair<float, float> endereco;
+    std::pair<float, float> endereco;
     unsigned int matricula;
     Data nascimento;
     Cargo *cargo;
@@ -24,7 +24,7 @@ class Funcionario : public Pessoa {
 
 public:
   Funcionario(TipoPessoa _tipo, std::string _cadastro, std::string _nome, std::string _email,
-                std::pair<float,float> _endereco, Data _nascimento, Cargo *cargo, Data dataCriacao, float salario);
+                std::pair<float, float> _endereco, Data _nascimento, Cargo *cargo, Data dataCriacao, float salario);
   void aplicaDissidio(Data data, float _novoSalario);
   void promover(unsigned ano, unsigned mes, unsigned dia, Cargo *_novoCargo, float _novoSalario);
   void promover(Data data, Cargo *_novoCargo, float _novoSalario);

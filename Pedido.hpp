@@ -9,14 +9,13 @@ class Pedido {
     public:
         Pedido(Orcamento *orcamento, Data data);
         void vende();
-        float calculaNovoTotal();
+        void calculaNovoTotal();
         std::list<Venda*> getVendas();
     
 
     private:
         Orcamento *orcamento;
         Data data;
-        float valor_total;
         std::list<Venda*> listaVendas;
 
 };

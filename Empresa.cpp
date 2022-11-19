@@ -10,7 +10,7 @@ Empresa *Empresa::instEmpresa() {
 }
 
 Funcionario* Empresa::adicionaFuncionario(TipoPessoa tipo, std::string cadastro, std::string nome,
-                          std::string email, std::pair<int, int> endereco, unsigned anoNasc, unsigned mesNasc, unsigned diaNasc,
+                          std::string email, std::pair<float, float> endereco, unsigned anoNasc, unsigned mesNasc, unsigned diaNasc,
                             Departamento* departamento, Cargo *cargo, unsigned anoCria, unsigned mesCria, unsigned diaCria, float salario) {
   try {
     if(Usuario::instUsuario()->getPermissao() == permissaoTeste)
@@ -152,6 +152,8 @@ bool Empresa::criaOrcamento(Cliente* cliente, unsigned ano, unsigned mes, unsign
   try {
     if(Usuario::instUsuario()->getPermissao() == permissaoTeste) {
       this->orcamentos.push_back(new Orcamento(cliente, Data(ano, mes, dia)));
+			RegistroLog::instRegLog()->vecLogEscrita.push_back(LogEscrita(Usuario::instUsuario(), "Empresa",
+                                                          Data::dateNow(), "cria orcamento para o cliente " + cliente->getNome()));
       return true;
     }
     else
@@ -163,12 +165,19 @@ bool Empresa::criaOrcamento(Cliente* cliente, unsigned ano, unsigned mes, unsign
   return false;
 }
 
+std::vector<Orcamento*> Empresa::getOrcamentos() {
+	RegistroLog::instRegLog()->vecLogLeitura.push_back(LogLeitura(Usuario::instUsuario(), "Empresa", __FUNCTION__));
+	return this->orcamentos;
+}
+
 bool Empresa::efetuaPedido(Orcamento* orcamento, unsigned ano, unsigned mes, unsigned dia) {
   try {
     if(Usuario::instUsuario()->getPermissao() == permissaoTeste) {
       for(std::map<Produto*, int>::iterator itr = orcamento->carrinho.begin(); itr != orcamento->carrinho.end(); ++ itr)
         if((itr->first)->ChecaQtd() < (itr->second)) return false;
       this->pedidos.push_back(new Pedido(orcamento, Data(ano, mes, dia)));
+			RegistroLog::instRegLog()->vecLogEscrita.push_back(LogEscrita(Usuario::instUsuario(), "Empresa",
+                                                          Data::dateNow(), "efetua pedido do orcamento para o cliente " + orcamento->cliente->getNome()));
       return true;
     }
     else
