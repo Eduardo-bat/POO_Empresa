@@ -14,8 +14,9 @@ std::map<std::string,Data> quadro_horarios;
 int capacidade;
 Turno *turno;
 std::vector<Funcionario> rota;
+std::pair<float,float> *end_empresa;
 public:
-Veiculo(int _capacidade, Turno *_t);
+Veiculo(int _capacidade, Turno *_t,std::pair<float,float>end_empresa);
 void adicionafuncionario(Funcionario funcionario);
 void removefuncionario(Funcionario funcionario);
 float calculaDistancia (float x1, float y1, float x2, float y2);
