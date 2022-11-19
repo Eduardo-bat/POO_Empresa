@@ -35,6 +35,6 @@ this->horario_saida=_data;
 
 std::string Turno::getTurno(){return this->turno;}
 
-int Turno::gethorario_entrada(){this->horario_entrada.getHora();}
+int Turno::gethorario_entrada(){return this->horario_entrada.getHora();}
 
-int Turno::gethorario_saida(){this->horario_saida.getHora();}
+int Turno::gethorario_saida(){return this->horario_saida.getHora();}
