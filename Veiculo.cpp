@@ -6,10 +6,10 @@
 #include <map>
 
 
-Veiculo::Veiculo(int _capacidade, Turno *_t,std::pair<float,float>end_empresa){
+Veiculo::Veiculo(int _capacidade, Turno *_t,std::pair<float,float>*end_empresa){
 this->capacidade=_capacidade;
 this->turno=_t;
-*this->end_empresa=end_empresa;
+this->end_empresa=end_empresa;
 }
 float Veiculo::calculaDistancia_e (float x1, float y1){
 return 110.57 * sqrt( pow(this->end_empresa->first-x1,2) + pow(this->end_empresa->second-y1, 2) );
