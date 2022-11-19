@@ -4,8 +4,8 @@
 
 Turno::Turno(std::string _t){
 if(_t=="M"){
-    sethorario_entrada(6);
-    sethorario_saida(14);
+    sethorario_entrada(8);
+    sethorario_saida(16);
 }
 else if (_t=="T"){
     sethorario_entrada(14);
