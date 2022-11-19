@@ -3,7 +3,7 @@
 unsigned int Funcionario::qtd = 0;
 
 Funcionario::Funcionario(TipoPessoa _tipo, std::string _cadastro, std::string _nome, std::string _email,
-                          std::pair<int, int> _endereco, Data _nascimento, Cargo *cargo, Data dataCriacao, float salario) {
+                          std::pair<float, float> _endereco, Data _nascimento, Cargo *cargo, Data dataCriacao, float salario) {
   this->tipo = _tipo;
   this->cadastro = _cadastro;
   this->nome = _nome;
@@ -118,14 +118,14 @@ std::map<Data, Alteracao> Funcionario::getHistAlt() {
   }
 }
 
-std::pair<int, int> Funcionario::getEndereco() const {
+std::pair<float, float> Funcionario::getEndereco() const {
   if(this != nullptr)
     return this -> endereco;
   else
     return {0, 0};
 }
 
-void Funcionario::setEndereco(const std::pair<int, int> _endereco) {
+void Funcionario::setEndereco(const std::pair<float, float> _endereco) {
   try {
     if(Usuario::instUsuario()->getPermissao() == permissaoTeste)
       this->endereco = _endereco;
