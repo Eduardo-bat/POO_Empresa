@@ -1,4 +1,5 @@
 #include "Produto.hpp"
+#include "ExcecaoAcessoNegado.hpp"
 
 Produto::Produto(std::string nome,float valorvenda, int codigo, int lotemin, int estoquemin,std::map<MateriaPrima*,unsigned> materias_prima){
     this->nome=nome;
@@ -51,23 +52,47 @@ int Produto::getLotemin() const{return this->lotemin;}
 
 void Produto::setLotemin(const int lotemin){this->lotemin=lotemin;}
 
-int Produto::getEstoquemin() const{return this->estoquemin;}
+int Produto::getEstoquemin() const{
+  RegistroLog::instRegLog()->vecLogLeitura.push_back(LogLeitura(Usuario::instUsuario(), "Produto", __FUNCTION__));
+  return this->estoquemin;}
 
 void Produto::setEstoquemin(const int estoquemin){this->estoquemin=estoquemin;}
 
 float Produto::getValorvenda() const{return this->valorvenda;}
 
 void Produto::setValorvenda(const float valorvenda, unsigned ano, unsigned mes, unsigned dia){
+  try {
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste){
   this->valorvenda=valorvenda;
   Data data(ano, mes, dia);
   hist_valor.emplace(data,valorvenda);
+  RegistroLog::instRegLog()->vecLogEscrita.push_back(LogEscrita(Usuario::instUsuario(), "Produto",
+                                                                      Data::dateNow(), "Set Valor Venda " + this->nome));
   }
+  else
+      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
+  }
+   catch(ExcecaoAcessoNegado& e) {
+    std::cerr << e.what() << '\n';
+}
+}
 
 void Produto::insereLotes(int qtd){
+   try {
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste){
   for(auto it=materiasprimas.begin();it!=materiasprimas.end();it++){
    it->first->alteraQtd( -(it->second) );
   }
   lotes.push_back(qtd);  
+  RegistroLog::instRegLog()->vecLogEscrita.push_back(LogEscrita(Usuario::instUsuario(), "Produto",
+                                                                      Data::dateNow(), "Insere Lotes " + this->nome));
+}
+else
+      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
+   }
+    catch(ExcecaoAcessoNegado& e) {
+    std::cerr << e.what() << '\n';
+  }
 }
 
 void Produto::print(){
