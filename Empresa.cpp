@@ -238,10 +238,10 @@ void Empresa::adicionaVeiculo(Veiculo *veiculo) {
   this->frota.push_back(veiculo);
 }
 
-std::pair<int, int> Empresa::getEndereco() {
+std::pair<float, float> Empresa::getEndereco() {
   return this->endereco;
 }
 
-void Empresa::setEndereco(std::pair<int, int> _endereco) {
+void Empresa::setEndereco(std::pair<float, float> _endereco) {
   this->endereco = _endereco;
 }
