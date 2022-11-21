@@ -7,6 +7,8 @@ Cartaocredito::Cartaocredito(unsigned _numParcelas, float _valorTotal){
  this->efetuado= false;
 } 
 
+Cartaocredito::Cartaocredito(){};
+
 void Cartaocredito::efetuarPagamento(){
   this->efetuado=true;
   this->dataPagamento=dataPagamento.dateNow();

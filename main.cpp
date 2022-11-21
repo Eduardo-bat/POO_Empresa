@@ -39,7 +39,7 @@ int main() {
   empresa->criaOrcamento(cliente0, 2022, 11, 17);
   (*empresa->getOrcamentos().begin())->insereProduto(&mesa, 10);
   mesa.setValorvenda(10.5, 2022, 11, 22);
-  empresa->efetuaPedido(*empresa->getOrcamentos().begin(), 2022, 11, 17);
+  empresa->efetuaPedido(*empresa->getOrcamentos().begin(), 2022, 11, 17,cartao,2);
   
   //cadastrar veiculo etc...
   RegistroLog::instRegLog()->printLogs(); // cada um coloca os logs nos métodos das classes que implementou

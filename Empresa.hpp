@@ -42,13 +42,13 @@ class Empresa {
     Departamento* getDeptFuncionario(Funcionario* funcionario);
 		bool criaOrcamento(Cliente* cliente, unsigned ano, unsigned mes, unsigned dia);
 		std::vector<Orcamento*> getOrcamentos();
-		bool efetuaPedido(Orcamento* orcamento, unsigned ano, unsigned mes, unsigned dia);
+		bool efetuaPedido(Orcamento* orcamento, unsigned ano, unsigned mes, unsigned dia,Tipopay t, int any);
     void deletaFuncionario(Funcionario* funcionario);
     void deletaCliente(Cliente* cliente);
     Cargo* criaCargo(std::string nome);
     void adicionaVeiculo(Veiculo* veiculo);
-    void setEndereco(std::pair<int, int>);
-    std::pair<int, int> getEndereco();
+    void setEndereco(std::pair<float, float>);
+    std::pair<float, float> getEndereco();
 };
 
 #endif

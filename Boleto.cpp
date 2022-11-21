@@ -7,6 +7,7 @@ Boleto::Boleto(vencimentoBoleto _vencimento, float _valor ,unsigned int ano, uns
   this->dataAbertura= Data(ano, mes, dia);
 }
 
+
 bool Boleto::boletoVencido(){
   
   Data x= dataAbertura.dateNow();

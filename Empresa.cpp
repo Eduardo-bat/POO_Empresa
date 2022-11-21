@@ -170,12 +170,12 @@ std::vector<Orcamento*> Empresa::getOrcamentos() {
 	return this->orcamentos;
 }
 
-bool Empresa::efetuaPedido(Orcamento* orcamento, unsigned ano, unsigned mes, unsigned dia) {
+bool Empresa::efetuaPedido(Orcamento* orcamento, unsigned ano, unsigned mes, unsigned dia, Tipopay t, int any) {
   try {
     if(Usuario::instUsuario()->getPermissao() == permissaoTeste) {
       for(std::map<Produto*, int>::iterator itr = orcamento->carrinho.begin(); itr != orcamento->carrinho.end(); ++ itr)
         if((itr->first)->ChecaQtd() < (itr->second)) return false;
-      this->pedidos.push_back(new Pedido(orcamento, Data(ano, mes, dia)));
+      this->pedidos.push_back(new Pedido(orcamento, Data(ano, mes, dia), t,  any));
 			RegistroLog::instRegLog()->vecLogEscrita.push_back(LogEscrita(Usuario::instUsuario(), "Empresa",
                                                           Data::dateNow(), "efetua pedido do orcamento para o cliente " + orcamento->cliente->getNome()));
       return true;
@@ -238,10 +238,10 @@ void Empresa::adicionaVeiculo(Veiculo *veiculo) {
   this->frota.push_back(veiculo);
 }
 
-std::pair<int, int> Empresa::getEndereco() {
+std::pair<float, float> Empresa::getEndereco() {
   return this->endereco;
 }
 
-void Empresa::setEndereco(std::pair<int, int> _endereco) {
+void Empresa::setEndereco(std::pair<float, float> _endereco) {
   this->endereco = _endereco;
 }

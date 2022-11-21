@@ -18,6 +18,7 @@ class Cartaocredito: public Pagamento{
    float getValorParcela();
    unsigned getNumParcelas();
    void print();
+   Cartaocredito();
     
  };
 
