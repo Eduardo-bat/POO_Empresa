@@ -25,7 +25,7 @@ class Empresa {
 		std::vector<Pedido*> pedidos;
     bool validaCadastro(TipoCadastro tipoC, TipoPessoa tipo, std::string cadastro);
     std::vector<Veiculo*> frota;
-    std::pair<int, int> endereco = {0, 0};
+    std::pair<float, float> endereco;
     Empresa() {};
     static Empresa *instptrEmpresa;
     
