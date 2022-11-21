@@ -3,7 +3,7 @@
 unsigned int Funcionario::qtd = 0;
 
 Funcionario::Funcionario(TipoPessoa _tipo, std::string _cadastro, std::string _nome, std::string _email,
-                          std::pair<float, float> _endereco, Data _nascimento, Cargo *cargo, Data dataCriacao, float salario) {
+                          std::pair<float, float> _endereco, Data _nascimento, Cargo *cargo, Data dataCriacao, float salario,Turno *t) {
   this->tipo = _tipo;
   this->cadastro = _cadastro;
   this->nome = _nome;
@@ -13,6 +13,7 @@ Funcionario::Funcionario(TipoPessoa _tipo, std::string _cadastro, std::string _n
   this->nascimento = _nascimento;
   this->contratar(dataCriacao, cargo, salario);
   this->status = ativo;
+  this->turno=t;
 }
 
 void Funcionario::aplicaDissidio(Data data, float novoSalario) {
@@ -182,4 +183,7 @@ Status Funcionario::getStatus() const {
     return this -> status;
   else
     return statusInvalido;
+}
+Turno Funcionario::getTurno(){
+return *this->turno;
 }

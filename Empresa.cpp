@@ -11,12 +11,12 @@ Empresa *Empresa::instEmpresa() {
 
 Funcionario* Empresa::adicionaFuncionario(TipoPessoa tipo, std::string cadastro, std::string nome,
                           std::string email, std::pair<float, float> endereco, unsigned anoNasc, unsigned mesNasc, unsigned diaNasc,
-                            Departamento* departamento, Cargo *cargo, unsigned anoCria, unsigned mesCria, unsigned diaCria, float salario) {
+                            Departamento* departamento, Cargo *cargo, unsigned anoCria, unsigned mesCria, unsigned diaCria, float salario,Turno *t) {
   try {
     if(Usuario::instUsuario()->getPermissao() == permissaoTeste)
       if(validaCadastro(func, tipo, cadastro)) {
       Funcionario* funcionario = new Funcionario(tipo, cadastro, nome, email, endereco, Data(anoNasc, mesNasc, diaNasc),
-                                                  cargo, Data(anoCria, mesCria, diaCria), salario);
+                                                  cargo, Data(anoCria, mesCria, diaCria), salario,t);
       departamento->adicionarFuncionario(funcionario);
       RegistroLog::instRegLog()->vecLogEscrita.push_back(LogEscrita(Usuario::instUsuario(), "Empresa",
                                                                       Data::dateNow(), "adiciona funcionario " + funcionario->getNome()));
@@ -234,9 +234,24 @@ Cargo* Empresa::criaCargo(std::string nome) {
   return nullptr;
 }
 
-void Empresa::adicionaVeiculo(Veiculo *veiculo) {
-  this->frota.push_back(veiculo);
+Veiculo* Empresa::adicionaVeiculo(int _capacidade, Turno *_t,std::pair<float,float>*end_empresa,std::string _placa) {
+  try {
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste) {
+  Veiculo *_v=new Veiculo(_capacidade,_t,end_empresa,_placa);
+  this->frota.push_back(_v);
+  RegistroLog::instRegLog()->vecLogEscrita.push_back(LogEscrita(Usuario::instUsuario(), "Empresa",
+                                                          Data::dateNow(), "Adiciona veículo " + _v->getPlaca()));
+  return _v;
 }
+ else
+      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
+  }
+  catch(ExcecaoAcessoNegado& e) {
+    std::cerr << e.what() << '\n';
+  }
+  return nullptr;
+  }
+
 
 std::pair<float, float> Empresa::getEndereco() {
   return this->endereco;
@@ -244,4 +259,14 @@ std::pair<float, float> Empresa::getEndereco() {
 
 void Empresa::setEndereco(std::pair<float, float> _endereco) {
   this->endereco = _endereco;
+}
+
+Veiculo* Empresa::getVeiculo(std::string placa){
+  std::vector<Veiculo*>::iterator itr;
+      for(itr = this->frota.begin(); itr != this->frota.end(); ++ itr){
+        if(placa == (*itr)->getPlaca()){
+          return (*itr);
+        }
+      }
+      return nullptr;
 }

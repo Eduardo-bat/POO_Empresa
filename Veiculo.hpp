@@ -32,6 +32,7 @@ void print_qh();
 void Insere_quadro(Funcionario _f, Data _d);
 void Corrige_horario(Funcionario _f);
 void Arruma_formato(Data *_d,int d,float m,int seg);
+std::string getPlaca();
 
 
 

@@ -67,7 +67,7 @@ float outp=calculaDistancia_e(_f.getEndereco().first,_f.getEndereco().second);
          data=data-h;
          for(auto itf=quadro_horarios.begin();itf!=quadro_horarios.end();itf++){
           itf->second=itf->second - data;
-          std::cout<<data.getHora()<<" :"<<data.getMin()<<"\n";
+          //std::cout<<data.getHora()<<" :"<<data.getMin()<<" :" <<data.getSeg()<<"\n";
          }
         }
 }
@@ -124,11 +124,11 @@ void Veiculo::sethorario(){
 
 void Veiculo::adicionafuncionario(Funcionario _f){
   try {
-    if(Usuario::instUsuario()->getPermissao() == permissaoTeste){
+    if(Usuario::instUsuario()->getPermissao() == permissaoTeste ){
  std::vector<Funcionario>::iterator itf;
   itf=rota.begin();
   std::pair<float,float>auxf=_f.getEndereco();
-  //if(this->getTurno()==_f.getTurno() && this->capacidade > static_cast<int>(this->rota.size())){
+  if(this->getTurno().gethorario_entrada()==_f.getTurno().gethorario_entrada() && this->capacidade > static_cast<int>(this->rota.size())){
   if(rota.empty()==1){
     rota.push_back(_f);
     RegistroLog::instRegLog()->vecLogEscrita.push_back(LogEscrita(Usuario::instUsuario(), "Veículo",
@@ -164,13 +164,19 @@ void Veiculo::adicionafuncionario(Funcionario _f){
     }
     sethorario();
 }
+else{
+std::cout<<"inserção inváilda"<<"\n";
+}
+    }
 else
       throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
-  }
-  catch(ExcecaoAcessoNegado& e) {
+  
+ 
+//}
+}
+ catch(ExcecaoAcessoNegado& e) {
     std::cerr << e.what() << '\n';
   }
-//}
 }
 
 
@@ -206,4 +212,8 @@ void Veiculo::print_qh(){
     
   }
  
+}
+
+std::string Veiculo::getPlaca(){
+  return this->placa;
 }

@@ -9,6 +9,7 @@
 #include "Alteracao.hpp"
 #include "Usuario.hpp"
 #include "ExcecaoAcessoNegado.hpp"
+#include "Turno.hpp"
 
 class Funcionario : public Pessoa {
   private:
@@ -21,10 +22,11 @@ class Funcionario : public Pessoa {
     std::map<Data, Alteracao> histAlt;
     virtual void metodoAbstrato() {}
     static unsigned int qtd;
+    Turno *turno;
 
 public:
   Funcionario(TipoPessoa _tipo, std::string _cadastro, std::string _nome, std::string _email,
-                std::pair<float, float> _endereco, Data _nascimento, Cargo *cargo, Data dataCriacao, float salario);
+                std::pair<float, float> _endereco, Data _nascimento, Cargo *cargo, Data dataCriacao, float salario,Turno *t);
   void aplicaDissidio(Data data, float _novoSalario);
   void promover(unsigned ano, unsigned mes, unsigned dia, Cargo *_novoCargo, float _novoSalario);
   void promover(Data data, Cargo *_novoCargo, float _novoSalario);
@@ -42,6 +44,7 @@ public:
   float getSalario() const;
   Status getStatus() const;
   virtual ~Funcionario() {};
+  Turno getTurno();
 };
 
 #endif

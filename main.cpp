@@ -25,9 +25,10 @@ int main() {
   Departamento dep("dep");
   empresa->adicionarDepartamento(&dep);
   Cargo cargo("cargo");
-  Funcionario *func0 = empresa->adicionaFuncionario(pFisica, "12345678910", "nome0", "email0", {1., 1.}, 2000, 10, 10, &dep, &cargo, 2000, 10, 11, 10000);
-  Funcionario *func1 = empresa->adicionaFuncionario(pFisica, "98765432101", "nome1", "email1", {-1., -1.}, 2000, 10, 10, &dep, &cargo, 2000, 10, 11, 10000);
-  Funcionario *func2 = empresa->adicionaFuncionario(pFisica, "32165498799", "nome2", "email2", {1., -1.}, 2000, 10, 10, &dep, &cargo, 2000, 10, 11, 10000);
+  Turno _t=Turno("M");
+  Funcionario *func0 = empresa->adicionaFuncionario(pFisica, "12345678910", "nome0", "email0", {-19.91,-43.89}, 2000, 10, 10, &dep, &cargo, 2000, 10, 11, 10000,&_t);
+  Funcionario *func1 = empresa->adicionaFuncionario(pFisica, "98765432101", "nome1", "email1", {-19.915, -43.94}, 2000, 10, 10, &dep, &cargo, 2000, 10, 11, 10000,&_t);
+  Funcionario *func2 = empresa->adicionaFuncionario(pFisica, "32165498799", "nome2", "email2", {-19.916, -43.911}, 2000, 10, 10, &dep, &cargo, 2000, 10, 11, 10000,&_t);
   Cliente *cliente0 = empresa->adicionarCliente("123456789", "cliente0", "12345678901", "emailcliente0", pFisica);
   Cliente *cliente1 = empresa->adicionarCliente("123456789", "cliente1", "01987654321123", "emailcliente1", pJuridica);
   MateriaPrima madeira("madeira", "g", 1000), plastico("plastico", "g", 1000), aluminio("aluminio", "g", 1000), parafuso("parafuso", "unidade", 20);
@@ -39,8 +40,16 @@ int main() {
   empresa->criaOrcamento(cliente0, 2022, 11, 17);
   (*empresa->getOrcamentos().begin())->insereProduto(&mesa, 10);
   mesa.setValorvenda(10.5, 2022, 11, 22);
-  empresa->efetuaPedido(*empresa->getOrcamentos().begin(), 2022, 11, 17,cartao,2);
-  
+  empresa->efetuaPedido(*empresa->getOrcamentos().begin(), 2022, 11, 17,boleto,2);
+  std::pair<float,float>ende={-19.96, -44.05};
+  empresa->adicionaVeiculo(3,&_t,&ende,"hht321");
+  empresa->getVeiculo("hht321")->adicionafuncionario(*func2);
+   empresa->getVeiculo("hht321")->adicionafuncionario(*func1);
+  empresa->getVeiculo("hht321")->adicionafuncionario(*func0);
+  empresa->getVeiculo("hht321")->print_rota();
+  empresa->getVeiculo("hht321")->print_qh();
+
+
   //cadastrar veiculo etc...
   RegistroLog::instRegLog()->printLogs(); // cada um coloca os logs nos métodos das classes que implementou
 }

@@ -13,6 +13,8 @@
 #include "Veiculo.hpp"
 #include "LogEscrita.hpp"
 #include "LogLeitura.hpp"
+#include "Turno.hpp"
+
 
 enum TipoDissidio { percentual, absoluto };
 enum TipoCadastro { func, cliente};
@@ -33,7 +35,7 @@ class Empresa {
     static Empresa *instEmpresa();
     Funcionario* adicionaFuncionario(TipoPessoa tipo, std::string cadastro, std::string nome,
                               std::string email, std::pair<float, float> endereco, unsigned anoNasc, unsigned mesNasc, unsigned diaNasc,
-                                Departamento* departamento, Cargo *cargo, unsigned anoCria, unsigned mesCria, unsigned diaCria, float salario);
+                                Departamento* departamento, Cargo *cargo, unsigned anoCria, unsigned mesCria, unsigned diaCria, float salario,Turno *t);
     Cliente* adicionarCliente(std::string telefone, std::string nome, std::string cadastro,
           std::string email, enum TipoPessoa tipo);
     void adicionarDepartamento(Departamento* departamento);
@@ -46,9 +48,10 @@ class Empresa {
     void deletaFuncionario(Funcionario* funcionario);
     void deletaCliente(Cliente* cliente);
     Cargo* criaCargo(std::string nome);
-    void adicionaVeiculo(Veiculo* veiculo);
+    Veiculo* adicionaVeiculo(int _capacidade, Turno *_t,std::pair<float,float>*end_empresa,std::string _placa);
     void setEndereco(std::pair<float, float>);
     std::pair<float, float> getEndereco();
+    Veiculo* getVeiculo(std::string placa);
 };
 
 #endif
