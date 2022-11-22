@@ -234,10 +234,10 @@ Cargo* Empresa::criaCargo(std::string nome) {
   return nullptr;
 }
 
-Veiculo* Empresa::adicionaVeiculo(int _capacidade, Turno *_t,std::pair<float,float>*end_empresa,std::string _placa) {
+Veiculo* Empresa::adicionaVeiculo(int _capacidade, Turno *_t,std::string _placa) {
   try {
     if(Usuario::instUsuario()->getPermissao() == permissaoTeste) {
-  Veiculo *_v=new Veiculo(_capacidade,_t,end_empresa,_placa);
+  Veiculo *_v=new Veiculo(_capacidade,_t,&this->endereco,_placa);
   this->frota.push_back(_v);
   RegistroLog::instRegLog()->vecLogEscrita.push_back(LogEscrita(Usuario::instUsuario(), "Empresa",
                                                           Data::dateNow(), "Adiciona veículo " + _v->getPlaca()));

@@ -36,6 +36,7 @@ Produto(std::string nome,float valorvenda, int codigo, int lotemin, int estoquem
   void insereLotes(int qtd);
   void print();
   void print_hist();
+  void verificaMp();
   
 };
 #endif

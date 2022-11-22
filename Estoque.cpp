@@ -32,6 +32,7 @@ bool Estoque::verificaEstoquemin(Produto *_produto, unsigned _ano, unsigned _mes
   if (_produto->verificaEstoquemin() == 1) {
     return true;
   } else {
+    
     int aux=_produto->getEstoquemin()-_produto->ChecaQtd();
     emiteOrdem( _ano, _mes, _dia,aux,_produto);
     return false;

@@ -48,7 +48,7 @@ class Empresa {
     void deletaFuncionario(Funcionario* funcionario);
     void deletaCliente(Cliente* cliente);
     Cargo* criaCargo(std::string nome);
-    Veiculo* adicionaVeiculo(int _capacidade, Turno *_t,std::pair<float,float>*end_empresa,std::string _placa);
+    Veiculo* adicionaVeiculo(int _capacidade, Turno *_t,std::string _placa);
     void setEndereco(std::pair<float, float>);
     std::pair<float, float> getEndereco();
     Veiculo* getVeiculo(std::string placa);

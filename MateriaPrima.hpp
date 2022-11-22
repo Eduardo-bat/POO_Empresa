@@ -28,6 +28,7 @@ class MateriaPrima {
     void alteraQtd(int);
     unsigned getQtd();
     std::string getUnidadeDeMedida();
+    unsigned getEstoqueMin();
 };
 
 #endif
