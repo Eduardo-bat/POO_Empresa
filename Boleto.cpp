@@ -29,6 +29,8 @@ bool Boleto::boletoVencido(){
    }else{
      return false;
    }
+  }else{
+    return false;
   }
   
 }

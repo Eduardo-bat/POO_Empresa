@@ -33,7 +33,7 @@ unsigned Cartaocredito::getNumParcelas(){
 void Cartaocredito::print(){
  std::cout<<endl<<"Valor total: R$"<<this->getValorTotal();
  std:: cout<<endl<<"Parcelas: "<<this->getNumParcelas(); 
- std::cout<<endl<<"Valor da parcela: "<<this->getValorParcela();
+ std::cout<<endl<<"Valor da parcela: R$"<<this->getValorParcela();
  if(this->efetuado==true){
    std::cout<<endl<<"Pagamento ja efetuado!"<<endl;
    std::cout<<"Data do pagamento: ";

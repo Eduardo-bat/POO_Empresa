@@ -13,6 +13,8 @@ Estoque *Estoque::instEstoque() {
 }
 
 void Estoque::adicionaProduto(Produto *p) { produtos_estoque.push_back(p);
+    RegistroLog::instRegLog()->vecLogEscrita.push_back(LogEscrita(Usuario::instUsuario(), "Estoque",
+                                                                      Data::dateNow(), "Adiciona produto " + p->getNome()));
 }
 
 void Estoque::adicionaOrdem(OrdemDeProd *op, Produto _p) { ordemdeprod.emplace(op,_p); }
@@ -29,6 +31,7 @@ void Estoque::removeProduto(Produto *p) {
 
 
 bool Estoque::verificaEstoquemin(Produto *_produto, unsigned _ano, unsigned _mes, unsigned _dia) {
+  RegistroLog::instRegLog()->vecLogLeitura.push_back(LogLeitura(Usuario::instUsuario(), "Estoque", __FUNCTION__));
   if (_produto->verificaEstoquemin() == 1) {
     return true;
   } else {
@@ -39,11 +42,15 @@ bool Estoque::verificaEstoquemin(Produto *_produto, unsigned _ano, unsigned _mes
 }
 
 OrdemDeProd Estoque::emiteOrdem(unsigned _ano, unsigned _mes, unsigned _dia, int _qtd,Produto *_produto) {
+    RegistroLog::instRegLog()->vecLogEscrita.push_back(LogEscrita(Usuario::instUsuario(), "Estoque",
+                                                            
+  Data::dateNow(), "Emite uma ordem de producao do produto " + _produto->getNome()));
+  
   OrdemDeProd *op = new OrdemDeProd(_ano, _mes, _dia,_qtd,_produto);
   adicionaOrdem(op, *_produto);
   return *op;
+  
 }
-
 
 
 

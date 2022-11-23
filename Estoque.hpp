@@ -8,8 +8,6 @@
 #include <iostream>
 
 
-
-
 class Estoque {
   private:
     std::map<OrdemDeProd*,Produto> ordemdeprod;

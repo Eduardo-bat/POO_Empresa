@@ -32,7 +32,7 @@ int main() {
   Cliente *cliente0 = empresa->adicionarCliente("123456789", "cliente0", "12345678901", "emailcliente0", pFisica);
   Cliente *cliente1 = empresa->adicionarCliente("123456789", "cliente1", "01987654321123", "emailcliente1", pJuridica);
   MateriaPrima madeira("madeira", "g", 1000), plastico("plastico", "g", 1000), aluminio("aluminio", "g", 1000), parafuso("parafuso", "unidade", 20);
-  Produto mesa("mesa", 10, 0, 10, 20, std::map<MateriaPrima*, unsigned>{{&plastico, 150}, {&aluminio, 100}, {&parafuso, 8}});
+  Produto mesa("mesa", 10, 0, 1, 20, std::map<MateriaPrima*, unsigned>{{&madeira, 450}, {&plastico, 150}, {&aluminio, 100}, {&parafuso, 8}});
 	Estoque *estoque = Estoque::instEstoque();
 	estoque->adicionaProduto(&mesa);
 	estoque->emiteOrdem(2022, 11, 17, mesa.getEstoquemin(), &mesa);
@@ -49,7 +49,7 @@ int main() {
   empresa->getVeiculo("hht321")->print_rota();
   empresa->getVeiculo("hht321")->print_qh();
 
-
   //cadastrar veiculo etc...
   RegistroLog::instRegLog()->printLogs(); // cada um coloca os logs nos métodos das classes que implementou
+    
 }
