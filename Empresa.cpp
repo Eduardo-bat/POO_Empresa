@@ -258,6 +258,8 @@ std::pair<float, float> Empresa::getEndereco() {
 }
 
 void Empresa::setEndereco(std::pair<float, float> _endereco) {
+  RegistroLog::instRegLog()->vecLogEscrita.push_back(LogEscrita(Usuario::instUsuario(), "Empresa",
+                                                          Data::dateNow(), "altera endereco para <" + std::to_string(_endereco.first) + ", " + std::to_string(_endereco.second) + ">"));
   this->endereco = _endereco;
 }
 
