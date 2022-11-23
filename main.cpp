@@ -40,11 +40,12 @@ int main() {
   empresa->criaOrcamento(cliente0, 2022, 11, 17);
   (*empresa->getOrcamentos().begin())->insereProduto(&mesa, 10);
   mesa.setValorvenda(10.5, 2022, 11, 22);
-  empresa->efetuaPedido(*empresa->getOrcamentos().begin(), 2022, 11, 17,boleto,2);
+  empresa->efetuaPedido(*empresa->getOrcamentos().begin(), 2022, 11, 17,cartao,2);
   std::pair<float,float>ende={-19.96, -44.05};
-  empresa->adicionaVeiculo(3,&_t,&ende,"hht321");
+  empresa->setEndereco(ende);
+  empresa->adicionaVeiculo(3,&_t,"hht321");
+  empresa->getVeiculo("hht321")->adicionafuncionario(*func1);
   empresa->getVeiculo("hht321")->adicionafuncionario(*func2);
-   empresa->getVeiculo("hht321")->adicionafuncionario(*func1);
   empresa->getVeiculo("hht321")->adicionafuncionario(*func0);
   empresa->getVeiculo("hht321")->print_rota();
   empresa->getVeiculo("hht321")->print_qh();

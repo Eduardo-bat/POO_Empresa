@@ -1,6 +1,7 @@
 #include "Produto.hpp"
 #include "ExcecaoAcessoNegado.hpp"
 
+
 Produto::Produto(std::string nome,float valorvenda, int codigo, int lotemin, int estoquemin,std::map<MateriaPrima*,unsigned> materias_prima){
     this->nome=nome;
     this->valorvenda=valorvenda;
@@ -77,13 +78,22 @@ void Produto::setValorvenda(const float valorvenda, unsigned ano, unsigned mes, 
 }
 }
 
+ void Produto::verificaMp(){
+for(auto it=materiasprimas.begin();it!=materiasprimas.end();it++){
+if( it->first->getQtd() < it->first->getEstoqueMin()){
+  it->first->emiteOrcamentoCompra(it->first->getEstoqueMin()-it->first->getQtd());
+}
+}
+ }
+
 void Produto::insereLotes(int qtd){
    try {
     if(Usuario::instUsuario()->getPermissao() == permissaoTeste){
   for(auto it=materiasprimas.begin();it!=materiasprimas.end();it++){
-   it->first->alteraQtd( -(it->second) );
+   it->first->alteraQtd( -static_cast<unsigned>(qtd*it->second) );
   }
-  lotes.push_back(qtd);  
+  lotes.push_back(qtd);
+  //verificaMp();  
   RegistroLog::instRegLog()->vecLogEscrita.push_back(LogEscrita(Usuario::instUsuario(), "Produto",
                                                                       Data::dateNow(), "Insere Lotes " + this->nome));
 }
@@ -94,6 +104,8 @@ else
     std::cerr << e.what() << '\n';
   }
 }
+
+
 
 void Produto::print(){
   int aux=1;
@@ -127,7 +139,8 @@ void Produto::print(){
   for(auto it=materiasprimas.begin();it!=materiasprimas.end();it++){
   std::cout<<"\n";
   std::cout<<"Matérias primas: ";
-  std::cout<<it->second<<it->first->getUnidadeDeMedida();
+  std::cout<<it->second<<it->first->getUnidadeDeMedida()<<"\n";
+  std::cout<<it->first->getQtd()<<"\n";
   }
 
 

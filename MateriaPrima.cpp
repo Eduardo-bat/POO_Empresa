@@ -62,3 +62,7 @@ unsigned MateriaPrima::getQtd() {
 std::string MateriaPrima::getUnidadeDeMedida() {
   return this->unidadeDeMedida;
 }
+
+unsigned MateriaPrima::getEstoqueMin(){
+  return this->estoqueMin;
+}

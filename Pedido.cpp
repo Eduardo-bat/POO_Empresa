@@ -27,7 +27,6 @@ Pedido::Pedido(Orcamento *orcamento, Data data,Tipopay t, int any) {
     
         }
     }
-    print_pay();
 }
 
 void Pedido::calculaNovoTotal() {
