@@ -264,6 +264,7 @@ void Empresa::setEndereco(std::pair<float, float> _endereco) {
 }
 
 Veiculo* Empresa::getVeiculo(std::string placa){
+  RegistroLog::instRegLog()->vecLogLeitura.push_back(LogLeitura(Usuario::instUsuario(), "Empresa", __FUNCTION__));
   std::vector<Veiculo*>::iterator itr;
       for(itr = this->frota.begin(); itr != this->frota.end(); ++ itr){
         if(placa == (*itr)->getPlaca()){

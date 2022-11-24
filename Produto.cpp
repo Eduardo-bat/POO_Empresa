@@ -61,21 +61,12 @@ void Produto::setEstoquemin(const int estoquemin){this->estoquemin=estoquemin;}
 
 float Produto::getValorvenda() const{return this->valorvenda;}
 
-void Produto::setValorvenda(const float valorvenda, unsigned ano, unsigned mes, unsigned dia){
-  try {
-    if(Usuario::instUsuario()->getPermissao() == permissaoTeste){
+void Produto::setValorvenda( float valorvenda, unsigned ano, unsigned mes, unsigned dia){
+ RegistroLog::instRegLog()->vecLogEscrita.push_back(LogEscrita(Usuario::instUsuario(), "Produto",
+                                                          Data::dateNow(), "altera Valor venda para <" + std::to_string(valorvenda)+ ">"));
   this->valorvenda=valorvenda;
   Data data(ano, mes, dia);
   hist_valor.emplace(data,valorvenda);
-  RegistroLog::instRegLog()->vecLogEscrita.push_back(LogEscrita(Usuario::instUsuario(), "Produto",
-                                                                      Data::dateNow(), "Set Valor Venda " + this->nome));
-  }
-  else
-      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
-  }
-   catch(ExcecaoAcessoNegado& e) {
-    std::cerr << e.what() << '\n';
-}
 }
 
  void Produto::verificaMp(){
