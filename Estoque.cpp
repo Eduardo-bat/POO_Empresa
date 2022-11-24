@@ -56,7 +56,6 @@ OrdemDeProd Estoque::emiteOrdem(unsigned _ano, unsigned _mes, unsigned _dia, int
 
 
 void Estoque::print(){
-  int permissao=4;
  std::vector<Produto *>::iterator it;
  std::cout<<"Produtos em Estoque:";
  std::cout<<"\n";

@@ -172,16 +172,18 @@ std::vector<Orcamento*> Empresa::getOrcamentos() {
 
 bool Empresa::efetuaPedido(Orcamento* orcamento, unsigned ano, unsigned mes, unsigned dia, Tipopay t, int any) {
   try {
-    if(Usuario::instUsuario()->getPermissao() == permissaoTeste) {
+    if(Usuario::instUsuario()->getPermissao() != permissaoTeste || any > 6 || any < 1 ||(t==boleto && any>3)) {
+      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
+    }
+    else
+      {
       for(std::map<Produto*, int>::iterator itr = orcamento->carrinho.begin(); itr != orcamento->carrinho.end(); ++ itr)
         if((itr->first)->ChecaQtd() < (itr->second)) return false;
       this->pedidos.push_back(new Pedido(orcamento, Data(ano, mes, dia), t,  any));
 			RegistroLog::instRegLog()->vecLogEscrita.push_back(LogEscrita(Usuario::instUsuario(), "Empresa",
                                                           Data::dateNow(), "efetua pedido do orcamento para o cliente " + orcamento->cliente->getNome()));
       return true;
-    }
-    else
-      throw ExcecaoAcessoNegado(Usuario::instUsuario(), typeid(*this).name(), __FUNCTION__);
+  }
   }
   catch(ExcecaoAcessoNegado& e) {
     std::cerr << e.what() << '\n';
